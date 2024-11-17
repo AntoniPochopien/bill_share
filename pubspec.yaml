@@ -31,6 +31,7 @@ dependencies:
   firebase_crashlytics: ^4.1.5
   supabase_flutter: ^2.8.0
   google_sign_in: ^6.2.2
+  dartz: ^0.10.1
 
 
 dev_dependencies:

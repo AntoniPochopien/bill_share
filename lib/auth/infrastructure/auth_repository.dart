@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:bill_share/auth/domain/i_auth_repository.dart';
+import 'package:bill_share/common/domain/failure.dart';
 import 'package:bill_share/constants/secrets.dart';
+import 'package:dartz/dartz.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -9,16 +11,10 @@ class AuthRepository implements IAuthRepository {
   final _supabase = Supabase.instance.client;
 
   @override
-  void init() {
-    _supabase.auth.onAuthStateChange.listen((data) {
-      final AuthChangeEvent event = data.event;
-      final Session? session = data.session;
-      //TODO handle login
-    });
-  }
+  Stream<AuthState> authStateChange() => _supabase.auth.onAuthStateChange;
 
   @override
-  Future<void> googleSignIn() async {
+  Future<Either<Failure, Unit>> googleSignIn() async {
     try {
       const googleSignInScopes = [
         'https://www.googleapis.com/auth/userinfo.email',
@@ -40,8 +36,16 @@ class AuthRepository implements IAuthRepository {
         idToken: idToken!,
         accessToken: accessToken,
       );
+      return right(unit);
     } catch (e) {
       log('_googleSignIn error: $e');
+      return left(Failure.unexpected());
     }
   }
+
+  @override
+  Session? checkIfSessionExists() => _supabase.auth.currentSession;
+
+  @override
+  Future<void> logOut() async => await _supabase.auth.signOut();
 }

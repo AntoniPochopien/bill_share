@@ -10,6 +10,25 @@
 part of 'app_router.dart';
 
 /// generated route for
+/// [AppStartupScreen]
+class AppStartupRoute extends PageRouteInfo<void> {
+  const AppStartupRoute({List<PageRouteInfo>? children})
+      : super(
+          AppStartupRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AppStartupRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const AppStartupScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [AuthScreen]
 class AuthRoute extends PageRouteInfo<void> {
   const AuthRoute({List<PageRouteInfo>? children})
