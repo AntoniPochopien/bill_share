@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bill_share/auth/domain/i_auth_repository.dart';
 import 'package:bill_share/auth/domain/user.dart';
 import 'package:bill_share/auth/infrastructure/user_to_domain.dart';
@@ -16,8 +18,10 @@ class AppStartupCubit extends Cubit<AppStartupState> {
     await Future.delayed(Duration.zero);
     final session = iAuthRepository.checkIfSessionExists();
     if (session?.user != null) {
+      log('user session retrived');
       emit(AppStartupState.authenticated(session!.user.toDomain()));
     } else {
+      log('cannot retrive user session');
       emit(AppStartupState.unauthenticated());
     }
   }

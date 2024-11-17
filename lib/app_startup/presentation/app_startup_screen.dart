@@ -19,10 +19,10 @@ class AppStartupScreen extends StatelessWidget {
             listener: (context, state) {
               state.whenOrNull(
                 authenticated: (user) {
-                  context.pushRoute(DashboardRoute());
+                  context.replaceRoute(DashboardRoute());
                 },
                 unauthenticated: () {
-                  context.pushRoute(AuthRoute());
+                  context.replaceRoute(AuthRoute());
                 },
               );
             },

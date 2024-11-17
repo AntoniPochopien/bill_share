@@ -3,6 +3,7 @@ import 'package:bill_share/auth/application/cubit/auth_cubit.dart';
 import 'package:bill_share/auth/domain/i_auth_repository.dart';
 import 'package:bill_share/constants/assets.dart';
 import 'package:bill_share/di.dart';
+import 'package:bill_share/navigation/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:bill_share/auth/presentation/widgets/divider_with_text.dart';
 import 'package:bill_share/common/widgets/billshare_text_field.dart';
@@ -21,8 +22,13 @@ class AuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthCubit(iAuthRepository: getIt<IAuthRepository>()),
-      child: BlocBuilder<AuthCubit, AuthState>(
+      create: (context) => AuthCubit(iAuthRepository: getIt<IAuthRepository>())..init(),
+      child: BlocConsumer<AuthCubit, AuthState>(
+        listener: (context, state) {
+          state.whenOrNull(
+            authenticated: (user) => context.replaceRoute(DashboardRoute()),
+          );
+        },
         builder: (context, state) => BillshareScaffold(
           body: CustomScrollView(
             slivers: [
@@ -57,7 +63,8 @@ class AuthScreen extends StatelessWidget {
                           DividerWithText(text: 'Or Sign In With'),
                           FramedButton(
                             text: 'Sign in with google',
-                            onPressed: () => context.read<AuthCubit>().googleSignIn(),
+                            onPressed: () =>
+                                context.read<AuthCubit>().googleSignIn(),
                             iconUrl: Assets.googleG,
                           ),
                           FramedButton(text: 'Sign up', onPressed: () {}),
