@@ -87,7 +87,7 @@ class _ExpandAndFadeWidgetState extends State<ExpandAndFadeWidget>
       child: widget.child,
       builder: (context, child) {
         return SizedBox(
-          height: _heightAnimation.value,
+          height: _showContainer ? null : _heightAnimation.value,
           child: _showContainer
               ? Opacity(
                   opacity: _fadeAnimation.value,

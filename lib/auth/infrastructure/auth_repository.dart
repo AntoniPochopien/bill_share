@@ -50,7 +50,7 @@ class AuthRepository implements IAuthRepository {
     required String password,
   }) async {
     try {
-      await _supabase.auth.signInWithPassword(
+      await _supabase.auth.signUp(
         email: email,
         password: password,
       );

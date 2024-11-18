@@ -35,9 +35,9 @@ class AuthCubit extends Cubit<AuthState> {
     required String password,
   }) async =>
       await iAuthRepository.signUpWithEmail(
-        email: email,
-        username: username,
-        password: password,
+        email: email.trim(),
+        username: username.trim(),
+        password: password.trim(),
       );
 
   void signInWithEmail({
@@ -45,8 +45,8 @@ class AuthCubit extends Cubit<AuthState> {
     required String password,
   }) async =>
       await iAuthRepository.signInWithEmail(
-        email: email,
-        password: password,
+        email: email.trim(),
+        password: password.trim(),
       );
 
   @override

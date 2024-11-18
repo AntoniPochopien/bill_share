@@ -1,10 +1,13 @@
 import 'package:bill_share/common/utils/firebase_initialization.dart';
 import 'package:bill_share/common/utils/navigator_observers.dart';
 import 'package:bill_share/common/utils/supabase_initialization.dart';
+import 'package:bill_share/l10n/application/cubit/language_cubit.dart';
+import 'package:bill_share/l10n/l10n.dart';
 import 'package:bill_share/local_storage/domain/i_local_storage_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:bill_share/di.dart';
 import 'package:bill_share/navigation/app_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   diInit();
@@ -21,14 +24,25 @@ class BillShare extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: getIt<AppRouter>().config(
-        navigatorObservers: () => navigatorObservers(),
-      ),
-      title: 'BillShare',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF404040)),
-        useMaterial3: true,
+    return BlocProvider(
+      create: (context) => LanguageCubit(
+          localStorageRepository: getIt<ILocalStorageRepository>())
+        ..init(),
+      child: BlocBuilder<LanguageCubit, LanguageState>(
+        builder: (context, languageState) => MaterialApp.router(
+          routerConfig: getIt<AppRouter>().config(
+            navigatorObservers: () => navigatorObservers(),
+          ),
+          title: 'BillShare',
+          theme: ThemeData(
+            colorScheme:
+                ColorScheme.fromSeed(seedColor: const Color(0xFF404040)),
+            useMaterial3: true,
+          ),
+          locale: languageState.locale,
+          supportedLocales: L10n.supported,
+          localizationsDelegates: L10n.localizationDelegates,
+        ),
       ),
     );
   }

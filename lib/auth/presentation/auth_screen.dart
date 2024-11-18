@@ -3,6 +3,7 @@ import 'package:bill_share/auth/application/cubit/auth_cubit.dart';
 import 'package:bill_share/auth/domain/i_auth_repository.dart';
 import 'package:bill_share/auth/presentation/widgets/expand_and_fade/expand_and_fade_controller.dart';
 import 'package:bill_share/auth/presentation/widgets/expand_and_fade/expand_and_fade_widget.dart';
+import 'package:bill_share/common/utils/validators.dart';
 import 'package:bill_share/constants/assets.dart';
 import 'package:bill_share/di.dart';
 import 'package:bill_share/navigation/app_router.dart';
@@ -34,6 +35,7 @@ class _AuthScreenState extends State<AuthScreen> {
   final usernameController = TextEditingController();
   final pwdController = TextEditingController();
   final repeatPwdController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   bool _signUpWithEmail = false;
 
   void _loginRegisterSwitcher() {
@@ -58,10 +60,12 @@ class _AuthScreenState extends State<AuthScreen> {
 
   void _onSignIn(BuildContext context) {
     if (_signUpWithEmail) {
-      context.read<AuthCubit>().signUpWithEmail(
-          email: emailController.text,
-          username: usernameController.text,
-          password: pwdController.text);
+      if (_formKey.currentState!.validate()) {
+        context.read<AuthCubit>().signUpWithEmail(
+            email: emailController.text,
+            username: usernameController.text,
+            password: pwdController.text);
+      }
     } else {
       context.read<AuthCubit>().signInWithEmail(
           email: emailController.text, password: pwdController.text);
@@ -85,83 +89,106 @@ class _AuthScreenState extends State<AuthScreen> {
               SliverFillRemaining(
                 hasScrollBody: false,
                 child: SafeArea(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Logo(
-                          size: 87,
-                        ),
-                        Column(children: [
-                          Text(
-                            'Sign In',
-                            style: Font.h2DarkSemiBold,
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Logo(
+                            size: 87,
                           ),
-                          Text(
-                            'Access to your account',
-                            style: Font.h4Grey,
-                          ),
-                        ]),
-                        Column(children: [
-                          ExpandAndFadeWidget(
-                            controller: _inputsExpandAndFadeControllers[0],
-                            child: BillshareTextField(
+                          Column(children: [
+                            Text(
+                              'Sign In',
+                              style: Font.h2DarkSemiBold,
+                            ),
+                            Text(
+                              'Access to your account',
+                              style: Font.h4Grey,
+                            ),
+                          ]),
+                          Column(children: [
+                            BillshareTextField(
                               controller: emailController,
                               label: 'Email',
+                              validator: (v) =>
+                                  Validators.emailValidator(context, v),
                             ),
-                          ),
-                          BillshareTextField(
-                            controller: usernameController,
-                            label: 'Username',
-                          ),
-                          BillshareTextField(
-                            controller: pwdController,
-                            label: 'Password',
-                            obscure: true,
-                          ),
-                          ExpandAndFadeWidget(
-                            controller: _inputsExpandAndFadeControllers[1],
-                            child: BillshareTextField(
-                              controller: repeatPwdController,
-                              label: 'Repeat password',
+                            ExpandAndFadeWidget(
+                                controller: _inputsExpandAndFadeControllers[0],
+                                child: BillshareTextField(
+                                    controller: usernameController,
+                                    label: 'Username',
+                                    validator: (v) {
+                                      if (_signUpWithEmail) {
+                                        return Validators.usernameValidator(
+                                            context, v);
+                                      } else {
+                                        return null;
+                                      }
+                                    })),
+                            BillshareTextField(
+                              controller: pwdController,
+                              label: 'Password',
+                              obscure: true,
+                              validator: (v) =>
+                                  Validators.passwordValidator(context, v),
                             ),
-                          ),
-                          Button(
-                              text: _signUpWithEmail ? 'Sign Up' : 'Sign in',
-                              onPressed: () => _onSignIn(context)),
-                          DividerWithText(text: 'Or Sign In With'),
-                          ExpandAndFadeWidget(
-                            controller: _buttonsExpandAndFadeController[0],
-                            initialExpanded: true,
-                            child: FramedButton(
-                              text: 'Sign in with google',
-                              onPressed: () =>
-                                  context.read<AuthCubit>().googleSignIn(),
-                              iconUrl: Assets.googleG,
+                            ExpandAndFadeWidget(
+                              controller: _inputsExpandAndFadeControllers[1],
+                              child: BillshareTextField(
+                                controller: repeatPwdController,
+                                label: 'Repeat password',
+                                obscure: true,
+                                validator: (v) {
+                                  if (_signUpWithEmail) {
+                                    return Validators.repeatPasswordValidator(
+                                        context, v, pwdController.text);
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                              ),
                             ),
-                          ),
-                          ExpandAndFadeWidget(
-                              controller: _buttonsExpandAndFadeController[1],
+                            Button(
+                                text: _signUpWithEmail ? 'Sign Up' : 'Sign in',
+                                onPressed: () => _onSignIn(context)),
+                            DividerWithText(text: 'Or Sign In With'),
+                            ExpandAndFadeWidget(
+                              controller: _buttonsExpandAndFadeController[0],
                               initialExpanded: true,
                               child: FramedButton(
-                                text: 'Sign in with Apple',
-                                onPressed: () {},
-                                iconUrl: Assets.apple,
-                              )),
-                          AnimatedSwitcher(
-                            duration: Duration(milliseconds: 300),
-                            child: _signUpWithEmail
-                                ? FramedButton(
-                                    text: 'Already have an account',
-                                    onPressed: () => _loginRegisterSwitcher(),
-                                  )
-                                : FramedButton(
-                                    text: 'Sign up with Email',
-                                    iconData: Icons.email,
-                                    onPressed: () => _loginRegisterSwitcher()),
-                          ),
+                                text: 'Sign in with google',
+                                onPressed: () =>
+                                    context.read<AuthCubit>().googleSignIn(),
+                                iconUrl: Assets.googleG,
+                              ),
+                            ),
+                            ExpandAndFadeWidget(
+                                controller: _buttonsExpandAndFadeController[1],
+                                initialExpanded: true,
+                                child: FramedButton(
+                                  text: 'Sign in with Apple',
+                                  onPressed: () {},
+                                  iconUrl: Assets.apple,
+                                )),
+                            AnimatedSwitcher(
+                              duration: Duration(milliseconds: 300),
+                              child: _signUpWithEmail
+                                  ? FramedButton(
+                                      text: 'Already have an account',
+                                      onPressed: () => _loginRegisterSwitcher(),
+                                    )
+                                  : FramedButton(
+                                      text: 'Sign up with Email',
+                                      iconData: Icons.email,
+                                      onPressed: () =>
+                                          _loginRegisterSwitcher()),
+                            ),
+                          ]),
+                          PrivacyPolicyInfo(),
                         ]),
-                        PrivacyPolicyInfo(),
-                      ]),
+                  ),
                 ),
               ),
             ],

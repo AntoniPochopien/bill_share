@@ -6,8 +6,13 @@ class BillshareTextField extends StatefulWidget {
   final String? label;
   final bool obscure;
   final TextEditingController? controller;
+  final String? Function(String?)? validator;
   const BillshareTextField(
-      {super.key, this.label, this.obscure = false, this.controller});
+      {super.key,
+      this.label,
+      this.obscure = false,
+      this.controller,
+      this.validator});
 
   @override
   State<BillshareTextField> createState() => _BillshareTextFieldState();
@@ -56,6 +61,8 @@ class _BillshareTextFieldState extends State<BillshareTextField> {
       child: TextFormField(
         controller: widget.controller,
         obscureText: _obscure,
+        validator: widget.validator,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
             labelText: widget.label,
             labelStyle: Font.h4Grey,
