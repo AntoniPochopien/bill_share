@@ -29,6 +29,26 @@ class AuthCubit extends Cubit<AuthState> {
 
   void googleSignIn() async => await iAuthRepository.googleSignIn();
 
+  void signUpWithEmail({
+    required String email,
+    required String username,
+    required String password,
+  }) async =>
+      await iAuthRepository.signUpWithEmail(
+        email: email,
+        username: username,
+        password: password,
+      );
+
+  void signInWithEmail({
+    required String email,
+    required String password,
+  }) async =>
+      await iAuthRepository.signInWithEmail(
+        email: email,
+        password: password,
+      );
+
   @override
   Future<void> close() {
     authSubscription.cancel();

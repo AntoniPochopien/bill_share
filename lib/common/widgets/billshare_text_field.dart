@@ -5,7 +5,9 @@ import 'package:bill_share/constants/font.dart';
 class BillshareTextField extends StatefulWidget {
   final String? label;
   final bool obscure;
-  const BillshareTextField({super.key, this.label, this.obscure = false});
+  final TextEditingController? controller;
+  const BillshareTextField(
+      {super.key, this.label, this.obscure = false, this.controller});
 
   @override
   State<BillshareTextField> createState() => _BillshareTextFieldState();
@@ -52,6 +54,7 @@ class _BillshareTextFieldState extends State<BillshareTextField> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.5),
       child: TextFormField(
+        controller: widget.controller,
         obscureText: _obscure,
         decoration: InputDecoration(
             labelText: widget.label,

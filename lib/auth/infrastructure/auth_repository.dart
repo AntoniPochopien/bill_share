@@ -38,7 +38,42 @@ class AuthRepository implements IAuthRepository {
       );
       return right(unit);
     } catch (e) {
-      log('_googleSignIn error: $e');
+      log('googleSignIn unexpected error: $e');
+      return left(Failure.unexpected());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> signUpWithEmail({
+    required String email,
+    required String username,
+    required String password,
+  }) async {
+    try {
+      await _supabase.auth.signInWithPassword(
+        email: email,
+        password: password,
+      );
+      return right(unit);
+    } catch (e) {
+      log('signUpWithEmail unexpected error: $e');
+      return left(Failure.unexpected());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> signInWithEmail({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      await _supabase.auth.signInWithPassword(
+        email: email,
+        password: password,
+      );
+      return right(unit);
+    } catch (e) {
+      log('signInWithEmail unexpected error: $e');
       return left(Failure.unexpected());
     }
   }

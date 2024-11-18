@@ -30,6 +30,10 @@ class _AuthScreenState extends State<AuthScreen> {
       List.generate(2, (index) => ExpandAndFadeController());
   final _buttonsExpandAndFadeController =
       List.generate(2, (index) => ExpandAndFadeController());
+  final emailController = TextEditingController();
+  final usernameController = TextEditingController();
+  final pwdController = TextEditingController();
+  final repeatPwdController = TextEditingController();
   bool _signUpWithEmail = false;
 
   void _loginRegisterSwitcher() {
@@ -50,6 +54,18 @@ class _AuthScreenState extends State<AuthScreen> {
     setState(() {
       _signUpWithEmail = !_signUpWithEmail;
     });
+  }
+
+  void _onSignIn(BuildContext context) {
+    if (_signUpWithEmail) {
+      context.read<AuthCubit>().signUpWithEmail(
+          email: emailController.text,
+          username: usernameController.text,
+          password: pwdController.text);
+    } else {
+      context.read<AuthCubit>().signInWithEmail(
+          email: emailController.text, password: pwdController.text);
+    }
   }
 
   @override
@@ -89,25 +105,29 @@ class _AuthScreenState extends State<AuthScreen> {
                           ExpandAndFadeWidget(
                             controller: _inputsExpandAndFadeControllers[0],
                             child: BillshareTextField(
+                              controller: emailController,
                               label: 'Email',
                             ),
                           ),
                           BillshareTextField(
+                            controller: usernameController,
                             label: 'Username',
                           ),
                           BillshareTextField(
+                            controller: pwdController,
                             label: 'Password',
                             obscure: true,
                           ),
                           ExpandAndFadeWidget(
                             controller: _inputsExpandAndFadeControllers[1],
                             child: BillshareTextField(
+                              controller: repeatPwdController,
                               label: 'Repeat password',
                             ),
                           ),
                           Button(
                               text: _signUpWithEmail ? 'Sign Up' : 'Sign in',
-                              onPressed: () {}),
+                              onPressed: () => _onSignIn(context)),
                           DividerWithText(text: 'Or Sign In With'),
                           ExpandAndFadeWidget(
                             controller: _buttonsExpandAndFadeController[0],

@@ -7,4 +7,13 @@ abstract class IAuthRepository {
   Stream<AuthState> authStateChange();
   Session? checkIfSessionExists();
   Future<void> logOut();
+  Future<Either<Failure, Unit>> signUpWithEmail({
+    required String email,
+    required String username,
+    required String password,
+  });
+   Future<Either<Failure, Unit>> signInWithEmail({
+    required String email,
+    required String password,
+  });
 }
