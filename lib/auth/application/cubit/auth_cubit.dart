@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:bill_share/auth/domain/i_auth_repository.dart';
 import 'package:bill_share/auth/infrastructure/user_to_domain.dart';
+import 'package:bill_share/common/domain/failure.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as sb;
@@ -27,7 +28,9 @@ class AuthCubit extends Cubit<AuthState> {
     });
   }
 
-  void googleSignIn() async => await iAuthRepository.googleSignIn();
+  void googleSignIn() async {
+    await iAuthRepository.googleSignIn();
+  }
 
   void signUpWithEmail({
     required String email,
@@ -43,11 +46,14 @@ class AuthCubit extends Cubit<AuthState> {
   void signInWithEmail({
     required String email,
     required String password,
-  }) async =>
-      await iAuthRepository.signInWithEmail(
-        email: email.trim(),
-        password: password.trim(),
-      );
+  }) async {
+    emit(AuthState.loading());
+    final result = await iAuthRepository.signInWithEmail(
+      email: email.trim(),
+      password: password.trim(),
+    );
+    result.fold((l) => emit(AuthState.error(l)), (r) {});
+  }
 
   @override
   Future<void> close() {

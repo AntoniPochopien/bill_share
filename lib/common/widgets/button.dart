@@ -6,20 +6,27 @@ class Button extends StatelessWidget {
   final void Function()? onPressed;
   final String text;
   final bool maxWidth;
+  final bool isLoading;
 
   const Button({
     super.key,
     this.onPressed,
     required this.text,
     this.maxWidth = true,
+    this.isLoading = false,
   });
-  
+
   @override
   Widget build(BuildContext context) {
-    final child = Text(
+    final t = Text(
       text,
       style: Font.h4Bright,
     );
+    final progressIndicator = const SizedBox(
+        height: 25,
+        width: 25,
+        child: CircularProgressIndicator(color: AppColors.white));
+    final child = isLoading ? progressIndicator : t;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.5),
       child: ElevatedButton(
@@ -31,8 +38,12 @@ class Button extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
         onPressed: onPressed,
         child: maxWidth
-            ? SizedBox(width: double.infinity, child: Center(child: child))
-            : child,
+            ? SizedBox(
+                width: double.infinity,
+                child: Center(child: isLoading ? progressIndicator : child))
+            : isLoading
+                ? progressIndicator
+                : child,
       ),
     );
   }

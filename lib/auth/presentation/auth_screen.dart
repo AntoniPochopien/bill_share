@@ -80,8 +80,8 @@ class _AuthScreenState extends State<AuthScreen> {
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           state.whenOrNull(
-            authenticated: (user) => context.replaceRoute(DashboardRoute()),
-          );
+              authenticated: (user) => context.replaceRoute(DashboardRoute()),
+              error: (failure) {});
         },
         builder: (context, state) => BillshareScaffold(
           body: CustomScrollView(
@@ -151,6 +151,8 @@ class _AuthScreenState extends State<AuthScreen> {
                               ),
                             ),
                             Button(
+                                isLoading: state.maybeWhen(
+                                    orElse: () => false, loading: () => true),
                                 text: _signUpWithEmail ? 'Sign Up' : 'Sign in',
                                 onPressed: () => _onSignIn(context)),
                             DividerWithText(text: 'Or Sign In With'),
@@ -176,10 +178,12 @@ class _AuthScreenState extends State<AuthScreen> {
                               duration: Duration(milliseconds: 300),
                               child: _signUpWithEmail
                                   ? FramedButton(
+                                      key: ValueKey('Already have an account'),
                                       text: 'Already have an account',
                                       onPressed: () => _loginRegisterSwitcher(),
                                     )
                                   : FramedButton(
+                                      key: ValueKey('Sign up with Email'),
                                       text: 'Sign up with Email',
                                       iconData: Icons.email,
                                       onPressed: () =>
