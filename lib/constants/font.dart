@@ -12,7 +12,7 @@ class Font {
   static const _h5 = 12.0;
 
   //dark
-  static const _baseDark = TextStyle(fontFamily: _basicFontFamily);
+  static const _baseDark = TextStyle(fontFamily: _basicFontFamily, color: AppColors.black);
 
   static final h1Dark = _baseDark.copyWith(fontSize: _h1);
   static final h2Dark = _baseDark.copyWith(fontSize: _h2);

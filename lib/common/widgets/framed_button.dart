@@ -47,7 +47,7 @@ class FramedButton extends StatelessWidget {
             backgroundColor: AppColors.transparent,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
-                side: BorderSide(color: AppColors.black))),
+                side: BorderSide(color: AppColors.grey))),
         onPressed: onPressed,
         child: _buildChild(),
       ),

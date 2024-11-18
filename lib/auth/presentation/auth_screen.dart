@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bill_share/auth/application/cubit/auth_cubit.dart';
 import 'package:bill_share/auth/domain/i_auth_repository.dart';
+import 'package:bill_share/auth/presentation/widgets/expand_and_fade/expand_and_fade_controller.dart';
+import 'package:bill_share/auth/presentation/widgets/expand_and_fade/expand_and_fade_widget.dart';
 import 'package:bill_share/constants/assets.dart';
 import 'package:bill_share/di.dart';
 import 'package:bill_share/navigation/app_router.dart';
@@ -16,13 +18,25 @@ import 'package:bill_share/constants/font.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
-class AuthScreen extends StatelessWidget {
+class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
+
+  @override
+  State<AuthScreen> createState() => _AuthScreenState();
+}
+
+class _AuthScreenState extends State<AuthScreen> {
+  final _inputsExpandAndFadeControllers =
+      List.generate(2, (index) => ExpandAndFadeController());
+  final _buttonsExpandAndFadeController =
+      List.generate(2, (index) => ExpandAndFadeController());
+  bool _signUpWithEmail = false;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthCubit(iAuthRepository: getIt<IAuthRepository>())..init(),
+      create: (context) =>
+          AuthCubit(iAuthRepository: getIt<IAuthRepository>())..init(),
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           state.whenOrNull(
@@ -52,6 +66,12 @@ class AuthScreen extends StatelessWidget {
                           ),
                         ]),
                         Column(children: [
+                          ExpandAndFadeWidget(
+                            controller: _inputsExpandAndFadeControllers[0],
+                            child: BillshareTextField(
+                              label: 'Email',
+                            ),
+                          ),
                           BillshareTextField(
                             label: 'Username',
                           ),
@@ -59,16 +79,53 @@ class AuthScreen extends StatelessWidget {
                             label: 'Password',
                             obscure: true,
                           ),
+                          ExpandAndFadeWidget(
+                            controller: _inputsExpandAndFadeControllers[1],
+                            child: BillshareTextField(
+                              label: 'Repeat password',
+                            ),
+                          ),
                           Button(text: 'Sign up', onPressed: () {}),
                           DividerWithText(text: 'Or Sign In With'),
-                          FramedButton(
-                            text: 'Sign in with google',
-                            onPressed: () =>
-                                context.read<AuthCubit>().googleSignIn(),
-                            iconUrl: Assets.googleG,
+                          ExpandAndFadeWidget(
+                            controller: _buttonsExpandAndFadeController[0],
+                            initialExpanded: true,
+                            child: FramedButton(
+                              text: 'Sign in with google',
+                              onPressed: () =>
+                                  context.read<AuthCubit>().googleSignIn(),
+                              iconUrl: Assets.googleG,
+                            ),
                           ),
-                          FramedButton(text: 'Sign up', onPressed: () {}),
-                          FramedButton(text: 'Sign up', onPressed: () {}),
+                          ExpandAndFadeWidget(
+                              controller: _buttonsExpandAndFadeController[1],
+                              initialExpanded: true,
+                              child: FramedButton(
+                                text: 'Sign up with Apple',
+                                onPressed: () {},
+                                iconUrl: Assets.apple,
+                              )),
+                          FramedButton(
+                              text: 'Sign up',
+                              onPressed: () {
+                                for (final controller
+                                    in _inputsExpandAndFadeControllers) {
+                                  if (_signUpWithEmail) {
+                                    controller.collapse();
+                                  } else {
+                                    controller.expand();
+                                  }
+                                }
+                                for (final controller
+                                    in _buttonsExpandAndFadeController) {
+                                  if (_signUpWithEmail) {
+                                    controller.expand();
+                                  } else {
+                                    controller.collapse();
+                                  }
+                                }
+                                _signUpWithEmail = !_signUpWithEmail;
+                              }),
                         ]),
                         PrivacyPolicyInfo(),
                       ]),
