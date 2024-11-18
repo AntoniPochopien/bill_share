@@ -24,6 +24,9 @@ class AuthCubit extends Cubit<AuthState> {
       if (session?.user != null) {
         log('user authenticated');
         emit(AuthState.authenticated(session!.user.toDomain()));
+      }else{
+        log('user unauthenticated');
+        emit(AuthState.unauthenticated());
       }
     });
   }
