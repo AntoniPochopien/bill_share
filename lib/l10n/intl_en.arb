@@ -22,5 +22,10 @@
     "sign_in_with_google": "Sign in with Google",
     "sign_in_with_apple": "Sign in with Apple",
     "already_have_an_account": "Already have an account",
-    "sign_up_with_email": "Sign up with Email"
+    "sign_up_with_email": "Sign up with Email",
+    "the_session_has_expired":"The session has expired",
+    "error":"Error",
+    "unexpected_error_occurred":"An unexpected error occurred, we are working on it!",
+      "you_will_be_logged_out":"You will be logged out, please log in again",
+      "ok":"Ok"
 }

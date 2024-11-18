@@ -22,5 +22,11 @@
   "sign_in_with_google": "Zaloguj się przez Google",
   "sign_in_with_apple": "Zaloguj się przez Apple",
   "already_have_an_account": "Masz już konto?",
-  "sign_up_with_email": "Zarejestruj się przez email"
+  "sign_up_with_email": "Zarejestruj się przez email",
+  "the_session_has_expired":"Sesja wygasła",
+  "error":"Błąd",
+  "unexpected_error_occurred":"Wystąpił nieoczekiwany błąd, pracujemy nad nim!",
+  "you_will_be_logged_out":"Zostaniesz wylogowany, prosimy zalogować się ponownie",
+    "ok":"Ok"
+
 }

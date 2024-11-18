@@ -3,6 +3,7 @@ import 'package:bill_share/auth/application/cubit/auth_cubit.dart';
 import 'package:bill_share/auth/domain/i_auth_repository.dart';
 import 'package:bill_share/auth/presentation/widgets/expand_and_fade/expand_and_fade_controller.dart';
 import 'package:bill_share/auth/presentation/widgets/expand_and_fade/expand_and_fade_widget.dart';
+import 'package:bill_share/common/utils/error_handler.dart';
 import 'package:bill_share/common/utils/validators.dart';
 import 'package:bill_share/constants/assets.dart';
 import 'package:bill_share/di.dart';
@@ -81,7 +82,8 @@ class _AuthScreenState extends State<AuthScreen> {
         listener: (context, state) {
           state.whenOrNull(
               authenticated: (user) => context.replaceRoute(DashboardRoute()),
-              error: (failure) {});
+              error: (failure) =>
+                  ErrorHandler.showErrorDialog(context, failure: failure));
         },
         builder: (context, state) => BillshareScaffold(
           body: CustomScrollView(
