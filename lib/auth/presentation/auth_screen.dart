@@ -32,6 +32,26 @@ class _AuthScreenState extends State<AuthScreen> {
       List.generate(2, (index) => ExpandAndFadeController());
   bool _signUpWithEmail = false;
 
+  void _loginRegisterSwitcher() {
+    for (final controller in _inputsExpandAndFadeControllers) {
+      if (_signUpWithEmail) {
+        controller.collapse();
+      } else {
+        controller.expand();
+      }
+    }
+    for (final controller in _buttonsExpandAndFadeController) {
+      if (_signUpWithEmail) {
+        controller.expand();
+      } else {
+        controller.collapse();
+      }
+    }
+    setState(() {
+      _signUpWithEmail = !_signUpWithEmail;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -85,7 +105,9 @@ class _AuthScreenState extends State<AuthScreen> {
                               label: 'Repeat password',
                             ),
                           ),
-                          Button(text: 'Sign up', onPressed: () {}),
+                          Button(
+                              text: _signUpWithEmail ? 'Sign Up' : 'Sign in',
+                              onPressed: () {}),
                           DividerWithText(text: 'Or Sign In With'),
                           ExpandAndFadeWidget(
                             controller: _buttonsExpandAndFadeController[0],
@@ -101,31 +123,22 @@ class _AuthScreenState extends State<AuthScreen> {
                               controller: _buttonsExpandAndFadeController[1],
                               initialExpanded: true,
                               child: FramedButton(
-                                text: 'Sign up with Apple',
+                                text: 'Sign in with Apple',
                                 onPressed: () {},
                                 iconUrl: Assets.apple,
                               )),
-                          FramedButton(
-                              text: 'Sign up',
-                              onPressed: () {
-                                for (final controller
-                                    in _inputsExpandAndFadeControllers) {
-                                  if (_signUpWithEmail) {
-                                    controller.collapse();
-                                  } else {
-                                    controller.expand();
-                                  }
-                                }
-                                for (final controller
-                                    in _buttonsExpandAndFadeController) {
-                                  if (_signUpWithEmail) {
-                                    controller.expand();
-                                  } else {
-                                    controller.collapse();
-                                  }
-                                }
-                                _signUpWithEmail = !_signUpWithEmail;
-                              }),
+                          AnimatedSwitcher(
+                            duration: Duration(milliseconds: 300),
+                            child: _signUpWithEmail
+                                ? FramedButton(
+                                    text: 'Already have an account',
+                                    onPressed: () => _loginRegisterSwitcher(),
+                                  )
+                                : FramedButton(
+                                    text: 'Sign up with Email',
+                                    iconData: Icons.email,
+                                    onPressed: () => _loginRegisterSwitcher()),
+                          ),
                         ]),
                         PrivacyPolicyInfo(),
                       ]),

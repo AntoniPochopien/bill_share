@@ -7,6 +7,7 @@ class FramedButton extends StatelessWidget {
   final String text;
   final bool maxWidth;
   final String? iconUrl;
+  final IconData? iconData;
 
   const FramedButton({
     super.key,
@@ -14,7 +15,9 @@ class FramedButton extends StatelessWidget {
     required this.text,
     this.maxWidth = true,
     this.iconUrl,
-  });
+    this.iconData,
+  }) : assert(iconUrl == null || iconData == null,
+            'Only one of iconUrl or iconData can be passed at a time');
 
   Widget _buildChild() {
     final child = Text(
@@ -22,9 +25,9 @@ class FramedButton extends StatelessWidget {
       style: Font.h4DarkMedium,
     );
 
-    if (iconUrl != null) {
+    if (iconUrl != null || iconData != null) {
       return Row(children: [
-        Image.asset(iconUrl!, width: 20, height: 20),
+        _buildIcon()!,
         Expanded(child: Center(child: child)),
         SizedBox(width: 20),
       ]);
@@ -33,6 +36,17 @@ class FramedButton extends StatelessWidget {
     } else {
       return child;
     }
+  }
+
+  Widget? _buildIcon() {
+    if (iconUrl != null) {
+      return Image.asset(iconUrl!, width: 20, height: 20);
+    }
+    if (iconData != null) {
+      return SizedBox(
+          height: 20, width: 20, child: Icon(iconData, color: AppColors.black));
+    }
+    return null;
   }
 
   @override
@@ -45,6 +59,7 @@ class FramedButton extends StatelessWidget {
             padding: EdgeInsets.all(12),
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             backgroundColor: AppColors.transparent,
+            shadowColor: AppColors.transparent,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
                 side: BorderSide(color: AppColors.grey))),
