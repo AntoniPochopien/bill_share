@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bill_share/app_startup/presentation/app_startup_screen.dart';
 import 'package:bill_share/auth/presentation/auth_screen.dart';
 import 'package:bill_share/dashboard/presentation/dashboard_screen.dart';
+import 'package:bill_share/home/presentation/home_screen.dart';
 
 part 'app_router.gr.dart';
 
@@ -12,5 +13,6 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: AppStartupRoute.page, initial: true),
         AutoRoute(page: AuthRoute.page),
         AutoRoute(page: DashboardRoute.page),
+        AutoRoute(page: HomeRoute.page),
       ];
 }
