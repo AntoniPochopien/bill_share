@@ -27,6 +27,8 @@
   "error":"Błąd",
   "unexpected_error_occurred":"Wystąpił nieoczekiwany błąd, pracujemy nad nim!",
   "you_will_be_logged_out":"Zostaniesz wylogowany, prosimy zalogować się ponownie",
-    "ok":"Ok"
-
+  "ok":"Ok",
+  "add_username": "Dodaj nazwę użytkownika",
+  "introduce_yourself": "Przedstaw się swoimi danymi użytkownika",
+  "add": "Dodaj"
 }

@@ -3,10 +3,11 @@ import 'package:bill_share/auth/application/cubit/auth_cubit.dart';
 import 'package:bill_share/auth/domain/i_auth_repository.dart';
 import 'package:bill_share/auth/domain/injectable_user.dart';
 import 'package:bill_share/common/widgets/button.dart';
+import 'package:bill_share/common/widgets/modals/add_username_modal/add_username_modal.dart';
 import 'package:bill_share/common/wrappers/billshare_scaffold.dart';
 import 'package:bill_share/di.dart';
 import 'package:bill_share/navigation/app_router.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
@@ -26,6 +27,15 @@ class HomeScreen extends StatelessWidget {
             unauthenticated: () {
               context.router.replaceAll([AuthRoute()]);
             },
+            authenticated: (user) {
+              if (user.username == null) {
+                showModalBottomSheet(
+                    context: context,
+                    isDismissible: false,
+                    isScrollControlled: true,
+                    builder: (context) => AddUsernameModal());
+              }
+            },
           );
         },
         child: BillshareScaffold(
@@ -35,6 +45,8 @@ class HomeScreen extends StatelessWidget {
                   text: 'Log out',
                   onPressed: () async =>
                       await getIt<IAuthRepository>().logOut()),
+              Text(
+                  'username: ${getIt<InjectableUser>().currentUser.username.toString()}'),
             ],
           ),
         ),

@@ -11,10 +11,12 @@ abstract class IAuthRepository {
     required String username,
     required String password,
   });
-   Future<Either<Failure, Unit>> signInWithEmail({
+  Future<Either<Failure, Unit>> signInWithEmail({
     required String email,
     required String password,
   });
 
   Future<Either<Failure, String?>> getUsername();
+
+  Future<Either<Failure, Unit>> updateUsername(String newUsername);
 }

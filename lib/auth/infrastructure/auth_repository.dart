@@ -83,12 +83,23 @@ class AuthRepository implements IAuthRepository {
   @override
   Future<Either<Failure, String?>> getUsername() async {
     try {
-      final metdatada =
+      final metadata =
           await _supabase.from('profiles').select('username').single();
-      print(metdatada);
-      return right('');
+      return right(metadata['username']);
     } catch (e) {
-      log('signInWithEmail unexpected error: $e');
+      log('getUsername unexpected error: $e');
+      return left(Failure.unexpected());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> updateUsername(String newUsername) async {
+    try {
+      final currentUserId = _supabase.auth.currentSession!.user.id;
+      await _supabase.from('profiles').update({'username': newUsername}).eq('id', currentUserId);
+      return right(unit);
+    } catch (e) {
+      log('updateUsername unexpected error: $e');
       return left(Failure.unexpected());
     }
   }

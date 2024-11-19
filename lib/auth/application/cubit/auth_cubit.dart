@@ -38,6 +38,7 @@ class AuthCubit extends Cubit<AuthState> {
         );
       } else {
         log('user unauthenticated');
+        injectableUser.clearUser();
         emit(AuthState.unauthenticated());
       }
     });
