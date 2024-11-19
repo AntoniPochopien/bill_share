@@ -54,7 +54,7 @@ CREATE OR REPLACE FUNCTION public.handle_new_user()
 AS $function$
 begin
 
-  insert into public.profiles (id, username)
+  insert into public.users (id, username)
   values (new.id, new.raw_user_meta_data ->> 'username');
 
   return new;

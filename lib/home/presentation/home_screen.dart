@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bill_share/auth/application/cubit/auth_cubit.dart';
 import 'package:bill_share/auth/domain/i_auth_repository.dart';
+import 'package:bill_share/auth/domain/injectable_user.dart';
 import 'package:bill_share/common/widgets/button.dart';
 import 'package:bill_share/common/wrappers/billshare_scaffold.dart';
 import 'package:bill_share/di.dart';
@@ -15,8 +16,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          AuthCubit(iAuthRepository: getIt<IAuthRepository>())..init(),
+      create: (context) => AuthCubit(
+        iAuthRepository: getIt<IAuthRepository>(),
+        injectableUser: getIt<InjectableUser>(),
+      )..init(),
       child: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) {
           state.whenOrNull(
@@ -31,7 +34,7 @@ class HomeScreen extends StatelessWidget {
               Button(
                   text: 'Log out',
                   onPressed: () async =>
-                      await getIt<IAuthRepository>().logOut())
+                      await getIt<IAuthRepository>().logOut()),
             ],
           ),
         ),

@@ -5,7 +5,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 abstract class IAuthRepository {
   Future<Either<Failure, Unit>> googleSignIn();
   Stream<AuthState> authStateChange();
-  Session? checkIfSessionExists();
   Future<void> logOut();
   Future<Either<Failure, Unit>> signUpWithEmail({
     required String email,
@@ -16,4 +15,6 @@ abstract class IAuthRepository {
     required String email,
     required String password,
   });
+
+  Future<Either<Failure, String?>> getUsername();
 }

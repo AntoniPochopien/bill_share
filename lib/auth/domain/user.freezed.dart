@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$User {
   String get id => throw _privateConstructorUsedError;
+  String? get username => throw _privateConstructorUsedError;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -29,7 +30,7 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({String id});
+  $Res call({String id, String? username});
 }
 
 /// @nodoc
@@ -48,12 +49,17 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @override
   $Res call({
     Object? id = null,
+    Object? username = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -65,7 +71,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$UserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id});
+  $Res call({String id, String? username});
 }
 
 /// @nodoc
@@ -81,12 +87,17 @@ class __$$UserImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? username = freezed,
   }) {
     return _then(_$UserImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -94,14 +105,16 @@ class __$$UserImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UserImpl implements _User {
-  const _$UserImpl({required this.id});
+  const _$UserImpl({required this.id, this.username});
 
   @override
   final String id;
+  @override
+  final String? username;
 
   @override
   String toString() {
-    return 'User(id: $id)';
+    return 'User(id: $id, username: $username)';
   }
 
   @override
@@ -109,11 +122,13 @@ class _$UserImpl implements _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.username, username) ||
+                other.username == username));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id);
+  int get hashCode => Object.hash(runtimeType, id, username);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -125,10 +140,13 @@ class _$UserImpl implements _User {
 }
 
 abstract class _User implements User {
-  const factory _User({required final String id}) = _$UserImpl;
+  const factory _User({required final String id, final String? username}) =
+      _$UserImpl;
 
   @override
   String get id;
+  @override
+  String? get username;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.

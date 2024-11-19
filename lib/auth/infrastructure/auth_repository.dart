@@ -50,10 +50,9 @@ class AuthRepository implements IAuthRepository {
     required String password,
   }) async {
     try {
-      await _supabase.auth.signUp(
-        email: email,
-        password: password,
-      );
+      await _supabase.auth.signUp(email: email, password: password, data: {
+        'username': username,
+      });
       return right(unit);
     } catch (e) {
       log('signUpWithEmail unexpected error: $e');
@@ -79,8 +78,18 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
-  Session? checkIfSessionExists() => _supabase.auth.currentSession;
+  Future<void> logOut() async => await _supabase.auth.signOut();
 
   @override
-  Future<void> logOut() async => await _supabase.auth.signOut();
+  Future<Either<Failure, String?>> getUsername() async {
+    try {
+      final metdatada =
+          await _supabase.from('profiles').select('username').single();
+      print(metdatada);
+      return right('');
+    } catch (e) {
+      log('signInWithEmail unexpected error: $e');
+      return left(Failure.unexpected());
+    }
+  }
 }

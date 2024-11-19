@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bill_share/auth/application/cubit/auth_cubit.dart';
 import 'package:bill_share/auth/domain/i_auth_repository.dart';
+import 'package:bill_share/auth/domain/injectable_user.dart';
 import 'package:bill_share/auth/presentation/widgets/expand_and_fade/expand_and_fade_controller.dart';
 import 'package:bill_share/auth/presentation/widgets/expand_and_fade/expand_and_fade_widget.dart';
 import 'package:bill_share/common/utils/error_handler.dart';
@@ -76,12 +77,14 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          AuthCubit(iAuthRepository: getIt<IAuthRepository>())..init(),
+      create: (context) => AuthCubit(
+        iAuthRepository: getIt<IAuthRepository>(),
+        injectableUser: getIt<InjectableUser>(),
+      )..init(),
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           state.whenOrNull(
-              authenticated: (user) => context.replaceRoute(DashboardRoute()),
+              authenticated: (user) => context.replaceRoute(HomeRoute()),
               error: (failure) =>
                   ErrorHandler.showErrorDialog(context, failure: failure));
         },

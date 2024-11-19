@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bill_share/app_startup/application/cubit/app_startup_cubit.dart';
+import 'package:bill_share/auth/application/cubit/auth_cubit.dart';
 import 'package:bill_share/auth/domain/i_auth_repository.dart';
+import 'package:bill_share/auth/domain/injectable_user.dart';
 import 'package:bill_share/di.dart';
 import 'package:bill_share/navigation/app_router.dart';
 import 'package:flutter/widgets.dart';
@@ -13,13 +14,16 @@ class AppStartupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) =>
-            AppStartupCubit(iAuthRepository: getIt<IAuthRepository>())..init(),
-        child: BlocListener<AppStartupCubit, AppStartupState>(
+        create: (context) => AuthCubit(
+            iAuthRepository: getIt<IAuthRepository>(),
+            injectableUser: getIt<InjectableUser>())
+          ..init(),
+        child: BlocListener<AuthCubit, AuthState>(
             listener: (context, state) {
               state.whenOrNull(
                 authenticated: (user) {
-                  context.replaceRoute(DashboardRoute());
+                  //TODO detect if user have any group, then pass to group_dashboard or home screen
+                  context.replaceRoute(HomeRoute());
                 },
                 unauthenticated: () {
                   context.replaceRoute(AuthRoute());
