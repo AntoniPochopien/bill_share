@@ -48,4 +48,12 @@ class Validators {
       return null;
     }
   }
+
+  static String? groupName(BuildContext context, String? v) {
+    if (v == null || v.isEmpty) {
+      return T(context).this_field_cannot;
+    } else {
+      return null;
+    }
+  }
 }

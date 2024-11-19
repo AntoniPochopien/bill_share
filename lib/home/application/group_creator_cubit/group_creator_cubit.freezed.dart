@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'username_cubit.dart';
+part of 'group_creator_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,11 +15,11 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$UsernameState {
+mixin _$GroupCreatorState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() added,
+    required TResult Function(int id) created,
     required TResult Function() loading,
     required TResult Function(Failure failure) error,
   }) =>
@@ -27,7 +27,7 @@ mixin _$UsernameState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? added,
+    TResult? Function(int id)? created,
     TResult? Function()? loading,
     TResult? Function(Failure failure)? error,
   }) =>
@@ -35,7 +35,7 @@ mixin _$UsernameState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? added,
+    TResult Function(int id)? created,
     TResult Function()? loading,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
@@ -44,7 +44,7 @@ mixin _$UsernameState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_added value) added,
+    required TResult Function(_Created value) created,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
   }) =>
@@ -52,7 +52,7 @@ mixin _$UsernameState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_added value)? added,
+    TResult? Function(_Created value)? created,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
   }) =>
@@ -60,7 +60,7 @@ mixin _$UsernameState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_added value)? added,
+    TResult Function(_Created value)? created,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -69,23 +69,23 @@ mixin _$UsernameState {
 }
 
 /// @nodoc
-abstract class $UsernameStateCopyWith<$Res> {
-  factory $UsernameStateCopyWith(
-          UsernameState value, $Res Function(UsernameState) then) =
-      _$UsernameStateCopyWithImpl<$Res, UsernameState>;
+abstract class $GroupCreatorStateCopyWith<$Res> {
+  factory $GroupCreatorStateCopyWith(
+          GroupCreatorState value, $Res Function(GroupCreatorState) then) =
+      _$GroupCreatorStateCopyWithImpl<$Res, GroupCreatorState>;
 }
 
 /// @nodoc
-class _$UsernameStateCopyWithImpl<$Res, $Val extends UsernameState>
-    implements $UsernameStateCopyWith<$Res> {
-  _$UsernameStateCopyWithImpl(this._value, this._then);
+class _$GroupCreatorStateCopyWithImpl<$Res, $Val extends GroupCreatorState>
+    implements $GroupCreatorStateCopyWith<$Res> {
+  _$GroupCreatorStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UsernameState
+  /// Create a copy of GroupCreatorState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -98,13 +98,13 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$UsernameStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$GroupCreatorStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UsernameState
+  /// Create a copy of GroupCreatorState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -115,7 +115,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'UsernameState.initial()';
+    return 'GroupCreatorState.initial()';
   }
 
   @override
@@ -131,7 +131,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() added,
+    required TResult Function(int id) created,
     required TResult Function() loading,
     required TResult Function(Failure failure) error,
   }) {
@@ -142,7 +142,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? added,
+    TResult? Function(int id)? created,
     TResult? Function()? loading,
     TResult? Function(Failure failure)? error,
   }) {
@@ -153,7 +153,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? added,
+    TResult Function(int id)? created,
     TResult Function()? loading,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
@@ -168,7 +168,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_added value) added,
+    required TResult Function(_Created value) created,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
   }) {
@@ -179,7 +179,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_added value)? added,
+    TResult? Function(_Created value)? created,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
   }) {
@@ -190,7 +190,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_added value)? added,
+    TResult Function(_Created value)? created,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -202,81 +202,108 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements UsernameState {
+abstract class _Initial implements GroupCreatorState {
   const factory _Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$addedImplCopyWith<$Res> {
-  factory _$$addedImplCopyWith(
-          _$addedImpl value, $Res Function(_$addedImpl) then) =
-      __$$addedImplCopyWithImpl<$Res>;
+abstract class _$$CreatedImplCopyWith<$Res> {
+  factory _$$CreatedImplCopyWith(
+          _$CreatedImpl value, $Res Function(_$CreatedImpl) then) =
+      __$$CreatedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int id});
 }
 
 /// @nodoc
-class __$$addedImplCopyWithImpl<$Res>
-    extends _$UsernameStateCopyWithImpl<$Res, _$addedImpl>
-    implements _$$addedImplCopyWith<$Res> {
-  __$$addedImplCopyWithImpl(
-      _$addedImpl _value, $Res Function(_$addedImpl) _then)
+class __$$CreatedImplCopyWithImpl<$Res>
+    extends _$GroupCreatorStateCopyWithImpl<$Res, _$CreatedImpl>
+    implements _$$CreatedImplCopyWith<$Res> {
+  __$$CreatedImplCopyWithImpl(
+      _$CreatedImpl _value, $Res Function(_$CreatedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UsernameState
+  /// Create a copy of GroupCreatorState
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$CreatedImpl(
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$addedImpl implements _added {
-  const _$addedImpl();
+class _$CreatedImpl implements _Created {
+  const _$CreatedImpl(this.id);
+
+  @override
+  final int id;
 
   @override
   String toString() {
-    return 'UsernameState.added()';
+    return 'GroupCreatorState.created(id: $id)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$addedImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$CreatedImpl &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, id);
+
+  /// Create a copy of GroupCreatorState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CreatedImplCopyWith<_$CreatedImpl> get copyWith =>
+      __$$CreatedImplCopyWithImpl<_$CreatedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() added,
+    required TResult Function(int id) created,
     required TResult Function() loading,
     required TResult Function(Failure failure) error,
   }) {
-    return added();
+    return created(id);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? added,
+    TResult? Function(int id)? created,
     TResult? Function()? loading,
     TResult? Function(Failure failure)? error,
   }) {
-    return added?.call();
+    return created?.call(id);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? added,
+    TResult Function(int id)? created,
     TResult Function()? loading,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
-    if (added != null) {
-      return added();
+    if (created != null) {
+      return created(id);
     }
     return orElse();
   }
@@ -285,42 +312,50 @@ class _$addedImpl implements _added {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_added value) added,
+    required TResult Function(_Created value) created,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
   }) {
-    return added(this);
+    return created(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_added value)? added,
+    TResult? Function(_Created value)? created,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
   }) {
-    return added?.call(this);
+    return created?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_added value)? added,
+    TResult Function(_Created value)? created,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
-    if (added != null) {
-      return added(this);
+    if (created != null) {
+      return created(this);
     }
     return orElse();
   }
 }
 
-abstract class _added implements UsernameState {
-  const factory _added() = _$addedImpl;
+abstract class _Created implements GroupCreatorState {
+  const factory _Created(final int id) = _$CreatedImpl;
+
+  int get id;
+
+  /// Create a copy of GroupCreatorState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CreatedImplCopyWith<_$CreatedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -332,13 +367,13 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$UsernameStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$GroupCreatorStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UsernameState
+  /// Create a copy of GroupCreatorState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -349,7 +384,7 @@ class _$LoadingImpl implements _Loading {
 
   @override
   String toString() {
-    return 'UsernameState.loading()';
+    return 'GroupCreatorState.loading()';
   }
 
   @override
@@ -365,7 +400,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() added,
+    required TResult Function(int id) created,
     required TResult Function() loading,
     required TResult Function(Failure failure) error,
   }) {
@@ -376,7 +411,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? added,
+    TResult? Function(int id)? created,
     TResult? Function()? loading,
     TResult? Function(Failure failure)? error,
   }) {
@@ -387,7 +422,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? added,
+    TResult Function(int id)? created,
     TResult Function()? loading,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
@@ -402,7 +437,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_added value) added,
+    required TResult Function(_Created value) created,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
   }) {
@@ -413,7 +448,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_added value)? added,
+    TResult? Function(_Created value)? created,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
   }) {
@@ -424,7 +459,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_added value)? added,
+    TResult Function(_Created value)? created,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -436,7 +471,7 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements UsernameState {
+abstract class _Loading implements GroupCreatorState {
   const factory _Loading() = _$LoadingImpl;
 }
 
@@ -453,13 +488,13 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$UsernameStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$GroupCreatorStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UsernameState
+  /// Create a copy of GroupCreatorState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -474,7 +509,7 @@ class __$$ErrorImplCopyWithImpl<$Res>
     ));
   }
 
-  /// Create a copy of UsernameState
+  /// Create a copy of GroupCreatorState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -495,7 +530,7 @@ class _$ErrorImpl implements _Error {
 
   @override
   String toString() {
-    return 'UsernameState.error(failure: $failure)';
+    return 'GroupCreatorState.error(failure: $failure)';
   }
 
   @override
@@ -509,7 +544,7 @@ class _$ErrorImpl implements _Error {
   @override
   int get hashCode => Object.hash(runtimeType, failure);
 
-  /// Create a copy of UsernameState
+  /// Create a copy of GroupCreatorState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -521,7 +556,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() added,
+    required TResult Function(int id) created,
     required TResult Function() loading,
     required TResult Function(Failure failure) error,
   }) {
@@ -532,7 +567,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? added,
+    TResult? Function(int id)? created,
     TResult? Function()? loading,
     TResult? Function(Failure failure)? error,
   }) {
@@ -543,7 +578,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? added,
+    TResult Function(int id)? created,
     TResult Function()? loading,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
@@ -558,7 +593,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_added value) added,
+    required TResult Function(_Created value) created,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
   }) {
@@ -569,7 +604,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_added value)? added,
+    TResult? Function(_Created value)? created,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
   }) {
@@ -580,7 +615,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_added value)? added,
+    TResult Function(_Created value)? created,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -592,12 +627,12 @@ class _$ErrorImpl implements _Error {
   }
 }
 
-abstract class _Error implements UsernameState {
+abstract class _Error implements GroupCreatorState {
   const factory _Error(final Failure failure) = _$ErrorImpl;
 
   Failure get failure;
 
-  /// Create a copy of UsernameState
+  /// Create a copy of GroupCreatorState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
