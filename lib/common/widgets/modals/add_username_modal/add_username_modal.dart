@@ -31,7 +31,8 @@ class _AddUsernameModalState extends State<AddUsernameModal> {
           state.whenOrNull(added: () => context.maybePop());
         },
         builder: (context, state) => ModalSheetStructure(
-            onPopInvokedWithResult: (_, __) =>  state.maybeWhen(added: () => true, orElse: () => false),
+            onPopInvokedWithResult: (_, __) =>
+                state.maybeWhen(added: () => true, orElse: () => false),
             title: T(context).add_username,
             description: T(context).introduce_yourself,
             body: Form(
