@@ -1,8 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bill_share/app_startup/presentation/app_startup_screen.dart';
 import 'package:bill_share/auth/presentation/auth_screen.dart';
-import 'package:bill_share/dashboard/presentation/dashboard_screen.dart';
+import 'package:bill_share/group_dashboard/presentation/group_dashboard_screen.dart';
 import 'package:bill_share/home/presentation/home_screen.dart';
+import 'package:flutter/material.dart';
 
 part 'app_router.gr.dart';
 
@@ -12,7 +13,7 @@ class AppRouter extends RootStackRouter {
   List<AutoRoute> get routes => [
         AutoRoute(page: AppStartupRoute.page, initial: true),
         AutoRoute(page: AuthRoute.page),
-        AutoRoute(page: DashboardRoute.page),
         AutoRoute(page: HomeRoute.page),
+        AutoRoute(page: GroupDashboardRoute.page),
       ];
 }

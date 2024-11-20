@@ -27,15 +27,15 @@ Deno.serve(async (req) => {
     }
     const userId = user.sub
 
-  const { groupName } = await req.json()
+  const { name } = await req.json()
 
-  if (!groupName) {
-    return new Response('Missing "groupName" in the request body', { status: 400 })
+  if (!name) {
+    return new Response('Missing "name" in the request body', { status: 400 })
   }
 
   const { data, error } = await supabase
   .from('groups')
-  .insert({ group_name: groupName }).select('id')
+  .insert({ name: name }).select('id')
 
 
   if (error) {

@@ -33,7 +33,7 @@ class _CreateGroupModalState extends State<CreateGroupModal> {
         builder: (context, state) => ModalSheetStructure(
             onPopInvokedWithResult: (_, __) =>
                 state.maybeWhen(created: (_) => true, orElse: () => false),
-            title: T(context).create_new_group,
+            title: T(context).create_group,
             description: T(context).introduce_yourself,
             body: Form(
               key: _formKey,

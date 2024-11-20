@@ -13,7 +13,7 @@ class GroupsRepository implements IGroupsRepository {
   Future<Either<Failure, int>> createGroup(String groupName) async {
     try {
       final result = await _supabase.functions.invoke('create-group', body: {
-        'groupName': groupName,
+        'name': groupName,
       });
       if (result.status == 201) {
         return right(result.data['newGroup']['id']);
@@ -34,13 +34,8 @@ class GroupsRepository implements IGroupsRepository {
           .from('groups_profiles')
           .select('groups(id, name)')
           .eq('user_id', userId);
-      final groups = response.map((e) {
-        final g = e['groups'];
-        return SimpleGroup(
-          id: g['id'],
-          name: g['name'],
-        );
-      }).toList();
+      final groups =
+          response.map((e) => SimpleGroup.fromJson(e['groups'])).toList();
       return right(groups);
     } catch (e) {
       log('fetchUserGroups unexpected error: $e');

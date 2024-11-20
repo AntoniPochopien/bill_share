@@ -48,22 +48,49 @@ class AuthRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [DashboardScreen]
-class DashboardRoute extends PageRouteInfo<void> {
-  const DashboardRoute({List<PageRouteInfo>? children})
-      : super(
-          DashboardRoute.name,
+/// [GroupDashboardScreen]
+class GroupDashboardRoute extends PageRouteInfo<GroupDashboardRouteArgs> {
+  GroupDashboardRoute({
+    Key? key,
+    required int groupId,
+    List<PageRouteInfo>? children,
+  }) : super(
+          GroupDashboardRoute.name,
+          args: GroupDashboardRouteArgs(
+            key: key,
+            groupId: groupId,
+          ),
           initialChildren: children,
         );
 
-  static const String name = 'DashboardRoute';
+  static const String name = 'GroupDashboardRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const DashboardScreen();
+      final args = data.argsAs<GroupDashboardRouteArgs>();
+      return GroupDashboardScreen(
+        key: args.key,
+        groupId: args.groupId,
+      );
     },
   );
+}
+
+class GroupDashboardRouteArgs {
+  const GroupDashboardRouteArgs({
+    this.key,
+    required this.groupId,
+  });
+
+  final Key? key;
+
+  final int groupId;
+
+  @override
+  String toString() {
+    return 'GroupDashboardRouteArgs{key: $key, groupId: $groupId}';
+  }
 }
 
 /// generated route for

@@ -108,8 +108,8 @@ class __$$SimpleGroupImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SimpleGroupImpl implements _SimpleGroup {
-  const _$SimpleGroupImpl({required this.id, required this.name});
+class _$SimpleGroupImpl extends _SimpleGroup {
+  const _$SimpleGroupImpl({required this.id, required this.name}) : super._();
 
   @override
   final int id;
@@ -142,9 +142,10 @@ class _$SimpleGroupImpl implements _SimpleGroup {
       __$$SimpleGroupImplCopyWithImpl<_$SimpleGroupImpl>(this, _$identity);
 }
 
-abstract class _SimpleGroup implements SimpleGroup {
+abstract class _SimpleGroup extends SimpleGroup {
   const factory _SimpleGroup(
       {required final int id, required final String name}) = _$SimpleGroupImpl;
+  const _SimpleGroup._() : super._();
 
   @override
   int get id;

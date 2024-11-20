@@ -34,7 +34,7 @@
     "enter_group_code": "Enter group Code",
     "join_existing_group_description": "To join to existing group, provide group code",
     "or_text": "or...",
-    "create_new_group": "Create new group",
+    "create_group": "Create group",
     "group_name":"Group name",
     "create":"Create"
 }

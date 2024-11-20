@@ -82,7 +82,7 @@ class HomeScreen extends StatelessWidget {
           listener: (context, state) {
             state.whenOrNull(
               created: (id) {
-                //TODO push to group dashboard
+                context.pushRoute(GroupDashboardRoute(groupId: id));
               },
             );
           },
@@ -117,7 +117,7 @@ class HomeScreen extends StatelessWidget {
                                     groupCreatorCubit:
                                         context.read<GroupCreatorCubit>(),
                                   )),
-                          child: Text(T(context).create_new_group,
+                          child: Text(T(context).create_group,
                               style: Font.h4Green))
                     ]),
                     SizedBox(),
