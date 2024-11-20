@@ -9,6 +9,9 @@ import 'package:bill_share/common/wrappers/billshare_scaffold.dart';
 import 'package:bill_share/constants/app_colors.dart';
 import 'package:bill_share/constants/font.dart';
 import 'package:bill_share/di.dart';
+import 'package:bill_share/home/application/group_creator_cubit/group_creator_cubit.dart';
+import 'package:bill_share/home/application/groups_cubit/groups_cubit.dart';
+import 'package:bill_share/home/domain/i_groups_repository.dart';
 import 'package:bill_share/home/presentation/widgets/modals/create_group_modal.dart';
 import 'package:bill_share/l10n/l10n.dart';
 import 'package:bill_share/navigation/app_router.dart';
@@ -38,11 +41,25 @@ class HomeScreen extends StatelessWidget {
         border: Border.all(width: 2, color: AppColors.green),
       ),
     );
-    return BlocProvider(
-      create: (context) => AuthCubit(
-        iAuthRepository: getIt<IAuthRepository>(),
-        injectableUser: getIt<InjectableUser>(),
-      )..init(),
+
+    final modalShape = ContinuousRectangleBorder();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (context) => AuthCubit(
+                  iAuthRepository: getIt<IAuthRepository>(),
+                  injectableUser: getIt<InjectableUser>(),
+                )..init()),
+        BlocProvider(
+            create: (context) => GroupCreatorCubit(
+                  iGroupsRepository: getIt<IGroupsRepository>(),
+                )),
+        BlocProvider(
+            create: (context) => GroupsCubit(
+                iGroupsRepository: getIt<IGroupsRepository>(),
+                injectableUser: getIt<InjectableUser>())
+              ..fetchUserGroups())
+      ],
       child: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) {
           state.whenOrNull(
@@ -55,42 +72,59 @@ class HomeScreen extends StatelessWidget {
                     context: context,
                     isDismissible: false,
                     isScrollControlled: true,
+                    shape: modalShape,
                     builder: (context) => AddUsernameModal());
               }
             },
           );
         },
-        child: BillshareScaffold(
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Logo(size: 87),
-              Column(children: [
-                TitleWithUnderscore(
-                  title: T(context).enter_group_code,
-                  description: T(context).join_existing_group_description,
+        child: BlocConsumer<GroupCreatorCubit, GroupCreatorState>(
+          listener: (context, state) {
+            state.whenOrNull(
+              created: (id) {
+                //TODO push to group dashboard
+              },
+            );
+          },
+          builder: (context, state) => BlocBuilder<GroupsCubit, GroupsState>(
+            builder: (context, state) {
+              return BillshareScaffold(
+                body: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Logo(size: 87),
+                    Column(children: [
+                      TitleWithUnderscore(
+                        title: T(context).enter_group_code,
+                        description: T(context).join_existing_group_description,
+                      ),
+                      SizedBox(height: 28),
+                      Pinput(
+                        length: 6,
+                        defaultPinTheme: defaultPinTheme,
+                        focusedPinTheme: focusedPinTheme,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 19),
+                        child: Text(T(context).or_text),
+                      ),
+                      GestureDetector(
+                          onTap: () => showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              shape: modalShape,
+                              builder: (ctx) => CreateGroupModal(
+                                    groupCreatorCubit:
+                                        context.read<GroupCreatorCubit>(),
+                                  )),
+                          child: Text(T(context).create_new_group,
+                              style: Font.h4Green))
+                    ]),
+                    SizedBox(),
+                  ],
                 ),
-                SizedBox(height: 28),
-                Pinput(
-                  length: 6,
-                  defaultPinTheme: defaultPinTheme,
-                  focusedPinTheme: focusedPinTheme,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 19),
-                  child: Text(T(context).or_text),
-                ),
-                GestureDetector(
-                    onTap: () => showModalBottomSheet(
-                        context: context,
-                        isDismissible: false,
-                        isScrollControlled: true,
-                        builder: (context) => CreateGroupModal()),
-                    child:
-                        Text(T(context).create_new_group, style: Font.h4Green))
-              ]),
-              SizedBox(),
-            ],
+              );
+            },
           ),
         ),
       ),

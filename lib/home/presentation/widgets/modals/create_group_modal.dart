@@ -2,15 +2,15 @@ import 'package:bill_share/common/utils/validators.dart';
 import 'package:bill_share/common/widgets/billshare_text_field.dart';
 import 'package:bill_share/common/widgets/button.dart';
 import 'package:bill_share/common/widgets/modals/modal_sheet_structure.dart';
-import 'package:bill_share/di.dart';
 import 'package:bill_share/home/application/group_creator_cubit/group_creator_cubit.dart';
-import 'package:bill_share/home/domain/i_groups_repository.dart';
 import 'package:bill_share/l10n/l10n.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:auto_route/auto_route.dart';
 
 class CreateGroupModal extends StatefulWidget {
-  const CreateGroupModal({super.key});
+  final GroupCreatorCubit groupCreatorCubit;
+  const CreateGroupModal({super.key, required this.groupCreatorCubit});
 
   @override
   State<CreateGroupModal> createState() => _CreateGroupModalState();
@@ -22,10 +22,14 @@ class _CreateGroupModalState extends State<CreateGroupModal> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          GroupCreatorCubit(iGroupsRepository: getIt<IGroupsRepository>()),
-      child: BlocBuilder<GroupCreatorCubit, GroupCreatorState>(
+    return BlocProvider.value(
+      value: widget.groupCreatorCubit,
+      child: BlocConsumer<GroupCreatorCubit, GroupCreatorState>(
+        listener: (context, state) {
+          state.whenOrNull(
+            created: (_) => context.maybePop(),
+          );
+        },
         builder: (context, state) => ModalSheetStructure(
             onPopInvokedWithResult: (_, __) =>
                 state.maybeWhen(created: (_) => true, orElse: () => false),
@@ -39,8 +43,7 @@ class _CreateGroupModalState extends State<CreateGroupModal> {
                     BillshareTextField(
                       controller: _groupNameController,
                       label: T(context).group_name,
-                      validator: (v) =>
-                          Validators.usernameValidator(context, v),
+                      validator: (v) => Validators.groupName(context, v),
                     ),
                     SizedBox(height: MediaQuery.sizeOf(context).height * 0.05),
                     Button(
