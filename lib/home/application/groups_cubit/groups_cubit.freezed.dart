@@ -19,21 +19,21 @@ mixin _$GroupsState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() groups,
+    required TResult Function(List<SimpleGroup> groups) groups,
     required TResult Function(Failure failure) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function()? groups,
+    TResult? Function(List<SimpleGroup> groups)? groups,
     TResult? Function(Failure failure)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? groups,
+    TResult Function(List<SimpleGroup> groups)? groups,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) =>
@@ -125,7 +125,7 @@ class _$loadingImpl implements _loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() groups,
+    required TResult Function(List<SimpleGroup> groups) groups,
     required TResult Function(Failure failure) error,
   }) {
     return loading();
@@ -135,7 +135,7 @@ class _$loadingImpl implements _loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function()? groups,
+    TResult? Function(List<SimpleGroup> groups)? groups,
     TResult? Function(Failure failure)? error,
   }) {
     return loading?.call();
@@ -145,7 +145,7 @@ class _$loadingImpl implements _loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? groups,
+    TResult Function(List<SimpleGroup> groups)? groups,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
@@ -199,6 +199,8 @@ abstract class _$$GroupsImplCopyWith<$Res> {
   factory _$$GroupsImplCopyWith(
           _$GroupsImpl value, $Res Function(_$GroupsImpl) then) =
       __$$GroupsImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<SimpleGroup> groups});
 }
 
 /// @nodoc
@@ -211,57 +213,88 @@ class __$$GroupsImplCopyWithImpl<$Res>
 
   /// Create a copy of GroupsState
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? groups = null,
+  }) {
+    return _then(_$GroupsImpl(
+      null == groups
+          ? _value._groups
+          : groups // ignore: cast_nullable_to_non_nullable
+              as List<SimpleGroup>,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$GroupsImpl implements _Groups {
-  const _$GroupsImpl();
+  const _$GroupsImpl(final List<SimpleGroup> groups) : _groups = groups;
+
+  final List<SimpleGroup> _groups;
+  @override
+  List<SimpleGroup> get groups {
+    if (_groups is EqualUnmodifiableListView) return _groups;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_groups);
+  }
 
   @override
   String toString() {
-    return 'GroupsState.groups()';
+    return 'GroupsState.groups(groups: $groups)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GroupsImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$GroupsImpl &&
+            const DeepCollectionEquality().equals(other._groups, _groups));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_groups));
+
+  /// Create a copy of GroupsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GroupsImplCopyWith<_$GroupsImpl> get copyWith =>
+      __$$GroupsImplCopyWithImpl<_$GroupsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() groups,
+    required TResult Function(List<SimpleGroup> groups) groups,
     required TResult Function(Failure failure) error,
   }) {
-    return groups();
+    return groups(this.groups);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function()? groups,
+    TResult? Function(List<SimpleGroup> groups)? groups,
     TResult? Function(Failure failure)? error,
   }) {
-    return groups?.call();
+    return groups?.call(this.groups);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? groups,
+    TResult Function(List<SimpleGroup> groups)? groups,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
     if (groups != null) {
-      return groups();
+      return groups(this.groups);
     }
     return orElse();
   }
@@ -302,7 +335,15 @@ class _$GroupsImpl implements _Groups {
 }
 
 abstract class _Groups implements GroupsState {
-  const factory _Groups() = _$GroupsImpl;
+  const factory _Groups(final List<SimpleGroup> groups) = _$GroupsImpl;
+
+  List<SimpleGroup> get groups;
+
+  /// Create a copy of GroupsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GroupsImplCopyWith<_$GroupsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -386,7 +427,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() groups,
+    required TResult Function(List<SimpleGroup> groups) groups,
     required TResult Function(Failure failure) error,
   }) {
     return error(failure);
@@ -396,7 +437,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function()? groups,
+    TResult? Function(List<SimpleGroup> groups)? groups,
     TResult? Function(Failure failure)? error,
   }) {
     return error?.call(failure);
@@ -406,7 +447,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? groups,
+    TResult Function(List<SimpleGroup> groups)? groups,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {

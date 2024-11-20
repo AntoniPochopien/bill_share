@@ -10,14 +10,17 @@ class Font {
   static const _h2 = 24.0;
   static const _h4 = 14.0;
   static const _h5 = 12.0;
+  static const _h6 = 10.0;
 
   //dark
-  static const _baseDark = TextStyle(fontFamily: _basicFontFamily, color: AppColors.black);
+  static const _baseDark =
+      TextStyle(fontFamily: _basicFontFamily, color: AppColors.black);
 
   static final h1Dark = _baseDark.copyWith(fontSize: _h1);
   static final h2Dark = _baseDark.copyWith(fontSize: _h2);
   static final h4Dark = _baseDark.copyWith(fontSize: _h4);
   static final h5Dark = _baseDark.copyWith(fontSize: _h5);
+  static final h6Dark = _baseDark.copyWith(fontSize: _h6);
 
   //dark medium
   static final h1DarkMedium =
@@ -28,6 +31,8 @@ class Font {
       _baseDark.copyWith(fontSize: _h4, fontWeight: FontWeight.w500);
   static final h5DarkMedium =
       _baseDark.copyWith(fontSize: _h5, fontWeight: FontWeight.w500);
+  static final h6DarkMedium =
+      _baseDark.copyWith(fontSize: _h6, fontWeight: FontWeight.w500);
 
   //dark semibold
   static final h1DarkSemiBold =
@@ -38,6 +43,8 @@ class Font {
       _baseDark.copyWith(fontSize: _h4, fontWeight: FontWeight.w600);
   static final h5DarkSemiBold =
       _baseDark.copyWith(fontSize: _h5, fontWeight: FontWeight.w600);
+  static final h6DarkSemiBold =
+      _baseDark.copyWith(fontSize: _h6, fontWeight: FontWeight.w600);
 
   //dark bold
   static final h1DarkBold =
@@ -48,6 +55,8 @@ class Font {
       _baseDark.copyWith(fontSize: _h4, fontWeight: FontWeight.bold);
   static final h5DarkBold =
       _baseDark.copyWith(fontSize: _h5, fontWeight: FontWeight.bold);
+  static final h6DarkBold =
+      _baseDark.copyWith(fontSize: _h6, fontWeight: FontWeight.bold);
 
   //bright
   static const _baseBright =
@@ -57,6 +66,7 @@ class Font {
   static final h2Bright = _baseBright.copyWith(fontSize: _h2);
   static final h4Bright = _baseBright.copyWith(fontSize: _h4);
   static final h5Bright = _baseBright.copyWith(fontSize: _h5);
+  static final h6Bright = _baseBright.copyWith(fontSize: _h6);
 
   //bright bold
   static final h1BrightBold =
@@ -67,6 +77,8 @@ class Font {
       _baseBright.copyWith(fontSize: _h4, fontWeight: FontWeight.bold);
   static final h5BrightBold =
       _baseBright.copyWith(fontSize: _h5, fontWeight: FontWeight.bold);
+  static final h6BrightBold =
+      _baseBright.copyWith(fontSize: _h6, fontWeight: FontWeight.bold);
 
   //grey
   static const _baseGrey =
@@ -76,6 +88,7 @@ class Font {
   static final h2Grey = _baseGrey.copyWith(fontSize: _h2);
   static final h4Grey = _baseGrey.copyWith(fontSize: _h4);
   static final h5Grey = _baseGrey.copyWith(fontSize: _h5);
+  static final h6Grey = _baseGrey.copyWith(fontSize: _h6);
 
   //grey bold
   static final h1GreyBold =
@@ -86,6 +99,8 @@ class Font {
       _baseGrey.copyWith(fontSize: _h4, fontWeight: FontWeight.bold);
   static final h5GreyBold =
       _baseGrey.copyWith(fontSize: _h5, fontWeight: FontWeight.bold);
+  static final h6GreyBold =
+      _baseGrey.copyWith(fontSize: _h6, fontWeight: FontWeight.bold);
 
   //green
   static const _baseGreen =
@@ -95,6 +110,7 @@ class Font {
   static final h2Green = _baseGreen.copyWith(fontSize: _h2);
   static final h4Green = _baseGreen.copyWith(fontSize: _h4);
   static final h5Green = _baseGreen.copyWith(fontSize: _h5);
+  static final h6Green = _baseGreen.copyWith(fontSize: _h6);
 
   //green bold
   static final h1GreenBold =
@@ -105,4 +121,6 @@ class Font {
       _baseGreen.copyWith(fontSize: _h4, fontWeight: FontWeight.bold);
   static final h5GreenBold =
       _baseGreen.copyWith(fontSize: _h5, fontWeight: FontWeight.bold);
+  static final h6GreenBold =
+      _baseGreen.copyWith(fontSize: _h6, fontWeight: FontWeight.bold);
 }
