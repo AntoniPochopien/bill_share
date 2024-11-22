@@ -36,5 +36,6 @@
     "or_text": "or...",
     "create_group": "Create group",
     "group_name":"Group name",
-    "create":"Create"
+    "create":"Create",
+    "your_groups":"Your groups"
 }

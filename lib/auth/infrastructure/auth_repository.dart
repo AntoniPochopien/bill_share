@@ -81,10 +81,13 @@ class AuthRepository implements IAuthRepository {
   Future<void> logOut() async => await _supabase.auth.signOut();
 
   @override
-  Future<Either<Failure, String?>> getUsername() async {
+  Future<Either<Failure, String?>> getUsername(String userId) async {
     try {
-      final metadata =
-          await _supabase.from('profiles').select('username').single();
+      final metadata = await _supabase
+          .from('profiles')
+          .select('username')
+          .eq('id', userId)
+          .single();
       return right(metadata['username']);
     } catch (e) {
       log('getUsername unexpected error: $e');
@@ -96,7 +99,9 @@ class AuthRepository implements IAuthRepository {
   Future<Either<Failure, Unit>> updateUsername(String newUsername) async {
     try {
       final currentUserId = _supabase.auth.currentSession!.user.id;
-      await _supabase.from('profiles').update({'username': newUsername}).eq('id', currentUserId);
+      await _supabase
+          .from('profiles')
+          .update({'username': newUsername}).eq('id', currentUserId);
       return right(unit);
     } catch (e) {
       log('updateUsername unexpected error: $e');

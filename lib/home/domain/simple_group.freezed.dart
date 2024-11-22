@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SimpleGroup {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  bool get isAdmin => throw _privateConstructorUsedError;
+  int get membersCount => throw _privateConstructorUsedError;
 
   /// Create a copy of SimpleGroup
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +34,7 @@ abstract class $SimpleGroupCopyWith<$Res> {
           SimpleGroup value, $Res Function(SimpleGroup) then) =
       _$SimpleGroupCopyWithImpl<$Res, SimpleGroup>;
   @useResult
-  $Res call({int id, String name});
+  $Res call({int id, String name, bool isAdmin, int membersCount});
 }
 
 /// @nodoc
@@ -52,6 +54,8 @@ class _$SimpleGroupCopyWithImpl<$Res, $Val extends SimpleGroup>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? isAdmin = null,
+    Object? membersCount = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -62,6 +66,14 @@ class _$SimpleGroupCopyWithImpl<$Res, $Val extends SimpleGroup>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      isAdmin: null == isAdmin
+          ? _value.isAdmin
+          : isAdmin // ignore: cast_nullable_to_non_nullable
+              as bool,
+      membersCount: null == membersCount
+          ? _value.membersCount
+          : membersCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -74,7 +86,7 @@ abstract class _$$SimpleGroupImplCopyWith<$Res>
       __$$SimpleGroupImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name});
+  $Res call({int id, String name, bool isAdmin, int membersCount});
 }
 
 /// @nodoc
@@ -92,6 +104,8 @@ class __$$SimpleGroupImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? isAdmin = null,
+    Object? membersCount = null,
   }) {
     return _then(_$SimpleGroupImpl(
       id: null == id
@@ -102,6 +116,14 @@ class __$$SimpleGroupImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      isAdmin: null == isAdmin
+          ? _value.isAdmin
+          : isAdmin // ignore: cast_nullable_to_non_nullable
+              as bool,
+      membersCount: null == membersCount
+          ? _value.membersCount
+          : membersCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -109,16 +131,25 @@ class __$$SimpleGroupImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SimpleGroupImpl extends _SimpleGroup {
-  const _$SimpleGroupImpl({required this.id, required this.name}) : super._();
+  const _$SimpleGroupImpl(
+      {required this.id,
+      required this.name,
+      required this.isAdmin,
+      required this.membersCount})
+      : super._();
 
   @override
   final int id;
   @override
   final String name;
+  @override
+  final bool isAdmin;
+  @override
+  final int membersCount;
 
   @override
   String toString() {
-    return 'SimpleGroup(id: $id, name: $name)';
+    return 'SimpleGroup(id: $id, name: $name, isAdmin: $isAdmin, membersCount: $membersCount)';
   }
 
   @override
@@ -127,11 +158,14 @@ class _$SimpleGroupImpl extends _SimpleGroup {
         (other.runtimeType == runtimeType &&
             other is _$SimpleGroupImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin) &&
+            (identical(other.membersCount, membersCount) ||
+                other.membersCount == membersCount));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(runtimeType, id, name, isAdmin, membersCount);
 
   /// Create a copy of SimpleGroup
   /// with the given fields replaced by the non-null parameter values.
@@ -144,13 +178,20 @@ class _$SimpleGroupImpl extends _SimpleGroup {
 
 abstract class _SimpleGroup extends SimpleGroup {
   const factory _SimpleGroup(
-      {required final int id, required final String name}) = _$SimpleGroupImpl;
+      {required final int id,
+      required final String name,
+      required final bool isAdmin,
+      required final int membersCount}) = _$SimpleGroupImpl;
   const _SimpleGroup._() : super._();
 
   @override
   int get id;
   @override
   String get name;
+  @override
+  bool get isAdmin;
+  @override
+  int get membersCount;
 
   /// Create a copy of SimpleGroup
   /// with the given fields replaced by the non-null parameter values.

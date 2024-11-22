@@ -16,7 +16,7 @@ abstract class IAuthRepository {
     required String password,
   });
 
-  Future<Either<Failure, String?>> getUsername();
+  Future<Either<Failure, String?>> getUsername(String userId);
 
   Future<Either<Failure, Unit>> updateUsername(String newUsername);
 }

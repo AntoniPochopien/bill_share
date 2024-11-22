@@ -27,11 +27,11 @@ class AuthCubit extends Cubit<AuthState> {
       final session = data.session;
       if (session?.user != null) {
         log('user authenticated');
-        final username = await iAuthRepository.getUsername();
+        final username = await iAuthRepository.getUsername(session!.user.id);
         username.fold(
           (l) => emit(AuthState.error(l)),
           (r) {
-            final user = session!.user.toDomain(r);
+            final user = session.user.toDomain(r);
             injectableUser.setUser(user);
             emit(AuthState.authenticated(user));
           },

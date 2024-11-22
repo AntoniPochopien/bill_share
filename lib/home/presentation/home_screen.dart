@@ -60,8 +60,9 @@ class HomeScreen extends StatelessWidget {
         child: BlocConsumer<GroupCreatorCubit, GroupCreatorState>(
           listener: (context, state) {
             state.whenOrNull(
-              created: (id) {
-                context.pushRoute(GroupDashboardRoute(groupId: id));
+              created: (newGroup) {
+                context.read<GroupsCubit>().addGroupToList(newGroup);
+                context.pushRoute(GroupDashboardRoute(groupId: newGroup.id));
               },
             );
           },

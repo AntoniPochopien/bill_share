@@ -8,6 +8,7 @@ class AppBarWithSettings extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return AppBar(
+        notificationPredicate: (_) => false,
         title: Logo(),
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.settings))]);
   }

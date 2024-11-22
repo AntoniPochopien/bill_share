@@ -3,6 +3,7 @@ import 'package:bill_share/common/widgets/title_with_underscore.dart';
 import 'package:bill_share/home/domain/simple_group.dart';
 import 'package:bill_share/home/presentation/helpers/open_group_creator_modal.dart';
 import 'package:bill_share/home/presentation/widgets/group_tile.dart';
+import 'package:bill_share/l10n/l10n.dart';
 import 'package:bill_share/navigation/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
@@ -16,7 +17,7 @@ class GroupsListView extends StatelessWidget {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),
-        child: TitleWithUnderscore(title: 'Your groups'),
+        child: TitleWithUnderscore(title: T(context).your_groups),
       ),
       Expanded(
         child: ListView.builder(

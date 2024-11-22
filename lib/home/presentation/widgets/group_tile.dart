@@ -20,7 +20,7 @@ class GroupTile extends StatelessWidget {
         leading: CircleAvatar(),
         title: Text(group.name, style: Font.h4DarkMedium),
         subtitle: Text(
-          'Members: 8',
+          'Members: ${group.membersCount}',
           style: Font.h6Grey,
         ),
         onTap: () => onTap(),

@@ -19,7 +19,7 @@ mixin _$GroupCreatorState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int id) created,
+    required TResult Function(SimpleGroup newGroup) created,
     required TResult Function() loading,
     required TResult Function(Failure failure) error,
   }) =>
@@ -27,7 +27,7 @@ mixin _$GroupCreatorState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int id)? created,
+    TResult? Function(SimpleGroup newGroup)? created,
     TResult? Function()? loading,
     TResult? Function(Failure failure)? error,
   }) =>
@@ -35,7 +35,7 @@ mixin _$GroupCreatorState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int id)? created,
+    TResult Function(SimpleGroup newGroup)? created,
     TResult Function()? loading,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
@@ -131,7 +131,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int id) created,
+    required TResult Function(SimpleGroup newGroup) created,
     required TResult Function() loading,
     required TResult Function(Failure failure) error,
   }) {
@@ -142,7 +142,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int id)? created,
+    TResult? Function(SimpleGroup newGroup)? created,
     TResult? Function()? loading,
     TResult? Function(Failure failure)? error,
   }) {
@@ -153,7 +153,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int id)? created,
+    TResult Function(SimpleGroup newGroup)? created,
     TResult Function()? loading,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
@@ -212,7 +212,9 @@ abstract class _$$CreatedImplCopyWith<$Res> {
           _$CreatedImpl value, $Res Function(_$CreatedImpl) then) =
       __$$CreatedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int id});
+  $Res call({SimpleGroup newGroup});
+
+  $SimpleGroupCopyWith<$Res> get newGroup;
 }
 
 /// @nodoc
@@ -228,28 +230,38 @@ class __$$CreatedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? newGroup = null,
   }) {
     return _then(_$CreatedImpl(
-      null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
+      null == newGroup
+          ? _value.newGroup
+          : newGroup // ignore: cast_nullable_to_non_nullable
+              as SimpleGroup,
     ));
+  }
+
+  /// Create a copy of GroupCreatorState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $SimpleGroupCopyWith<$Res> get newGroup {
+    return $SimpleGroupCopyWith<$Res>(_value.newGroup, (value) {
+      return _then(_value.copyWith(newGroup: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$CreatedImpl implements _Created {
-  const _$CreatedImpl(this.id);
+  const _$CreatedImpl(this.newGroup);
 
   @override
-  final int id;
+  final SimpleGroup newGroup;
 
   @override
   String toString() {
-    return 'GroupCreatorState.created(id: $id)';
+    return 'GroupCreatorState.created(newGroup: $newGroup)';
   }
 
   @override
@@ -257,11 +269,12 @@ class _$CreatedImpl implements _Created {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CreatedImpl &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.newGroup, newGroup) ||
+                other.newGroup == newGroup));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id);
+  int get hashCode => Object.hash(runtimeType, newGroup);
 
   /// Create a copy of GroupCreatorState
   /// with the given fields replaced by the non-null parameter values.
@@ -275,35 +288,35 @@ class _$CreatedImpl implements _Created {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int id) created,
+    required TResult Function(SimpleGroup newGroup) created,
     required TResult Function() loading,
     required TResult Function(Failure failure) error,
   }) {
-    return created(id);
+    return created(newGroup);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int id)? created,
+    TResult? Function(SimpleGroup newGroup)? created,
     TResult? Function()? loading,
     TResult? Function(Failure failure)? error,
   }) {
-    return created?.call(id);
+    return created?.call(newGroup);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int id)? created,
+    TResult Function(SimpleGroup newGroup)? created,
     TResult Function()? loading,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
     if (created != null) {
-      return created(id);
+      return created(newGroup);
     }
     return orElse();
   }
@@ -347,9 +360,9 @@ class _$CreatedImpl implements _Created {
 }
 
 abstract class _Created implements GroupCreatorState {
-  const factory _Created(final int id) = _$CreatedImpl;
+  const factory _Created(final SimpleGroup newGroup) = _$CreatedImpl;
 
-  int get id;
+  SimpleGroup get newGroup;
 
   /// Create a copy of GroupCreatorState
   /// with the given fields replaced by the non-null parameter values.
@@ -400,7 +413,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int id) created,
+    required TResult Function(SimpleGroup newGroup) created,
     required TResult Function() loading,
     required TResult Function(Failure failure) error,
   }) {
@@ -411,7 +424,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int id)? created,
+    TResult? Function(SimpleGroup newGroup)? created,
     TResult? Function()? loading,
     TResult? Function(Failure failure)? error,
   }) {
@@ -422,7 +435,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int id)? created,
+    TResult Function(SimpleGroup newGroup)? created,
     TResult Function()? loading,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
@@ -556,7 +569,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int id) created,
+    required TResult Function(SimpleGroup newGroup) created,
     required TResult Function() loading,
     required TResult Function(Failure failure) error,
   }) {
@@ -567,7 +580,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int id)? created,
+    TResult? Function(SimpleGroup newGroup)? created,
     TResult? Function()? loading,
     TResult? Function(Failure failure)? error,
   }) {
@@ -578,7 +591,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int id)? created,
+    TResult Function(SimpleGroup newGroup)? created,
     TResult Function()? loading,
     TResult Function(Failure failure)? error,
     required TResult orElse(),

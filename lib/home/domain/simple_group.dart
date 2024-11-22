@@ -6,9 +6,15 @@ part 'simple_group.freezed.dart';
 class SimpleGroup with _$SimpleGroup {
   const SimpleGroup._();
   const factory SimpleGroup({
-  required  int id,
-  required String name
-  })=_SimpleGroup;
+    required int id,
+    required String name,
+    required bool isAdmin,
+    required int membersCount,
+  }) = _SimpleGroup;
 
-  static SimpleGroup fromJson(Map<String,dynamic> data)=> SimpleGroup(id: data['id'], name: data['name']);
+  static SimpleGroup fromJson(Map<String, dynamic> data) {
+    final group = data['groups'];
+    return SimpleGroup(
+        id: group['id'], name: group['name'], isAdmin: data['isAdmin'], membersCount: group['membersCount'][0]['count']);
+  }
 }

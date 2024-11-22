@@ -10,16 +10,20 @@ class GroupsRepository implements IGroupsRepository {
   final _supabase = Supabase.instance.client;
 
   @override
-  Future<Either<Failure, int>> createGroup(String groupName) async {
+  Future<Either<Failure, SimpleGroup>> createGroup(String groupName) async {
     try {
-      final result = await _supabase.functions.invoke('create-group', body: {
+      final result = await _supabase.rpc('create_group', params: {
         'name': groupName,
-      });
-      if (result.status == 201) {
-        return right(result.data['newGroup']['id']);
-      } else {
-        return left(Failure.unexpected());
-      }
+      }) as List;
+      final newGroupId = result[0]['id'];
+      final newGroupResult = await _supabase
+          .from('groups_profiles')
+          .select(
+              'groups(id, name, membersCount:groups_profiles(count)), isAdmin')
+          .eq('group_id', newGroupId);
+      final newGroup =
+          newGroupResult.map((e) => SimpleGroup.fromJson(e)).toList();
+      return right(newGroup.first);
     } catch (e) {
       log('createGroup unexpected error: $e');
       return left(Failure.unexpected());
@@ -32,10 +36,10 @@ class GroupsRepository implements IGroupsRepository {
     try {
       final response = await _supabase
           .from('groups_profiles')
-          .select('groups(id, name)')
+          .select(
+              'groups(id, name, membersCount:groups_profiles(count)), isAdmin')
           .eq('user_id', userId);
-      final groups =
-          response.map((e) => SimpleGroup.fromJson(e['groups'])).toList();
+      final groups = response.map((e) => SimpleGroup.fromJson(e)).toList();
       return right(groups);
     } catch (e) {
       log('fetchUserGroups unexpected error: $e');

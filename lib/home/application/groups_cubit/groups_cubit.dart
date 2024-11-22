@@ -25,4 +25,13 @@ class GroupsCubit extends Cubit<GroupsState> {
       (r) => emit(GroupsState.groups(r)),
     );
   }
+
+  void addGroupToList(SimpleGroup newGroup) {
+    if (state is _Groups) {
+      final s = state as _Groups;
+      final groups = List<SimpleGroup>.from(s.groups);
+      groups.add(newGroup);
+      emit(s.copyWith(groups: groups));
+    }
+  }
 }
