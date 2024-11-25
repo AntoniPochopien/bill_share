@@ -35,7 +35,7 @@ class AppStartupScreen extends StatelessWidget {
                     authenticated: (user) {
                       appStartupState.whenOrNull(
                         navigateToGroup: (groupId) => context.replaceRoute(
-                            GroupDashboardRoute(groupId: groupId)),
+                            GroupNavigatorRoute(groupId: groupId)),
                         navigateToHome: () => context.replaceRoute(HomeRoute()),
                       );
                     },

@@ -62,7 +62,7 @@ class HomeScreen extends StatelessWidget {
             state.whenOrNull(
               created: (newGroup) {
                 context.read<GroupsCubit>().addGroupToList(newGroup);
-                context.pushRoute(GroupDashboardRoute(groupId: newGroup.id));
+                context.pushRoute(GroupNavigatorRoute(groupId: newGroup.id));
               },
             );
           },

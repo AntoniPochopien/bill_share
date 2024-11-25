@@ -25,7 +25,7 @@ class GroupsListView extends StatelessWidget {
             itemBuilder: (context, index) => GroupTile(
                   group: groups[index],
                   onTap: () => context.pushRoute(
-                      GroupDashboardRoute(groupId: groups[index].id)),
+                      GroupNavigatorRoute(groupId: groups[index].id)),
                 )),
       ),
       Button(text: '+', onPressed: () => openGroupCreatorModal(context)),

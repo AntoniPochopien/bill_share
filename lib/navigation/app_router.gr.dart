@@ -48,18 +48,30 @@ class AuthRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [GroupChatScreen]
+class GroupChatRoute extends PageRouteInfo<void> {
+  const GroupChatRoute({List<PageRouteInfo>? children})
+      : super(
+          GroupChatRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'GroupChatRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const GroupChatScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [GroupDashboardScreen]
-class GroupDashboardRoute extends PageRouteInfo<GroupDashboardRouteArgs> {
-  GroupDashboardRoute({
-    Key? key,
-    required int groupId,
-    List<PageRouteInfo>? children,
-  }) : super(
+class GroupDashboardRoute extends PageRouteInfo<void> {
+  const GroupDashboardRoute({List<PageRouteInfo>? children})
+      : super(
           GroupDashboardRoute.name,
-          args: GroupDashboardRouteArgs(
-            key: key,
-            groupId: groupId,
-          ),
           initialChildren: children,
         );
 
@@ -68,8 +80,53 @@ class GroupDashboardRoute extends PageRouteInfo<GroupDashboardRouteArgs> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<GroupDashboardRouteArgs>();
-      return GroupDashboardScreen(
+      return const GroupDashboardScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [GroupMembersScreen]
+class GroupMembersRoute extends PageRouteInfo<void> {
+  const GroupMembersRoute({List<PageRouteInfo>? children})
+      : super(
+          GroupMembersRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'GroupMembersRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const GroupMembersScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [GroupNavigatorScreen]
+class GroupNavigatorRoute extends PageRouteInfo<GroupNavigatorRouteArgs> {
+  GroupNavigatorRoute({
+    Key? key,
+    required int groupId,
+    List<PageRouteInfo>? children,
+  }) : super(
+          GroupNavigatorRoute.name,
+          args: GroupNavigatorRouteArgs(
+            key: key,
+            groupId: groupId,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'GroupNavigatorRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<GroupNavigatorRouteArgs>();
+      return GroupNavigatorScreen(
         key: args.key,
         groupId: args.groupId,
       );
@@ -77,8 +134,8 @@ class GroupDashboardRoute extends PageRouteInfo<GroupDashboardRouteArgs> {
   );
 }
 
-class GroupDashboardRouteArgs {
-  const GroupDashboardRouteArgs({
+class GroupNavigatorRouteArgs {
+  const GroupNavigatorRouteArgs({
     this.key,
     required this.groupId,
   });
@@ -89,7 +146,7 @@ class GroupDashboardRouteArgs {
 
   @override
   String toString() {
-    return 'GroupDashboardRouteArgs{key: $key, groupId: $groupId}';
+    return 'GroupNavigatorRouteArgs{key: $key, groupId: $groupId}';
   }
 }
 

@@ -1,7 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bill_share/app_startup/presentation/app_startup_screen.dart';
 import 'package:bill_share/auth/presentation/auth_screen.dart';
+import 'package:bill_share/group_chat/presentation/group_chat_screen.dart';
 import 'package:bill_share/group_dashboard/presentation/group_dashboard_screen.dart';
+import 'package:bill_share/group_members_screen/presentation/group_members_screen.dart';
+import 'package:bill_share/group_navigator/presentation/group_navigator_screen.dart';
 import 'package:bill_share/home/presentation/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +17,10 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: AppStartupRoute.page, initial: true),
         AutoRoute(page: AuthRoute.page),
         AutoRoute(page: HomeRoute.page),
-        AutoRoute(page: GroupDashboardRoute.page),
+        AutoRoute(page: GroupNavigatorRoute.page, children: [
+          AutoRoute(page: GroupDashboardRoute.page),
+          AutoRoute(page: GroupChatRoute.page),
+          AutoRoute(page: GroupMembersRoute.page),
+        ]),
       ];
 }

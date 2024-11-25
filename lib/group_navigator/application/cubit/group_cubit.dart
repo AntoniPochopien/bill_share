@@ -14,5 +14,6 @@ class GroupCubit extends Cubit<GroupState> {
 
   void init(int groupId) async {
     await iLocalStorageRepository.saveLastGroupId(groupId);
+    emit(GroupState.data());
   }
 }
