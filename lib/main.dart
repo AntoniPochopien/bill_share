@@ -38,6 +38,13 @@ class BillShare extends StatelessWidget {
             colorScheme:
                 ColorScheme.fromSeed(seedColor: const Color(0xFF404040)),
             useMaterial3: true,
+            pageTransitionsTheme: const PageTransitionsTheme(
+              builders: <TargetPlatform, PageTransitionsBuilder>{
+                TargetPlatform.android: ZoomPageTransitionsBuilder(
+                    allowEnterRouteSnapshotting: false),
+                TargetPlatform.iOS: CupertinoPageTransitionsBuilder()
+              },
+            ),
           ),
           locale: languageState.locale,
           supportedLocales: L10n.supported,
