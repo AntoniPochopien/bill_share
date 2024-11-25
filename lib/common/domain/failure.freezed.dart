@@ -21,6 +21,7 @@ mixin _$Failure {
     required TResult Function() cannotReach,
     required TResult Function() unauthorized,
     required TResult Function() wrongCredentials,
+    required TResult Function() groupNotExists,
     required TResult Function(String? message) unexpected,
   }) =>
       throw _privateConstructorUsedError;
@@ -29,6 +30,7 @@ mixin _$Failure {
     TResult? Function()? cannotReach,
     TResult? Function()? unauthorized,
     TResult? Function()? wrongCredentials,
+    TResult? Function()? groupNotExists,
     TResult? Function(String? message)? unexpected,
   }) =>
       throw _privateConstructorUsedError;
@@ -37,6 +39,7 @@ mixin _$Failure {
     TResult Function()? cannotReach,
     TResult Function()? unauthorized,
     TResult Function()? wrongCredentials,
+    TResult Function()? groupNotExists,
     TResult Function(String? message)? unexpected,
     required TResult orElse(),
   }) =>
@@ -46,6 +49,7 @@ mixin _$Failure {
     required TResult Function(_CannotReach value) cannotReach,
     required TResult Function(_Unauthorized value) unauthorized,
     required TResult Function(_WrongCredentials value) wrongCredentials,
+    required TResult Function(_GroupNotExists value) groupNotExists,
     required TResult Function(_Unexpected value) unexpected,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,6 +58,7 @@ mixin _$Failure {
     TResult? Function(_CannotReach value)? cannotReach,
     TResult? Function(_Unauthorized value)? unauthorized,
     TResult? Function(_WrongCredentials value)? wrongCredentials,
+    TResult? Function(_GroupNotExists value)? groupNotExists,
     TResult? Function(_Unexpected value)? unexpected,
   }) =>
       throw _privateConstructorUsedError;
@@ -62,6 +67,7 @@ mixin _$Failure {
     TResult Function(_CannotReach value)? cannotReach,
     TResult Function(_Unauthorized value)? unauthorized,
     TResult Function(_WrongCredentials value)? wrongCredentials,
+    TResult Function(_GroupNotExists value)? groupNotExists,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) =>
@@ -132,6 +138,7 @@ class _$CannotReachImpl implements _CannotReach {
     required TResult Function() cannotReach,
     required TResult Function() unauthorized,
     required TResult Function() wrongCredentials,
+    required TResult Function() groupNotExists,
     required TResult Function(String? message) unexpected,
   }) {
     return cannotReach();
@@ -143,6 +150,7 @@ class _$CannotReachImpl implements _CannotReach {
     TResult? Function()? cannotReach,
     TResult? Function()? unauthorized,
     TResult? Function()? wrongCredentials,
+    TResult? Function()? groupNotExists,
     TResult? Function(String? message)? unexpected,
   }) {
     return cannotReach?.call();
@@ -154,6 +162,7 @@ class _$CannotReachImpl implements _CannotReach {
     TResult Function()? cannotReach,
     TResult Function()? unauthorized,
     TResult Function()? wrongCredentials,
+    TResult Function()? groupNotExists,
     TResult Function(String? message)? unexpected,
     required TResult orElse(),
   }) {
@@ -169,6 +178,7 @@ class _$CannotReachImpl implements _CannotReach {
     required TResult Function(_CannotReach value) cannotReach,
     required TResult Function(_Unauthorized value) unauthorized,
     required TResult Function(_WrongCredentials value) wrongCredentials,
+    required TResult Function(_GroupNotExists value) groupNotExists,
     required TResult Function(_Unexpected value) unexpected,
   }) {
     return cannotReach(this);
@@ -180,6 +190,7 @@ class _$CannotReachImpl implements _CannotReach {
     TResult? Function(_CannotReach value)? cannotReach,
     TResult? Function(_Unauthorized value)? unauthorized,
     TResult? Function(_WrongCredentials value)? wrongCredentials,
+    TResult? Function(_GroupNotExists value)? groupNotExists,
     TResult? Function(_Unexpected value)? unexpected,
   }) {
     return cannotReach?.call(this);
@@ -191,6 +202,7 @@ class _$CannotReachImpl implements _CannotReach {
     TResult Function(_CannotReach value)? cannotReach,
     TResult Function(_Unauthorized value)? unauthorized,
     TResult Function(_WrongCredentials value)? wrongCredentials,
+    TResult Function(_GroupNotExists value)? groupNotExists,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) {
@@ -249,6 +261,7 @@ class _$UnauthorizedImpl implements _Unauthorized {
     required TResult Function() cannotReach,
     required TResult Function() unauthorized,
     required TResult Function() wrongCredentials,
+    required TResult Function() groupNotExists,
     required TResult Function(String? message) unexpected,
   }) {
     return unauthorized();
@@ -260,6 +273,7 @@ class _$UnauthorizedImpl implements _Unauthorized {
     TResult? Function()? cannotReach,
     TResult? Function()? unauthorized,
     TResult? Function()? wrongCredentials,
+    TResult? Function()? groupNotExists,
     TResult? Function(String? message)? unexpected,
   }) {
     return unauthorized?.call();
@@ -271,6 +285,7 @@ class _$UnauthorizedImpl implements _Unauthorized {
     TResult Function()? cannotReach,
     TResult Function()? unauthorized,
     TResult Function()? wrongCredentials,
+    TResult Function()? groupNotExists,
     TResult Function(String? message)? unexpected,
     required TResult orElse(),
   }) {
@@ -286,6 +301,7 @@ class _$UnauthorizedImpl implements _Unauthorized {
     required TResult Function(_CannotReach value) cannotReach,
     required TResult Function(_Unauthorized value) unauthorized,
     required TResult Function(_WrongCredentials value) wrongCredentials,
+    required TResult Function(_GroupNotExists value) groupNotExists,
     required TResult Function(_Unexpected value) unexpected,
   }) {
     return unauthorized(this);
@@ -297,6 +313,7 @@ class _$UnauthorizedImpl implements _Unauthorized {
     TResult? Function(_CannotReach value)? cannotReach,
     TResult? Function(_Unauthorized value)? unauthorized,
     TResult? Function(_WrongCredentials value)? wrongCredentials,
+    TResult? Function(_GroupNotExists value)? groupNotExists,
     TResult? Function(_Unexpected value)? unexpected,
   }) {
     return unauthorized?.call(this);
@@ -308,6 +325,7 @@ class _$UnauthorizedImpl implements _Unauthorized {
     TResult Function(_CannotReach value)? cannotReach,
     TResult Function(_Unauthorized value)? unauthorized,
     TResult Function(_WrongCredentials value)? wrongCredentials,
+    TResult Function(_GroupNotExists value)? groupNotExists,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) {
@@ -366,6 +384,7 @@ class _$WrongCredentialsImpl implements _WrongCredentials {
     required TResult Function() cannotReach,
     required TResult Function() unauthorized,
     required TResult Function() wrongCredentials,
+    required TResult Function() groupNotExists,
     required TResult Function(String? message) unexpected,
   }) {
     return wrongCredentials();
@@ -377,6 +396,7 @@ class _$WrongCredentialsImpl implements _WrongCredentials {
     TResult? Function()? cannotReach,
     TResult? Function()? unauthorized,
     TResult? Function()? wrongCredentials,
+    TResult? Function()? groupNotExists,
     TResult? Function(String? message)? unexpected,
   }) {
     return wrongCredentials?.call();
@@ -388,6 +408,7 @@ class _$WrongCredentialsImpl implements _WrongCredentials {
     TResult Function()? cannotReach,
     TResult Function()? unauthorized,
     TResult Function()? wrongCredentials,
+    TResult Function()? groupNotExists,
     TResult Function(String? message)? unexpected,
     required TResult orElse(),
   }) {
@@ -403,6 +424,7 @@ class _$WrongCredentialsImpl implements _WrongCredentials {
     required TResult Function(_CannotReach value) cannotReach,
     required TResult Function(_Unauthorized value) unauthorized,
     required TResult Function(_WrongCredentials value) wrongCredentials,
+    required TResult Function(_GroupNotExists value) groupNotExists,
     required TResult Function(_Unexpected value) unexpected,
   }) {
     return wrongCredentials(this);
@@ -414,6 +436,7 @@ class _$WrongCredentialsImpl implements _WrongCredentials {
     TResult? Function(_CannotReach value)? cannotReach,
     TResult? Function(_Unauthorized value)? unauthorized,
     TResult? Function(_WrongCredentials value)? wrongCredentials,
+    TResult? Function(_GroupNotExists value)? groupNotExists,
     TResult? Function(_Unexpected value)? unexpected,
   }) {
     return wrongCredentials?.call(this);
@@ -425,6 +448,7 @@ class _$WrongCredentialsImpl implements _WrongCredentials {
     TResult Function(_CannotReach value)? cannotReach,
     TResult Function(_Unauthorized value)? unauthorized,
     TResult Function(_WrongCredentials value)? wrongCredentials,
+    TResult Function(_GroupNotExists value)? groupNotExists,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) {
@@ -437,6 +461,129 @@ class _$WrongCredentialsImpl implements _WrongCredentials {
 
 abstract class _WrongCredentials implements Failure {
   const factory _WrongCredentials() = _$WrongCredentialsImpl;
+}
+
+/// @nodoc
+abstract class _$$GroupNotExistsImplCopyWith<$Res> {
+  factory _$$GroupNotExistsImplCopyWith(_$GroupNotExistsImpl value,
+          $Res Function(_$GroupNotExistsImpl) then) =
+      __$$GroupNotExistsImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GroupNotExistsImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$GroupNotExistsImpl>
+    implements _$$GroupNotExistsImplCopyWith<$Res> {
+  __$$GroupNotExistsImplCopyWithImpl(
+      _$GroupNotExistsImpl _value, $Res Function(_$GroupNotExistsImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$GroupNotExistsImpl implements _GroupNotExists {
+  const _$GroupNotExistsImpl();
+
+  @override
+  String toString() {
+    return 'Failure.groupNotExists()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$GroupNotExistsImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() cannotReach,
+    required TResult Function() unauthorized,
+    required TResult Function() wrongCredentials,
+    required TResult Function() groupNotExists,
+    required TResult Function(String? message) unexpected,
+  }) {
+    return groupNotExists();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? cannotReach,
+    TResult? Function()? unauthorized,
+    TResult? Function()? wrongCredentials,
+    TResult? Function()? groupNotExists,
+    TResult? Function(String? message)? unexpected,
+  }) {
+    return groupNotExists?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? cannotReach,
+    TResult Function()? unauthorized,
+    TResult Function()? wrongCredentials,
+    TResult Function()? groupNotExists,
+    TResult Function(String? message)? unexpected,
+    required TResult orElse(),
+  }) {
+    if (groupNotExists != null) {
+      return groupNotExists();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CannotReach value) cannotReach,
+    required TResult Function(_Unauthorized value) unauthorized,
+    required TResult Function(_WrongCredentials value) wrongCredentials,
+    required TResult Function(_GroupNotExists value) groupNotExists,
+    required TResult Function(_Unexpected value) unexpected,
+  }) {
+    return groupNotExists(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_CannotReach value)? cannotReach,
+    TResult? Function(_Unauthorized value)? unauthorized,
+    TResult? Function(_WrongCredentials value)? wrongCredentials,
+    TResult? Function(_GroupNotExists value)? groupNotExists,
+    TResult? Function(_Unexpected value)? unexpected,
+  }) {
+    return groupNotExists?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CannotReach value)? cannotReach,
+    TResult Function(_Unauthorized value)? unauthorized,
+    TResult Function(_WrongCredentials value)? wrongCredentials,
+    TResult Function(_GroupNotExists value)? groupNotExists,
+    TResult Function(_Unexpected value)? unexpected,
+    required TResult orElse(),
+  }) {
+    if (groupNotExists != null) {
+      return groupNotExists(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GroupNotExists implements Failure {
+  const factory _GroupNotExists() = _$GroupNotExistsImpl;
 }
 
 /// @nodoc
@@ -511,6 +658,7 @@ class _$UnexpectedImpl implements _Unexpected {
     required TResult Function() cannotReach,
     required TResult Function() unauthorized,
     required TResult Function() wrongCredentials,
+    required TResult Function() groupNotExists,
     required TResult Function(String? message) unexpected,
   }) {
     return unexpected(message);
@@ -522,6 +670,7 @@ class _$UnexpectedImpl implements _Unexpected {
     TResult? Function()? cannotReach,
     TResult? Function()? unauthorized,
     TResult? Function()? wrongCredentials,
+    TResult? Function()? groupNotExists,
     TResult? Function(String? message)? unexpected,
   }) {
     return unexpected?.call(message);
@@ -533,6 +682,7 @@ class _$UnexpectedImpl implements _Unexpected {
     TResult Function()? cannotReach,
     TResult Function()? unauthorized,
     TResult Function()? wrongCredentials,
+    TResult Function()? groupNotExists,
     TResult Function(String? message)? unexpected,
     required TResult orElse(),
   }) {
@@ -548,6 +698,7 @@ class _$UnexpectedImpl implements _Unexpected {
     required TResult Function(_CannotReach value) cannotReach,
     required TResult Function(_Unauthorized value) unauthorized,
     required TResult Function(_WrongCredentials value) wrongCredentials,
+    required TResult Function(_GroupNotExists value) groupNotExists,
     required TResult Function(_Unexpected value) unexpected,
   }) {
     return unexpected(this);
@@ -559,6 +710,7 @@ class _$UnexpectedImpl implements _Unexpected {
     TResult? Function(_CannotReach value)? cannotReach,
     TResult? Function(_Unauthorized value)? unauthorized,
     TResult? Function(_WrongCredentials value)? wrongCredentials,
+    TResult? Function(_GroupNotExists value)? groupNotExists,
     TResult? Function(_Unexpected value)? unexpected,
   }) {
     return unexpected?.call(this);
@@ -570,6 +722,7 @@ class _$UnexpectedImpl implements _Unexpected {
     TResult Function(_CannotReach value)? cannotReach,
     TResult Function(_Unauthorized value)? unauthorized,
     TResult Function(_WrongCredentials value)? wrongCredentials,
+    TResult Function(_GroupNotExists value)? groupNotExists,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) {

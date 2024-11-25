@@ -5,6 +5,7 @@ import 'package:bill_share/local_storage/domain/i_local_storage_repository.dart'
 
 enum _Tables {
   locale,
+  lastGroupId,
 }
 
 class LocalStorageRepository implements ILocalStorageRepository {
@@ -29,4 +30,11 @@ class LocalStorageRepository implements ILocalStorageRepository {
   @override
   Future<void> saveLocale(Locale? locale) =>
       box.put(_Tables.locale.name, locale?.languageCode);
+
+  @override
+  int? readLastGroupId() => box.get(_Tables.lastGroupId.name);
+
+  @override
+  Future<void> saveLastGroupId(int groupId) async =>
+      await box.put(_Tables.lastGroupId.name, groupId);
 }

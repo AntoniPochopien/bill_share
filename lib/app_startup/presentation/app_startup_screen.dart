@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bill_share/app_startup/application/cubit/app_startup_cubit.dart';
 import 'package:bill_share/auth/application/cubit/auth_cubit.dart';
 import 'package:bill_share/auth/domain/i_auth_repository.dart';
 import 'package:bill_share/auth/domain/injectable_user.dart';
 import 'package:bill_share/di.dart';
+import 'package:bill_share/local_storage/domain/i_local_storage_repository.dart';
 import 'package:bill_share/navigation/app_router.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,23 +15,37 @@ class AppStartupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => AuthCubit(
-            iAuthRepository: getIt<IAuthRepository>(),
-            injectableUser: getIt<InjectableUser>())
-          ..init(),
-        child: BlocListener<AuthCubit, AuthState>(
-            listener: (context, state) {
-              state.whenOrNull(
-                authenticated: (user) {
-                  //TODO detect if user have any group, then pass to group_dashboard or home screen
-                  context.replaceRoute(HomeRoute());
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+              create: (context) => AuthCubit(
+                  iAuthRepository: getIt<IAuthRepository>(),
+                  injectableUser: getIt<InjectableUser>())
+                ..init()),
+          BlocProvider(
+              create: (context) => AppStartupCubit(
+                  iLocalStorageRepository: getIt<ILocalStorageRepository>())
+                ..init())
+        ],
+        child: BlocBuilder<AppStartupCubit, AppStartupState>(
+          builder: (context, appStartupState) {
+            return BlocListener<AuthCubit, AuthState>(
+                listener: (context, authState) {
+                  authState.whenOrNull(
+                    authenticated: (user) {
+                      appStartupState.whenOrNull(
+                        navigateToGroup: (groupId) => context.replaceRoute(
+                            GroupDashboardRoute(groupId: groupId)),
+                        navigateToHome: () => context.replaceRoute(HomeRoute()),
+                      );
+                    },
+                    unauthenticated: () {
+                      context.replaceRoute(AuthRoute());
+                    },
+                  );
                 },
-                unauthenticated: () {
-                  context.replaceRoute(AuthRoute());
-                },
-              );
-            },
-            child: const Placeholder()));
+                child: const Placeholder());
+          },
+        ));
   }
 }
