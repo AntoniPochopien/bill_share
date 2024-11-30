@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:bill_share/common/domain/failure.dart';
+import 'package:bill_share/group_navigator/domain/group_member.dart';
 import 'package:bill_share/home/domain/i_groups_repository.dart';
 import 'package:bill_share/home/domain/simple_group.dart';
 import 'package:dartz/dartz.dart';
@@ -43,6 +44,23 @@ class GroupsRepository implements IGroupsRepository {
       return right(groups);
     } catch (e) {
       log('fetchUserGroups unexpected error: $e');
+      return left(Failure.unexpected());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<GroupMember>>> fetchGroupMembers(
+      int groupId) async {
+    try {
+      final response = await _supabase
+          .from('groups_profiles')
+          .select('profiles(id, username), isAdmin')
+          .eq('group_id', groupId);
+      // final users = response.map((e) => );
+      print(response);
+      return right([]);
+    } catch (e) {
+      log('fetchGroupMembers unexpected error: $e');
       return left(Failure.unexpected());
     }
   }
