@@ -3,10 +3,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'group_member.freezed.dart';
 
-@freezed
+@Freezed(toJson: false, fromJson: false)
 class GroupMember with _$GroupMember {
   const factory GroupMember({
     required User user,
     required bool isAdmin,
   }) = _GroupMember;
+
+  
 }

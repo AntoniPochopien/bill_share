@@ -4,8 +4,8 @@ import 'package:bill_share/common/screens/error_screen.dart';
 import 'package:bill_share/common/screens/loading_screen.dart';
 import 'package:bill_share/di.dart';
 import 'package:bill_share/group_navigator/application/cubit/group_cubit.dart';
+import 'package:bill_share/group_navigator/domain/i_group_repository.dart';
 import 'package:bill_share/group_navigator/presentation/widgets/group_nav_page.dart';
-import 'package:bill_share/home/domain/i_groups_repository.dart';
 import 'package:bill_share/local_storage/domain/i_local_storage_repository.dart';
 import 'package:bill_share/navigation/app_router.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class GroupNavigatorScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) => GroupCubit(
-            iGroupsRepository: getIt<IGroupsRepository>(),
+            iGroupRepository: getIt<IGroupRepository>(),
             iLocalStorageRepository: getIt<ILocalStorageRepository>())
           ..init(groupId),
         child: BlocConsumer<GroupCubit, GroupState>(
