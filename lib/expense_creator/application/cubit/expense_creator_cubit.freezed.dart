@@ -19,8 +19,12 @@ mixin _$ExpenseCreatorState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(bool isLoading, List<GroupMember> beneficiers,
-            List<GroupMember> groupMebers, GroupMember payer)
+    required TResult Function(
+            bool isLoading,
+            List<GroupMember> beneficiers,
+            List<GroupMember> groupMembers,
+            GroupMember payer,
+            bool beneficiersIsEmptyError)
         initialized,
     required TResult Function() created,
     required TResult Function(Failure failure) error,
@@ -29,8 +33,12 @@ mixin _$ExpenseCreatorState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(bool isLoading, List<GroupMember> beneficiers,
-            List<GroupMember> groupMebers, GroupMember payer)?
+    TResult? Function(
+            bool isLoading,
+            List<GroupMember> beneficiers,
+            List<GroupMember> groupMembers,
+            GroupMember payer,
+            bool beneficiersIsEmptyError)?
         initialized,
     TResult? Function()? created,
     TResult? Function(Failure failure)? error,
@@ -39,8 +47,12 @@ mixin _$ExpenseCreatorState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isLoading, List<GroupMember> beneficiers,
-            List<GroupMember> groupMebers, GroupMember payer)?
+    TResult Function(
+            bool isLoading,
+            List<GroupMember> beneficiers,
+            List<GroupMember> groupMembers,
+            GroupMember payer,
+            bool beneficiersIsEmptyError)?
         initialized,
     TResult Function()? created,
     TResult Function(Failure failure)? error,
@@ -137,8 +149,12 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(bool isLoading, List<GroupMember> beneficiers,
-            List<GroupMember> groupMebers, GroupMember payer)
+    required TResult Function(
+            bool isLoading,
+            List<GroupMember> beneficiers,
+            List<GroupMember> groupMembers,
+            GroupMember payer,
+            bool beneficiersIsEmptyError)
         initialized,
     required TResult Function() created,
     required TResult Function(Failure failure) error,
@@ -150,8 +166,12 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(bool isLoading, List<GroupMember> beneficiers,
-            List<GroupMember> groupMebers, GroupMember payer)?
+    TResult? Function(
+            bool isLoading,
+            List<GroupMember> beneficiers,
+            List<GroupMember> groupMembers,
+            GroupMember payer,
+            bool beneficiersIsEmptyError)?
         initialized,
     TResult? Function()? created,
     TResult? Function(Failure failure)? error,
@@ -163,8 +183,12 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isLoading, List<GroupMember> beneficiers,
-            List<GroupMember> groupMebers, GroupMember payer)?
+    TResult Function(
+            bool isLoading,
+            List<GroupMember> beneficiers,
+            List<GroupMember> groupMembers,
+            GroupMember payer,
+            bool beneficiersIsEmptyError)?
         initialized,
     TResult Function()? created,
     TResult Function(Failure failure)? error,
@@ -227,8 +251,9 @@ abstract class _$$InitializedImplCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       List<GroupMember> beneficiers,
-      List<GroupMember> groupMebers,
-      GroupMember payer});
+      List<GroupMember> groupMembers,
+      GroupMember payer,
+      bool beneficiersIsEmptyError});
 
   $GroupMemberCopyWith<$Res> get payer;
 }
@@ -248,8 +273,9 @@ class __$$InitializedImplCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? beneficiers = null,
-    Object? groupMebers = null,
+    Object? groupMembers = null,
     Object? payer = null,
+    Object? beneficiersIsEmptyError = null,
   }) {
     return _then(_$InitializedImpl(
       isLoading: null == isLoading
@@ -260,14 +286,18 @@ class __$$InitializedImplCopyWithImpl<$Res>
           ? _value._beneficiers
           : beneficiers // ignore: cast_nullable_to_non_nullable
               as List<GroupMember>,
-      groupMebers: null == groupMebers
-          ? _value._groupMebers
-          : groupMebers // ignore: cast_nullable_to_non_nullable
+      groupMembers: null == groupMembers
+          ? _value._groupMembers
+          : groupMembers // ignore: cast_nullable_to_non_nullable
               as List<GroupMember>,
       payer: null == payer
           ? _value.payer
           : payer // ignore: cast_nullable_to_non_nullable
               as GroupMember,
+      beneficiersIsEmptyError: null == beneficiersIsEmptyError
+          ? _value.beneficiersIsEmptyError
+          : beneficiersIsEmptyError // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -288,10 +318,11 @@ class _$InitializedImpl implements _Initialized {
   const _$InitializedImpl(
       {this.isLoading = false,
       final List<GroupMember> beneficiers = const [],
-      final List<GroupMember> groupMebers = const [],
-      required this.payer})
+      final List<GroupMember> groupMembers = const [],
+      required this.payer,
+      this.beneficiersIsEmptyError = false})
       : _beneficiers = beneficiers,
-        _groupMebers = groupMebers;
+        _groupMembers = groupMembers;
 
   @override
   @JsonKey()
@@ -305,21 +336,24 @@ class _$InitializedImpl implements _Initialized {
     return EqualUnmodifiableListView(_beneficiers);
   }
 
-  final List<GroupMember> _groupMebers;
+  final List<GroupMember> _groupMembers;
   @override
   @JsonKey()
-  List<GroupMember> get groupMebers {
-    if (_groupMebers is EqualUnmodifiableListView) return _groupMebers;
+  List<GroupMember> get groupMembers {
+    if (_groupMembers is EqualUnmodifiableListView) return _groupMembers;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_groupMebers);
+    return EqualUnmodifiableListView(_groupMembers);
   }
 
   @override
   final GroupMember payer;
+  @override
+  @JsonKey()
+  final bool beneficiersIsEmptyError;
 
   @override
   String toString() {
-    return 'ExpenseCreatorState.initialized(isLoading: $isLoading, beneficiers: $beneficiers, groupMebers: $groupMebers, payer: $payer)';
+    return 'ExpenseCreatorState.initialized(isLoading: $isLoading, beneficiers: $beneficiers, groupMembers: $groupMembers, payer: $payer, beneficiersIsEmptyError: $beneficiersIsEmptyError)';
   }
 
   @override
@@ -332,8 +366,11 @@ class _$InitializedImpl implements _Initialized {
             const DeepCollectionEquality()
                 .equals(other._beneficiers, _beneficiers) &&
             const DeepCollectionEquality()
-                .equals(other._groupMebers, _groupMebers) &&
-            (identical(other.payer, payer) || other.payer == payer));
+                .equals(other._groupMembers, _groupMembers) &&
+            (identical(other.payer, payer) || other.payer == payer) &&
+            (identical(
+                    other.beneficiersIsEmptyError, beneficiersIsEmptyError) ||
+                other.beneficiersIsEmptyError == beneficiersIsEmptyError));
   }
 
   @override
@@ -341,8 +378,9 @@ class _$InitializedImpl implements _Initialized {
       runtimeType,
       isLoading,
       const DeepCollectionEquality().hash(_beneficiers),
-      const DeepCollectionEquality().hash(_groupMebers),
-      payer);
+      const DeepCollectionEquality().hash(_groupMembers),
+      payer,
+      beneficiersIsEmptyError);
 
   /// Create a copy of ExpenseCreatorState
   /// with the given fields replaced by the non-null parameter values.
@@ -356,41 +394,56 @@ class _$InitializedImpl implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(bool isLoading, List<GroupMember> beneficiers,
-            List<GroupMember> groupMebers, GroupMember payer)
+    required TResult Function(
+            bool isLoading,
+            List<GroupMember> beneficiers,
+            List<GroupMember> groupMembers,
+            GroupMember payer,
+            bool beneficiersIsEmptyError)
         initialized,
     required TResult Function() created,
     required TResult Function(Failure failure) error,
   }) {
-    return initialized(isLoading, beneficiers, groupMebers, payer);
+    return initialized(
+        isLoading, beneficiers, groupMembers, payer, beneficiersIsEmptyError);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(bool isLoading, List<GroupMember> beneficiers,
-            List<GroupMember> groupMebers, GroupMember payer)?
+    TResult? Function(
+            bool isLoading,
+            List<GroupMember> beneficiers,
+            List<GroupMember> groupMembers,
+            GroupMember payer,
+            bool beneficiersIsEmptyError)?
         initialized,
     TResult? Function()? created,
     TResult? Function(Failure failure)? error,
   }) {
-    return initialized?.call(isLoading, beneficiers, groupMebers, payer);
+    return initialized?.call(
+        isLoading, beneficiers, groupMembers, payer, beneficiersIsEmptyError);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isLoading, List<GroupMember> beneficiers,
-            List<GroupMember> groupMebers, GroupMember payer)?
+    TResult Function(
+            bool isLoading,
+            List<GroupMember> beneficiers,
+            List<GroupMember> groupMembers,
+            GroupMember payer,
+            bool beneficiersIsEmptyError)?
         initialized,
     TResult Function()? created,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized(isLoading, beneficiers, groupMebers, payer);
+      return initialized(
+          isLoading, beneficiers, groupMembers, payer, beneficiersIsEmptyError);
     }
     return orElse();
   }
@@ -437,13 +490,15 @@ abstract class _Initialized implements ExpenseCreatorState {
   const factory _Initialized(
       {final bool isLoading,
       final List<GroupMember> beneficiers,
-      final List<GroupMember> groupMebers,
-      required final GroupMember payer}) = _$InitializedImpl;
+      final List<GroupMember> groupMembers,
+      required final GroupMember payer,
+      final bool beneficiersIsEmptyError}) = _$InitializedImpl;
 
   bool get isLoading;
   List<GroupMember> get beneficiers;
-  List<GroupMember> get groupMebers;
+  List<GroupMember> get groupMembers;
   GroupMember get payer;
+  bool get beneficiersIsEmptyError;
 
   /// Create a copy of ExpenseCreatorState
   /// with the given fields replaced by the non-null parameter values.
@@ -494,8 +549,12 @@ class _$CreatedImpl implements _Created {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(bool isLoading, List<GroupMember> beneficiers,
-            List<GroupMember> groupMebers, GroupMember payer)
+    required TResult Function(
+            bool isLoading,
+            List<GroupMember> beneficiers,
+            List<GroupMember> groupMembers,
+            GroupMember payer,
+            bool beneficiersIsEmptyError)
         initialized,
     required TResult Function() created,
     required TResult Function(Failure failure) error,
@@ -507,8 +566,12 @@ class _$CreatedImpl implements _Created {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(bool isLoading, List<GroupMember> beneficiers,
-            List<GroupMember> groupMebers, GroupMember payer)?
+    TResult? Function(
+            bool isLoading,
+            List<GroupMember> beneficiers,
+            List<GroupMember> groupMembers,
+            GroupMember payer,
+            bool beneficiersIsEmptyError)?
         initialized,
     TResult? Function()? created,
     TResult? Function(Failure failure)? error,
@@ -520,8 +583,12 @@ class _$CreatedImpl implements _Created {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isLoading, List<GroupMember> beneficiers,
-            List<GroupMember> groupMebers, GroupMember payer)?
+    TResult Function(
+            bool isLoading,
+            List<GroupMember> beneficiers,
+            List<GroupMember> groupMembers,
+            GroupMember payer,
+            bool beneficiersIsEmptyError)?
         initialized,
     TResult Function()? created,
     TResult Function(Failure failure)? error,
@@ -656,8 +723,12 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(bool isLoading, List<GroupMember> beneficiers,
-            List<GroupMember> groupMebers, GroupMember payer)
+    required TResult Function(
+            bool isLoading,
+            List<GroupMember> beneficiers,
+            List<GroupMember> groupMembers,
+            GroupMember payer,
+            bool beneficiersIsEmptyError)
         initialized,
     required TResult Function() created,
     required TResult Function(Failure failure) error,
@@ -669,8 +740,12 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(bool isLoading, List<GroupMember> beneficiers,
-            List<GroupMember> groupMebers, GroupMember payer)?
+    TResult? Function(
+            bool isLoading,
+            List<GroupMember> beneficiers,
+            List<GroupMember> groupMembers,
+            GroupMember payer,
+            bool beneficiersIsEmptyError)?
         initialized,
     TResult? Function()? created,
     TResult? Function(Failure failure)? error,
@@ -682,8 +757,12 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isLoading, List<GroupMember> beneficiers,
-            List<GroupMember> groupMebers, GroupMember payer)?
+    TResult Function(
+            bool isLoading,
+            List<GroupMember> beneficiers,
+            List<GroupMember> groupMembers,
+            GroupMember payer,
+            bool beneficiersIsEmptyError)?
         initialized,
     TResult Function()? created,
     TResult Function(Failure failure)? error,

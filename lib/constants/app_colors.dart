@@ -7,4 +7,5 @@ class AppColors {
   static const green = Color(0xFF43D77C);
   static const lightBlue = Colors.lightBlueAccent;
   static const transparent = Colors.transparent;
+  static const errorRed = Color(0xFFC35656);
 }

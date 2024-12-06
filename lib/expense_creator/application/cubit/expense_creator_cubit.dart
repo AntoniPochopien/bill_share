@@ -19,10 +19,17 @@ class ExpenseCreatorCubit extends Cubit<ExpenseCreatorState> {
     if (currentUser.length == 1) {
       emit(ExpenseCreatorState.initialized(
         payer: currentUser.first,
-        groupMebers: groupMembers,
+        groupMembers: groupMembers,
       ));
     } else {
       emit(ExpenseCreatorState.error(Failure.unexpected()));
+    }
+  }
+
+  void updatePayer(GroupMember newPayer) {
+    if (state is _Initialized) {
+      final s = state as _Initialized;
+      emit(s.copyWith(payer: newPayer));
     }
   }
 
@@ -45,7 +52,7 @@ class ExpenseCreatorCubit extends Cubit<ExpenseCreatorState> {
   void addAllBeneficiers() {
     if (state is _Initialized) {
       final s = state as _Initialized;
-      emit(s.copyWith(beneficiers: s.groupMebers));
+      emit(s.copyWith(beneficiers: s.groupMembers));
     }
   }
 
@@ -53,6 +60,13 @@ class ExpenseCreatorCubit extends Cubit<ExpenseCreatorState> {
     if (state is _Initialized) {
       final s = state as _Initialized;
       emit(s.copyWith(beneficiers: []));
+    }
+  }
+
+  void setBeneficiersIsEmptyError(bool newValue) {
+    if (state is _Initialized) {
+      final s = state as _Initialized;
+      emit(s.copyWith(beneficiersIsEmptyError: newValue));
     }
   }
 }

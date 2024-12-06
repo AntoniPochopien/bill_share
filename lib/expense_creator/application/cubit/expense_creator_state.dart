@@ -6,8 +6,9 @@ class ExpenseCreatorState with _$ExpenseCreatorState {
   const factory ExpenseCreatorState.initialized({
     @Default(false) bool isLoading,
     @Default([]) List<GroupMember> beneficiers,
-    @Default([]) List<GroupMember> groupMebers,
+    @Default([]) List<GroupMember> groupMembers,
     required GroupMember payer,
+    @Default(false) bool beneficiersIsEmptyError,
   }) = _Initialized;
   const factory ExpenseCreatorState.created() = _Created;
   const factory ExpenseCreatorState.error(Failure failure) = _Error;

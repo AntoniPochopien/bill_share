@@ -49,11 +49,29 @@ class Validators {
     }
   }
 
-  static String? groupName(BuildContext context, String? v) {
+  static String? groupNameValidator(BuildContext context, String? v) {
     if (v == null || v.isEmpty) {
       return T(context).this_field_cannot;
     } else {
       return null;
     }
+  }
+
+  static String? titleValidator(BuildContext context, String? v) {
+    if (v == null || v.isEmpty) {
+      return T(context).this_field_cannot;
+    } else {
+      return null;
+    }
+  }
+
+  static String? priceValidator(BuildContext context, String? v) {
+    final regex = RegExp(r'^\d+(\.\d{1,2})?$');
+    if (v == null || v.isEmpty) {
+      return T(context).this_field_cannot;
+    } else if (!regex.hasMatch(v)) {
+      return T(context).enter_valid_price;
+    } 
+    return null;
   }
 }

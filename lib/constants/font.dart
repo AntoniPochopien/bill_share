@@ -68,7 +68,7 @@ class Font {
   static final h5Bright = _baseBright.copyWith(fontSize: _h5);
   static final h6Bright = _baseBright.copyWith(fontSize: _h6);
 
-    //dark medium
+  //dark medium
   static final h1BrightkMedium =
       _baseBright.copyWith(fontSize: _h1, fontWeight: FontWeight.w500);
   static final h2BrightMedium =
@@ -135,4 +135,14 @@ class Font {
       _baseGreen.copyWith(fontSize: _h5, fontWeight: FontWeight.bold);
   static final h6GreenBold =
       _baseGreen.copyWith(fontSize: _h6, fontWeight: FontWeight.bold);
+
+  //red
+  static const _baseRed =
+      TextStyle(fontFamily: _basicFontFamily, color: AppColors.errorRed);
+
+  static final h1Red = _baseRed.copyWith(fontSize: _h1);
+  static final h2Red = _baseRed.copyWith(fontSize: _h2);
+  static final h4Red = _baseRed.copyWith(fontSize: _h4);
+  static final h5Red = _baseRed.copyWith(fontSize: _h5);
+  static final h6Red = _baseRed.copyWith(fontSize: _h6);
 }

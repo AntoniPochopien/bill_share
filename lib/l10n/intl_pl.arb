@@ -37,5 +37,6 @@
   "create_group": "Utwórz grupę",
   "group_name":"Nazwa grupy",
   "create":"Stwórz",
-  "your_groups":"Twoje grupy"
+  "your_groups":"Twoje grupy",
+  "enter_valid_price":"Wpisz poprawną cenę"
 }

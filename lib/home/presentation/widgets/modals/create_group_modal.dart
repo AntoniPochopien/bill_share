@@ -43,7 +43,7 @@ class _CreateGroupModalState extends State<CreateGroupModal> {
                     BillshareTextField(
                       controller: _groupNameController,
                       label: T(context).group_name,
-                      validator: (v) => Validators.groupName(context, v),
+                      validator: (v) => Validators.groupNameValidator(context, v),
                     ),
                     SizedBox(height: MediaQuery.sizeOf(context).height * 0.05),
                     Button(
