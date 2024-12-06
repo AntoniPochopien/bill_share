@@ -5,8 +5,16 @@ class BillshareScaffold extends StatelessWidget {
   final PreferredSizeWidget? appBar;
   final BottomNavigationBar? bottomNavigationBar;
   final EdgeInsets? padding;
-  const BillshareScaffold(
-      {super.key, this.body, this.appBar, this.bottomNavigationBar, this.padding});
+  final Widget? floatingActionButton;
+
+  const BillshareScaffold({
+    super.key,
+    this.body,
+    this.appBar,
+    this.bottomNavigationBar,
+    this.padding,
+    this.floatingActionButton,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +23,8 @@ class BillshareScaffold extends StatelessWidget {
       child: Scaffold(
         appBar: appBar,
         bottomNavigationBar: bottomNavigationBar,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: floatingActionButton,
         body: SafeArea(
           child: Padding(
             padding: padding ?? const EdgeInsets.symmetric(horizontal: 16),

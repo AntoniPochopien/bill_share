@@ -22,6 +22,11 @@ class GroupNavPage extends StatelessWidget {
           appBar: AppBarWithActions(),
           padding: EdgeInsets.zero,
           body: child,
+          floatingActionButton: FloatingActionButton(
+              backgroundColor: AppColors.green,
+              foregroundColor: AppColors.white,
+              onPressed: () {},
+              child: Icon(Icons.add)),
           bottomNavigationBar: BottomNavigationBar(
               currentIndex: tabsRouter.activeIndex,
               selectedItemColor: AppColors.green,

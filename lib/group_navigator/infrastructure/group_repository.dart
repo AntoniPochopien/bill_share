@@ -17,9 +17,8 @@ class GroupRepository implements IGroupRepository {
           .from('groups_profiles')
           .select('profiles(id, username), isAdmin')
           .eq('group_id', groupId);
-      // final users = response.map((e) => );
-      print(response);
-      return right([]);
+      final members = response.map((e) => GroupMember.fromJson(e)).toList();
+      return right(members);
     } catch (e) {
       log('fetchGroupMembers unexpected error: $e');
       return left(Failure.unexpected());

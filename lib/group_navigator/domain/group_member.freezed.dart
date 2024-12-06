@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$GroupMember {
-  User get user => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  String get username => throw _privateConstructorUsedError;
   bool get isAdmin => throw _privateConstructorUsedError;
 
   /// Create a copy of GroupMember
@@ -32,9 +33,7 @@ abstract class $GroupMemberCopyWith<$Res> {
           GroupMember value, $Res Function(GroupMember) then) =
       _$GroupMemberCopyWithImpl<$Res, GroupMember>;
   @useResult
-  $Res call({User user, bool isAdmin});
-
-  $UserCopyWith<$Res> get user;
+  $Res call({String id, String username, bool isAdmin});
 }
 
 /// @nodoc
@@ -52,29 +51,24 @@ class _$GroupMemberCopyWithImpl<$Res, $Val extends GroupMember>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = null,
+    Object? id = null,
+    Object? username = null,
     Object? isAdmin = null,
   }) {
     return _then(_value.copyWith(
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
       isAdmin: null == isAdmin
           ? _value.isAdmin
           : isAdmin // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
-  }
-
-  /// Create a copy of GroupMember
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value) as $Val);
-    });
   }
 }
 
@@ -86,10 +80,7 @@ abstract class _$$GroupMemberImplCopyWith<$Res>
       __$$GroupMemberImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({User user, bool isAdmin});
-
-  @override
-  $UserCopyWith<$Res> get user;
+  $Res call({String id, String username, bool isAdmin});
 }
 
 /// @nodoc
@@ -105,14 +96,19 @@ class __$$GroupMemberImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = null,
+    Object? id = null,
+    Object? username = null,
     Object? isAdmin = null,
   }) {
     return _then(_$GroupMemberImpl(
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
       isAdmin: null == isAdmin
           ? _value.isAdmin
           : isAdmin // ignore: cast_nullable_to_non_nullable
@@ -123,17 +119,21 @@ class __$$GroupMemberImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GroupMemberImpl implements _GroupMember {
-  const _$GroupMemberImpl({required this.user, required this.isAdmin});
+class _$GroupMemberImpl extends _GroupMember {
+  const _$GroupMemberImpl(
+      {required this.id, required this.username, required this.isAdmin})
+      : super._();
 
   @override
-  final User user;
+  final String id;
+  @override
+  final String username;
   @override
   final bool isAdmin;
 
   @override
   String toString() {
-    return 'GroupMember(user: $user, isAdmin: $isAdmin)';
+    return 'GroupMember(id: $id, username: $username, isAdmin: $isAdmin)';
   }
 
   @override
@@ -141,12 +141,14 @@ class _$GroupMemberImpl implements _GroupMember {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GroupMemberImpl &&
-            (identical(other.user, user) || other.user == user) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.username, username) ||
+                other.username == username) &&
             (identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user, isAdmin);
+  int get hashCode => Object.hash(runtimeType, id, username, isAdmin);
 
   /// Create a copy of GroupMember
   /// with the given fields replaced by the non-null parameter values.
@@ -157,13 +159,17 @@ class _$GroupMemberImpl implements _GroupMember {
       __$$GroupMemberImplCopyWithImpl<_$GroupMemberImpl>(this, _$identity);
 }
 
-abstract class _GroupMember implements GroupMember {
+abstract class _GroupMember extends GroupMember {
   const factory _GroupMember(
-      {required final User user,
+      {required final String id,
+      required final String username,
       required final bool isAdmin}) = _$GroupMemberImpl;
+  const _GroupMember._() : super._();
 
   @override
-  User get user;
+  String get id;
+  @override
+  String get username;
   @override
   bool get isAdmin;
 
