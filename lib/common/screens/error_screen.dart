@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 
 class ErrorScreen extends StatelessWidget {
   final Function onRetry;
-  const ErrorScreen({super.key, required this.onRetry});
+  final bool willPop;
+  const ErrorScreen({super.key, required this.onRetry, this.willPop = false});
 
   @override
   Widget build(BuildContext context) {
     return BillshareScaffold(
       body: Center(
-        child: Button(text: 'Retry', onPressed: () => onRetry()),
+        child:
+            Button(text: willPop ? 'Ok' : 'Retry', onPressed: () => onRetry()),
       ),
     );
   }

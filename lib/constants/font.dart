@@ -68,6 +68,18 @@ class Font {
   static final h5Bright = _baseBright.copyWith(fontSize: _h5);
   static final h6Bright = _baseBright.copyWith(fontSize: _h6);
 
+    //dark medium
+  static final h1BrightkMedium =
+      _baseBright.copyWith(fontSize: _h1, fontWeight: FontWeight.w500);
+  static final h2BrightMedium =
+      _baseBright.copyWith(fontSize: _h2, fontWeight: FontWeight.w500);
+  static final h4BrightMedium =
+      _baseBright.copyWith(fontSize: _h4, fontWeight: FontWeight.w500);
+  static final h5BrightMedium =
+      _baseBright.copyWith(fontSize: _h5, fontWeight: FontWeight.w500);
+  static final h6BrightMedium =
+      _baseBright.copyWith(fontSize: _h6, fontWeight: FontWeight.w500);
+
   //bright bold
   static final h1BrightBold =
       _baseBright.copyWith(fontSize: _h1, fontWeight: FontWeight.bold);

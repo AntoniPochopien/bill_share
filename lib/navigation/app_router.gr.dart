@@ -49,10 +49,17 @@ class AuthRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [ExpenseCreatorScreen]
-class ExpenseCreatorRoute extends PageRouteInfo<void> {
-  const ExpenseCreatorRoute({List<PageRouteInfo>? children})
-      : super(
+class ExpenseCreatorRoute extends PageRouteInfo<ExpenseCreatorRouteArgs> {
+  ExpenseCreatorRoute({
+    Key? key,
+    required List<GroupMember> groupMembers,
+    List<PageRouteInfo>? children,
+  }) : super(
           ExpenseCreatorRoute.name,
+          args: ExpenseCreatorRouteArgs(
+            key: key,
+            groupMembers: groupMembers,
+          ),
           initialChildren: children,
         );
 
@@ -61,9 +68,29 @@ class ExpenseCreatorRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const ExpenseCreatorScreen();
+      final args = data.argsAs<ExpenseCreatorRouteArgs>();
+      return ExpenseCreatorScreen(
+        key: args.key,
+        groupMembers: args.groupMembers,
+      );
     },
   );
+}
+
+class ExpenseCreatorRouteArgs {
+  const ExpenseCreatorRouteArgs({
+    this.key,
+    required this.groupMembers,
+  });
+
+  final Key? key;
+
+  final List<GroupMember> groupMembers;
+
+  @override
+  String toString() {
+    return 'ExpenseCreatorRouteArgs{key: $key, groupMembers: $groupMembers}';
+  }
 }
 
 /// generated route for
