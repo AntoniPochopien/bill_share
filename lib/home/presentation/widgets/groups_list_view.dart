@@ -15,10 +15,7 @@ class GroupsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        child: TitleWithUnderscore(title: T(context).your_groups),
-      ),
+      TitleWithUnderscore(title: T(context).your_groups),
       Expanded(
         child: ListView.builder(
             itemCount: groups.length,

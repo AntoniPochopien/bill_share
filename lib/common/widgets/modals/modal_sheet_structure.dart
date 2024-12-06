@@ -31,6 +31,7 @@ class ModalSheetStructure extends StatelessWidget {
                     child: TitleWithUnderscore(
                       title: title,
                       description: description,
+                      padding: EdgeInsets.zero,
                     ),
                   ),
                   SizedBox(height: 11.5),

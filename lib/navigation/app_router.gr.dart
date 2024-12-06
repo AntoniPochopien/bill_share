@@ -48,6 +48,25 @@ class AuthRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ExpenseCreatorScreen]
+class ExpenseCreatorRoute extends PageRouteInfo<void> {
+  const ExpenseCreatorRoute({List<PageRouteInfo>? children})
+      : super(
+          ExpenseCreatorRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ExpenseCreatorRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ExpenseCreatorScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [GroupChatScreen]
 class GroupChatRoute extends PageRouteInfo<void> {
   const GroupChatRoute({List<PageRouteInfo>? children})

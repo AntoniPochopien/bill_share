@@ -20,10 +20,7 @@ class GroupMembersScreen extends StatelessWidget {
                   body: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: TitleWithUnderscore(title: 'Members'),
-                        ),
+                        TitleWithUnderscore(title: 'Members'),
                         Expanded(
                             child: ListView.builder(
                                 itemCount: groupData.members.length,
