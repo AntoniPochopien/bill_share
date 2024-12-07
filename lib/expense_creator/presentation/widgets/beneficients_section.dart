@@ -3,6 +3,7 @@ import 'package:bill_share/expense_creator/application/cubit/expense_creator_cub
 import 'package:bill_share/expense_creator/presentation/widgets/beneficiers_selector_dialog.dart';
 import 'package:bill_share/expense_creator/presentation/widgets/option_pill.dart';
 import 'package:bill_share/group_navigator/domain/group_member.dart';
+import 'package:bill_share/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -83,7 +84,7 @@ class _BeneficientsSectionState extends State<BeneficientsSection> {
                         .read<ExpenseCreatorCubit>()
                         .setBeneficiersIsEmptyError(false);
                   },
-                  text: 'All',
+                  text: T(context).all,
                   isSelected: _areListsEqualAsSets(
                     widget.beneficiers,
                     widget.groupMembers,
@@ -97,7 +98,7 @@ class _BeneficientsSectionState extends State<BeneficientsSection> {
                         groupMembers: widget.groupMembers,
                         selectedBeneficiers: widget.beneficiers,
                       ),
-                  text: 'Some',
+                  text: T(context).some,
                   isSelected: _isSomeSelected(
                     selectedBeneficiers: widget.beneficiers,
                     groupMembers: widget.groupMembers,
@@ -108,7 +109,7 @@ class _BeneficientsSectionState extends State<BeneficientsSection> {
         Padding(
           padding: const EdgeInsets.only(left: 32, top: 4),
           child: Text(
-            'At least one beneficier needs to be selected',
+            T(context).at_least_one_debtor_needs_to_be_selected,
             style: Font.h5Red,
           ),
         )

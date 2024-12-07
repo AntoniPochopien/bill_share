@@ -5,6 +5,7 @@ import 'package:bill_share/constants/app_colors.dart';
 import 'package:bill_share/constants/font.dart';
 import 'package:bill_share/group_members_screen/presentation/widgets/member_tile.dart';
 import 'package:bill_share/group_navigator/domain/group_member.dart';
+import 'package:bill_share/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 
@@ -39,7 +40,7 @@ class _BeneficiersSelectorDialogState extends State<BeneficiersSelectorDialog> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TitleWithUnderscore(title: 'Select beneficiers'),
+            TitleWithUnderscore(title: T(context).select_debtors),
             Expanded(
               child: ListView.builder(
                   itemCount: widget.groupMembers.length,
@@ -73,11 +74,11 @@ class _BeneficiersSelectorDialogState extends State<BeneficiersSelectorDialog> {
               style: Font.h4DarkSemiBold,
             )),
             FramedButton(
-              text: 'Clear',
+              text: T(context).clear,
               onPressed: () => setState(() => _selectedBeneficiers.clear()),
             ),
             Button(
-                text: 'Ok',
+                text: T(context).ok,
                 onPressed: () => context.maybePop(_selectedBeneficiers)),
             SizedBox(height: 8),
           ],

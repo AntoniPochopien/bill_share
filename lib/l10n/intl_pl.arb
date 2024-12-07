@@ -38,5 +38,20 @@
   "group_name":"Nazwa grupy",
   "create":"Stwórz",
   "your_groups":"Twoje grupy",
-  "enter_valid_price":"Wpisz poprawną cenę"
+  "enter_valid_price":"Wpisz poprawną cenę",
+  "create_expense": "Utwórz wydatek",
+  "enter_the_title_of_expense": "Wprowadź tytuł wydatku (np. zakupy, burger)",
+  "title": "Tytuł",
+  "how_much_did_it_cost": "Ile to kosztowało?",
+  "amount": "Kwota",
+  "who_paid_for_this": "Kto zapłacił za to?",
+  "add_expense": "Dodaj wydatek",
+  "who_needs_to_pay_this_back": "Kto musi to spłacić?",
+  "all": "Wszyscy",
+  "some": "Niektórzy",
+  "at_least_one_debtor_needs_to_be_selected": "Należy wybrać przynajmniej jednego dłużnika.",
+  "clear": "Wyczyść",
+  "select_payer": "Wybierz osobę płacącą",
+  "select_debtors": "Wybierz dłużników",
+  "members":"Członkowie"
 }

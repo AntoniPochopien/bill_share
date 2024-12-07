@@ -3,6 +3,7 @@ import 'package:bill_share/common/widgets/title_with_underscore.dart';
 import 'package:bill_share/constants/app_colors.dart';
 import 'package:bill_share/group_members_screen/presentation/widgets/member_tile.dart';
 import 'package:bill_share/group_navigator/domain/group_member.dart';
+import 'package:bill_share/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 
@@ -34,7 +35,7 @@ class _PayerSelectorDialogState extends State<PayerSelectorDialog> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TitleWithUnderscore(title: 'Select payer'),
+            TitleWithUnderscore(title: T(context).select_payer),
             Expanded(
               child: ListView.builder(
                   itemCount: widget.groupMembers.length,
@@ -58,7 +59,7 @@ class _PayerSelectorDialogState extends State<PayerSelectorDialog> {
                     );
                   }),
             ),
-            Button(text: 'Ok', onPressed: () => context.maybePop(payer)),
+            Button(text: T(context).ok, onPressed: () => context.maybePop(payer)),
             SizedBox(height: 8),
           ],
         ),

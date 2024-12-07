@@ -16,6 +16,7 @@ import 'package:bill_share/expense_creator/presentation/widgets/done_animation_d
 import 'package:bill_share/expense_creator/presentation/widgets/payer_selector_dialog.dart';
 import 'package:bill_share/group_members_screen/presentation/widgets/member_tile.dart';
 import 'package:bill_share/group_navigator/domain/group_member.dart';
+import 'package:bill_share/l10n/l10n.dart';
 import 'package:bill_share/navigation/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -85,7 +86,7 @@ class _ExpenseCreatorScreenState extends State<ExpenseCreatorScreen> {
                     body: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TitleWithUnderscore(title: 'Create Expense'),
+                        TitleWithUnderscore(title: T(context).create_expense),
                         Expanded(
                           child: CustomScrollView(
                             slivers: [
@@ -108,13 +109,13 @@ class _ExpenseCreatorScreenState extends State<ExpenseCreatorScreen> {
                                                     const EdgeInsets.symmetric(
                                                         vertical: 15),
                                                 child: Text(
-                                                  'Podaj nazwę wydatku (np. zakupy, burger)',
+                                                  T(context).enter_the_title_of_expense,
                                                   style: Font.h4Grey,
                                                 ),
                                               ),
                                               BillshareTextField(
                                                 controller: _titleController,
-                                                label: 'Title',
+                                                label: T(context).title,
                                                 validator: (v) =>
                                                     Validators.titleValidator(
                                                         context, v),
@@ -124,13 +125,13 @@ class _ExpenseCreatorScreenState extends State<ExpenseCreatorScreen> {
                                                     const EdgeInsets.symmetric(
                                                         vertical: 15),
                                                 child: Text(
-                                                  'How much did you spend?',
+                                                  T(context).how_much_did_it_cost,
                                                   style: Font.h4Grey,
                                                 ),
                                               ),
                                               BillshareTextField(
                                                 controller: _amountController,
-                                                label: 'Amount',
+                                                label: T(context).amount,
                                                 validator: (v) =>
                                                     Validators.priceValidator(
                                                         context, v),
@@ -140,7 +141,7 @@ class _ExpenseCreatorScreenState extends State<ExpenseCreatorScreen> {
                                                     const EdgeInsets.symmetric(
                                                         vertical: 15),
                                                 child: Text(
-                                                  'Who paid for this?',
+                                                  T(context).who_paid_for_this,
                                                   style: Font.h4Grey,
                                                 ),
                                               ),
@@ -165,7 +166,7 @@ class _ExpenseCreatorScreenState extends State<ExpenseCreatorScreen> {
                                       ),
                                       //TODO add selected beneficiers listview
                                       Button(
-                                          text: 'Add expense',
+                                          text: T(context).add_expense,
                                           isLoading: data.isLoading,
                                           onPressed: () {
                                             if (_formKey.currentState!

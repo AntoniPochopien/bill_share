@@ -3,6 +3,7 @@ import 'package:bill_share/common/widgets/app_bars/app_bar_with_actions.dart';
 import 'package:bill_share/common/wrappers/billshare_scaffold.dart';
 import 'package:bill_share/constants/app_colors.dart';
 import 'package:bill_share/group_navigator/application/cubit/group_cubit.dart';
+import 'package:bill_share/l10n/l10n.dart';
 import 'package:bill_share/navigation/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,7 +43,7 @@ class GroupNavPage extends StatelessWidget {
                   items: [
                     BottomNavigationBarItem(
                       icon: Icon(Icons.person),
-                      label: 'Members',
+                      label: T(context).members,
                     ),
                     BottomNavigationBarItem(
                       icon: Icon(Icons.data_usage_outlined),
