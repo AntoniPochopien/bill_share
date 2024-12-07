@@ -17,13 +17,14 @@ class ExpenseCreatorCubit extends Cubit<ExpenseCreatorState> {
     required this.iexpensesRepository,
   }) : super(ExpenseCreatorState.initial());
 
-  void init(List<GroupMember> groupMembers) {
+  void init({required List<GroupMember> groupMembers, required int gorupId}) {
     final currentUser = groupMembers
         .where((element) => element.id == injectableUser.currentUser.id);
     if (currentUser.length == 1) {
       emit(ExpenseCreatorState.initialized(
         payer: currentUser.first,
         groupMembers: groupMembers,
+        groupId: gorupId
       ));
     } else {
       emit(ExpenseCreatorState.error(Failure.unexpected()));
@@ -35,6 +36,7 @@ class ExpenseCreatorCubit extends Cubit<ExpenseCreatorState> {
       final s = state as _Initialized;
       emit(s.copyWith(isLoading: true));
       final result = await iexpensesRepository.saveExpense(ExpenseCreatorModel(
+        groupId: s.groupId,
         title: title,
         amount: amount,
         payer: s.payer,

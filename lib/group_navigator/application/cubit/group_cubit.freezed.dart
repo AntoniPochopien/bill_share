@@ -19,7 +19,7 @@ mixin _$GroupState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(GroupData groupData) data,
+    required TResult Function(GroupData groupData, List<Expense> expenses) data,
     required TResult Function() loading,
     required TResult Function(Failure failure) error,
   }) =>
@@ -27,7 +27,7 @@ mixin _$GroupState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(GroupData groupData)? data,
+    TResult? Function(GroupData groupData, List<Expense> expenses)? data,
     TResult? Function()? loading,
     TResult? Function(Failure failure)? error,
   }) =>
@@ -35,7 +35,7 @@ mixin _$GroupState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(GroupData groupData)? data,
+    TResult Function(GroupData groupData, List<Expense> expenses)? data,
     TResult Function()? loading,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
@@ -131,7 +131,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(GroupData groupData) data,
+    required TResult Function(GroupData groupData, List<Expense> expenses) data,
     required TResult Function() loading,
     required TResult Function(Failure failure) error,
   }) {
@@ -142,7 +142,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(GroupData groupData)? data,
+    TResult? Function(GroupData groupData, List<Expense> expenses)? data,
     TResult? Function()? loading,
     TResult? Function(Failure failure)? error,
   }) {
@@ -153,7 +153,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(GroupData groupData)? data,
+    TResult Function(GroupData groupData, List<Expense> expenses)? data,
     TResult Function()? loading,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
@@ -212,7 +212,7 @@ abstract class _$$DataImplCopyWith<$Res> {
           _$DataImpl value, $Res Function(_$DataImpl) then) =
       __$$DataImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({GroupData groupData});
+  $Res call({GroupData groupData, List<Expense> expenses});
 
   $GroupDataCopyWith<$Res> get groupData;
 }
@@ -230,12 +230,17 @@ class __$$DataImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? groupData = null,
+    Object? expenses = null,
   }) {
     return _then(_$DataImpl(
       groupData: null == groupData
           ? _value.groupData
           : groupData // ignore: cast_nullable_to_non_nullable
               as GroupData,
+      expenses: null == expenses
+          ? _value._expenses
+          : expenses // ignore: cast_nullable_to_non_nullable
+              as List<Expense>,
     ));
   }
 
@@ -253,14 +258,23 @@ class __$$DataImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DataImpl implements _Data {
-  const _$DataImpl({required this.groupData});
+  const _$DataImpl(
+      {required this.groupData, required final List<Expense> expenses})
+      : _expenses = expenses;
 
   @override
   final GroupData groupData;
+  final List<Expense> _expenses;
+  @override
+  List<Expense> get expenses {
+    if (_expenses is EqualUnmodifiableListView) return _expenses;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_expenses);
+  }
 
   @override
   String toString() {
-    return 'GroupState.data(groupData: $groupData)';
+    return 'GroupState.data(groupData: $groupData, expenses: $expenses)';
   }
 
   @override
@@ -269,11 +283,13 @@ class _$DataImpl implements _Data {
         (other.runtimeType == runtimeType &&
             other is _$DataImpl &&
             (identical(other.groupData, groupData) ||
-                other.groupData == groupData));
+                other.groupData == groupData) &&
+            const DeepCollectionEquality().equals(other._expenses, _expenses));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, groupData);
+  int get hashCode => Object.hash(
+      runtimeType, groupData, const DeepCollectionEquality().hash(_expenses));
 
   /// Create a copy of GroupState
   /// with the given fields replaced by the non-null parameter values.
@@ -287,35 +303,35 @@ class _$DataImpl implements _Data {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(GroupData groupData) data,
+    required TResult Function(GroupData groupData, List<Expense> expenses) data,
     required TResult Function() loading,
     required TResult Function(Failure failure) error,
   }) {
-    return data(groupData);
+    return data(groupData, expenses);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(GroupData groupData)? data,
+    TResult? Function(GroupData groupData, List<Expense> expenses)? data,
     TResult? Function()? loading,
     TResult? Function(Failure failure)? error,
   }) {
-    return data?.call(groupData);
+    return data?.call(groupData, expenses);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(GroupData groupData)? data,
+    TResult Function(GroupData groupData, List<Expense> expenses)? data,
     TResult Function()? loading,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
     if (data != null) {
-      return data(groupData);
+      return data(groupData, expenses);
     }
     return orElse();
   }
@@ -359,9 +375,12 @@ class _$DataImpl implements _Data {
 }
 
 abstract class _Data implements GroupState {
-  const factory _Data({required final GroupData groupData}) = _$DataImpl;
+  const factory _Data(
+      {required final GroupData groupData,
+      required final List<Expense> expenses}) = _$DataImpl;
 
   GroupData get groupData;
+  List<Expense> get expenses;
 
   /// Create a copy of GroupState
   /// with the given fields replaced by the non-null parameter values.
@@ -412,7 +431,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(GroupData groupData) data,
+    required TResult Function(GroupData groupData, List<Expense> expenses) data,
     required TResult Function() loading,
     required TResult Function(Failure failure) error,
   }) {
@@ -423,7 +442,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(GroupData groupData)? data,
+    TResult? Function(GroupData groupData, List<Expense> expenses)? data,
     TResult? Function()? loading,
     TResult? Function(Failure failure)? error,
   }) {
@@ -434,7 +453,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(GroupData groupData)? data,
+    TResult Function(GroupData groupData, List<Expense> expenses)? data,
     TResult Function()? loading,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
@@ -568,7 +587,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(GroupData groupData) data,
+    required TResult Function(GroupData groupData, List<Expense> expenses) data,
     required TResult Function() loading,
     required TResult Function(Failure failure) error,
   }) {
@@ -579,7 +598,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(GroupData groupData)? data,
+    TResult? Function(GroupData groupData, List<Expense> expenses)? data,
     TResult? Function()? loading,
     TResult? Function(Failure failure)? error,
   }) {
@@ -590,7 +609,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(GroupData groupData)? data,
+    TResult Function(GroupData groupData, List<Expense> expenses)? data,
     TResult Function()? loading,
     TResult Function(Failure failure)? error,
     required TResult orElse(),

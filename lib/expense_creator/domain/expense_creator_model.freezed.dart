@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ExpenseCreatorModel {
+  int get groupId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
   GroupMember get payer => throw _privateConstructorUsedError;
@@ -35,7 +36,8 @@ abstract class $ExpenseCreatorModelCopyWith<$Res> {
       _$ExpenseCreatorModelCopyWithImpl<$Res, ExpenseCreatorModel>;
   @useResult
   $Res call(
-      {String title,
+      {int groupId,
+      String title,
       double amount,
       GroupMember payer,
       List<GroupMember> beneficients});
@@ -58,12 +60,17 @@ class _$ExpenseCreatorModelCopyWithImpl<$Res, $Val extends ExpenseCreatorModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? groupId = null,
     Object? title = null,
     Object? amount = null,
     Object? payer = null,
     Object? beneficients = null,
   }) {
     return _then(_value.copyWith(
+      groupId: null == groupId
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -103,7 +110,8 @@ abstract class _$$ExpenseCreatorModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String title,
+      {int groupId,
+      String title,
       double amount,
       GroupMember payer,
       List<GroupMember> beneficients});
@@ -125,12 +133,17 @@ class __$$ExpenseCreatorModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? groupId = null,
     Object? title = null,
     Object? amount = null,
     Object? payer = null,
     Object? beneficients = null,
   }) {
     return _then(_$ExpenseCreatorModelImpl(
+      groupId: null == groupId
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -155,12 +168,15 @@ class __$$ExpenseCreatorModelImplCopyWithImpl<$Res>
 
 class _$ExpenseCreatorModelImpl implements _ExpenseCreatorModel {
   const _$ExpenseCreatorModelImpl(
-      {required this.title,
+      {required this.groupId,
+      required this.title,
       required this.amount,
       required this.payer,
       required final List<GroupMember> beneficients})
       : _beneficients = beneficients;
 
+  @override
+  final int groupId;
   @override
   final String title;
   @override
@@ -177,7 +193,7 @@ class _$ExpenseCreatorModelImpl implements _ExpenseCreatorModel {
 
   @override
   String toString() {
-    return 'ExpenseCreatorModel(title: $title, amount: $amount, payer: $payer, beneficients: $beneficients)';
+    return 'ExpenseCreatorModel(groupId: $groupId, title: $title, amount: $amount, payer: $payer, beneficients: $beneficients)';
   }
 
   @override
@@ -185,6 +201,7 @@ class _$ExpenseCreatorModelImpl implements _ExpenseCreatorModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ExpenseCreatorModelImpl &&
+            (identical(other.groupId, groupId) || other.groupId == groupId) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.payer, payer) || other.payer == payer) &&
@@ -193,7 +210,7 @@ class _$ExpenseCreatorModelImpl implements _ExpenseCreatorModel {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, title, amount, payer,
+  int get hashCode => Object.hash(runtimeType, groupId, title, amount, payer,
       const DeepCollectionEquality().hash(_beneficients));
 
   /// Create a copy of ExpenseCreatorModel
@@ -208,12 +225,15 @@ class _$ExpenseCreatorModelImpl implements _ExpenseCreatorModel {
 
 abstract class _ExpenseCreatorModel implements ExpenseCreatorModel {
   const factory _ExpenseCreatorModel(
-          {required final String title,
+          {required final int groupId,
+          required final String title,
           required final double amount,
           required final GroupMember payer,
           required final List<GroupMember> beneficients}) =
       _$ExpenseCreatorModelImpl;
 
+  @override
+  int get groupId;
   @override
   String get title;
   @override

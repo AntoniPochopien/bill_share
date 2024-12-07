@@ -6,6 +6,7 @@ part 'expense_creator_model.freezed.dart';
 @freezed
 class ExpenseCreatorModel with _$ExpenseCreatorModel {
   const factory ExpenseCreatorModel({
+    required int groupId,
     required String title,
     required double amount,
     required GroupMember payer,

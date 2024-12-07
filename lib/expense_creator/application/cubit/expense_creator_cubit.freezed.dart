@@ -23,6 +23,7 @@ mixin _$ExpenseCreatorState {
             bool isLoading,
             List<GroupMember> beneficiers,
             List<GroupMember> groupMembers,
+            int groupId,
             GroupMember payer,
             bool beneficiersIsEmptyError,
             bool created)
@@ -37,6 +38,7 @@ mixin _$ExpenseCreatorState {
             bool isLoading,
             List<GroupMember> beneficiers,
             List<GroupMember> groupMembers,
+            int groupId,
             GroupMember payer,
             bool beneficiersIsEmptyError,
             bool created)?
@@ -51,6 +53,7 @@ mixin _$ExpenseCreatorState {
             bool isLoading,
             List<GroupMember> beneficiers,
             List<GroupMember> groupMembers,
+            int groupId,
             GroupMember payer,
             bool beneficiersIsEmptyError,
             bool created)?
@@ -150,6 +153,7 @@ class _$InitialImpl implements _Initial {
             bool isLoading,
             List<GroupMember> beneficiers,
             List<GroupMember> groupMembers,
+            int groupId,
             GroupMember payer,
             bool beneficiersIsEmptyError,
             bool created)
@@ -167,6 +171,7 @@ class _$InitialImpl implements _Initial {
             bool isLoading,
             List<GroupMember> beneficiers,
             List<GroupMember> groupMembers,
+            int groupId,
             GroupMember payer,
             bool beneficiersIsEmptyError,
             bool created)?
@@ -184,6 +189,7 @@ class _$InitialImpl implements _Initial {
             bool isLoading,
             List<GroupMember> beneficiers,
             List<GroupMember> groupMembers,
+            int groupId,
             GroupMember payer,
             bool beneficiersIsEmptyError,
             bool created)?
@@ -246,6 +252,7 @@ abstract class _$$InitializedImplCopyWith<$Res> {
       {bool isLoading,
       List<GroupMember> beneficiers,
       List<GroupMember> groupMembers,
+      int groupId,
       GroupMember payer,
       bool beneficiersIsEmptyError,
       bool created});
@@ -269,6 +276,7 @@ class __$$InitializedImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? beneficiers = null,
     Object? groupMembers = null,
+    Object? groupId = null,
     Object? payer = null,
     Object? beneficiersIsEmptyError = null,
     Object? created = null,
@@ -286,6 +294,10 @@ class __$$InitializedImplCopyWithImpl<$Res>
           ? _value._groupMembers
           : groupMembers // ignore: cast_nullable_to_non_nullable
               as List<GroupMember>,
+      groupId: null == groupId
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
+              as int,
       payer: null == payer
           ? _value.payer
           : payer // ignore: cast_nullable_to_non_nullable
@@ -319,6 +331,7 @@ class _$InitializedImpl implements _Initialized {
       {this.isLoading = false,
       final List<GroupMember> beneficiers = const [],
       final List<GroupMember> groupMembers = const [],
+      required this.groupId,
       required this.payer,
       this.beneficiersIsEmptyError = false,
       this.created = false})
@@ -347,6 +360,8 @@ class _$InitializedImpl implements _Initialized {
   }
 
   @override
+  final int groupId;
+  @override
   final GroupMember payer;
   @override
   @JsonKey()
@@ -357,7 +372,7 @@ class _$InitializedImpl implements _Initialized {
 
   @override
   String toString() {
-    return 'ExpenseCreatorState.initialized(isLoading: $isLoading, beneficiers: $beneficiers, groupMembers: $groupMembers, payer: $payer, beneficiersIsEmptyError: $beneficiersIsEmptyError, created: $created)';
+    return 'ExpenseCreatorState.initialized(isLoading: $isLoading, beneficiers: $beneficiers, groupMembers: $groupMembers, groupId: $groupId, payer: $payer, beneficiersIsEmptyError: $beneficiersIsEmptyError, created: $created)';
   }
 
   @override
@@ -371,6 +386,7 @@ class _$InitializedImpl implements _Initialized {
                 .equals(other._beneficiers, _beneficiers) &&
             const DeepCollectionEquality()
                 .equals(other._groupMembers, _groupMembers) &&
+            (identical(other.groupId, groupId) || other.groupId == groupId) &&
             (identical(other.payer, payer) || other.payer == payer) &&
             (identical(
                     other.beneficiersIsEmptyError, beneficiersIsEmptyError) ||
@@ -384,6 +400,7 @@ class _$InitializedImpl implements _Initialized {
       isLoading,
       const DeepCollectionEquality().hash(_beneficiers),
       const DeepCollectionEquality().hash(_groupMembers),
+      groupId,
       payer,
       beneficiersIsEmptyError,
       created);
@@ -404,13 +421,14 @@ class _$InitializedImpl implements _Initialized {
             bool isLoading,
             List<GroupMember> beneficiers,
             List<GroupMember> groupMembers,
+            int groupId,
             GroupMember payer,
             bool beneficiersIsEmptyError,
             bool created)
         initialized,
     required TResult Function(Failure failure) error,
   }) {
-    return initialized(isLoading, beneficiers, groupMembers, payer,
+    return initialized(isLoading, beneficiers, groupMembers, groupId, payer,
         beneficiersIsEmptyError, created);
   }
 
@@ -422,14 +440,15 @@ class _$InitializedImpl implements _Initialized {
             bool isLoading,
             List<GroupMember> beneficiers,
             List<GroupMember> groupMembers,
+            int groupId,
             GroupMember payer,
             bool beneficiersIsEmptyError,
             bool created)?
         initialized,
     TResult? Function(Failure failure)? error,
   }) {
-    return initialized?.call(isLoading, beneficiers, groupMembers, payer,
-        beneficiersIsEmptyError, created);
+    return initialized?.call(isLoading, beneficiers, groupMembers, groupId,
+        payer, beneficiersIsEmptyError, created);
   }
 
   @override
@@ -440,6 +459,7 @@ class _$InitializedImpl implements _Initialized {
             bool isLoading,
             List<GroupMember> beneficiers,
             List<GroupMember> groupMembers,
+            int groupId,
             GroupMember payer,
             bool beneficiersIsEmptyError,
             bool created)?
@@ -448,7 +468,7 @@ class _$InitializedImpl implements _Initialized {
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized(isLoading, beneficiers, groupMembers, payer,
+      return initialized(isLoading, beneficiers, groupMembers, groupId, payer,
           beneficiersIsEmptyError, created);
     }
     return orElse();
@@ -494,6 +514,7 @@ abstract class _Initialized implements ExpenseCreatorState {
       {final bool isLoading,
       final List<GroupMember> beneficiers,
       final List<GroupMember> groupMembers,
+      required final int groupId,
       required final GroupMember payer,
       final bool beneficiersIsEmptyError,
       final bool created}) = _$InitializedImpl;
@@ -501,6 +522,7 @@ abstract class _Initialized implements ExpenseCreatorState {
   bool get isLoading;
   List<GroupMember> get beneficiers;
   List<GroupMember> get groupMembers;
+  int get groupId;
   GroupMember get payer;
   bool get beneficiersIsEmptyError;
   bool get created;
@@ -597,6 +619,7 @@ class _$ErrorImpl implements _Error {
             bool isLoading,
             List<GroupMember> beneficiers,
             List<GroupMember> groupMembers,
+            int groupId,
             GroupMember payer,
             bool beneficiersIsEmptyError,
             bool created)
@@ -614,6 +637,7 @@ class _$ErrorImpl implements _Error {
             bool isLoading,
             List<GroupMember> beneficiers,
             List<GroupMember> groupMembers,
+            int groupId,
             GroupMember payer,
             bool beneficiersIsEmptyError,
             bool created)?
@@ -631,6 +655,7 @@ class _$ErrorImpl implements _Error {
             bool isLoading,
             List<GroupMember> beneficiers,
             List<GroupMember> groupMembers,
+            int groupId,
             GroupMember payer,
             bool beneficiersIsEmptyError,
             bool created)?

@@ -1,4 +1,5 @@
 import 'package:bill_share/common/domain/failure.dart';
+import 'package:bill_share/group_navigator/domain/expense.dart';
 import 'package:bill_share/group_navigator/domain/group_data.dart';
 import 'package:bill_share/group_navigator/domain/i_group_repository.dart';
 import 'package:bill_share/local_storage/domain/i_local_storage_repository.dart';
@@ -19,9 +20,17 @@ class GroupCubit extends Cubit<GroupState> {
   void init(int groupId) async {
     await iLocalStorageRepository.saveLastGroupId(groupId);
     final result = await iGroupRepository.fetchGroupMembers(groupId);
+    final expensesObserver = iGroupRepository.observeExpenses(groupId);
+    expensesObserver.fold(
+      (l) {},
+      (r) => r.listen((event) {
+        print('dasdsaads $event');
+      }),
+    );
     result.fold(
       (l) => emit(GroupState.error(l)),
-      (r) => emit(GroupState.data(groupData: GroupData(members: r))),
+      (r) => emit(GroupState.data(
+          groupData: GroupData(id: groupId, members: r), expenses: [])),
     );
   }
 }

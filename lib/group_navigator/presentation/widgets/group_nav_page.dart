@@ -30,11 +30,17 @@ class GroupNavPage extends StatelessWidget {
               floatingActionButton: FloatingActionButton(
                   backgroundColor: AppColors.green,
                   foregroundColor: AppColors.white,
-                  onPressed: () => context.pushRoute(ExpenseCreatorRoute(
-                        groupMembers: state.maybeWhen(
-                            orElse: () => [],
-                            data: (groupData) => groupData.members),
-                      )),
+                  onPressed: () {
+                    state.whenOrNull(
+                      data: (groupData, expenses) {
+                    context.pushRoute(ExpenseCreatorRoute(
+                        groupId: groupData.id,
+                        groupMembers:  groupData.members,
+                      ));       
+                      },
+                    );
+                 
+                  } ,
                   child: Icon(Icons.add)),
               bottomNavigationBar: BottomNavigationBar(
                   currentIndex: tabsRouter.activeIndex,

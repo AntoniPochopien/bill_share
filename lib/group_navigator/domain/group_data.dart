@@ -6,6 +6,7 @@ part 'group_data.freezed.dart';
 @freezed
 class GroupData with _$GroupData {
   const factory GroupData({
+    required int id,
     required List<GroupMember> members,
   }) = _GroupData;
 }

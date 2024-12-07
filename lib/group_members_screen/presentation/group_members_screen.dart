@@ -17,7 +17,7 @@ class GroupMembersScreen extends StatelessWidget {
       builder: (context, state) {
         return state.maybeWhen(
             orElse: () => SizedBox(),
-            data: (groupData) => BillshareScaffold(
+            data: (groupData, expenses) => BillshareScaffold(
                   body: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

@@ -11,9 +11,12 @@ Deno.serve(async (req) => {
       { global: { headers: { Authorization: req.headers.get('Authorization')! } } }
     )
     const body = await req.json();
-    const { title, amount, payer_id, beneficients_ids } = body;
+    const { title, amount, payer_id, beneficients_ids, group_id} = body;
     if (!title || typeof title !== "string") {
       return new Response("The 'title' field is required and must be a string.", { status: 400 });
+    }
+    if (!group_id || typeof group_id !== "number"){
+      return new Response("The 'group_id' field is required and must be a number.", { status: 400 });
     }
     if (!amount || typeof amount !== "number" || amount <= 0) {
       return new Response("The 'amount' field is required and must be a number greater than zero.", { status: 400 });
@@ -30,7 +33,7 @@ Deno.serve(async (req) => {
     // Insert into expenses tabel
     const { data: expense, error: expenseError } = await supabase
       .from("expenses")
-      .insert([{ title, amount, payer_id }])
+      .insert([{ title, amount, payer_id, group_id }])
       .select("id")
       .single();
 

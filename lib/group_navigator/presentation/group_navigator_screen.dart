@@ -36,7 +36,7 @@ class GroupNavigatorScreen extends StatelessWidget {
             builder: (context, state) => state.maybeWhen(
                   orElse: () => LoadingScreen(),
                   error: (failure) => ErrorScreen(onRetry: () {}),
-                  data: (members) => GroupNavPage(),
+                  data: (members, expenses) => GroupNavPage(),
                 )));
   }
 }

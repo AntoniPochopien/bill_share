@@ -53,12 +53,14 @@ class ExpenseCreatorRoute extends PageRouteInfo<ExpenseCreatorRouteArgs> {
   ExpenseCreatorRoute({
     Key? key,
     required List<GroupMember> groupMembers,
+    required int groupId,
     List<PageRouteInfo>? children,
   }) : super(
           ExpenseCreatorRoute.name,
           args: ExpenseCreatorRouteArgs(
             key: key,
             groupMembers: groupMembers,
+            groupId: groupId,
           ),
           initialChildren: children,
         );
@@ -72,6 +74,7 @@ class ExpenseCreatorRoute extends PageRouteInfo<ExpenseCreatorRouteArgs> {
       return ExpenseCreatorScreen(
         key: args.key,
         groupMembers: args.groupMembers,
+        groupId: args.groupId,
       );
     },
   );
@@ -81,15 +84,18 @@ class ExpenseCreatorRouteArgs {
   const ExpenseCreatorRouteArgs({
     this.key,
     required this.groupMembers,
+    required this.groupId,
   });
 
   final Key? key;
 
   final List<GroupMember> groupMembers;
 
+  final int groupId;
+
   @override
   String toString() {
-    return 'ExpenseCreatorRouteArgs{key: $key, groupMembers: $groupMembers}';
+    return 'ExpenseCreatorRouteArgs{key: $key, groupMembers: $groupMembers, groupId: $groupId}';
   }
 }
 

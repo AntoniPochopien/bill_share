@@ -24,9 +24,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 @RoutePage()
 class ExpenseCreatorScreen extends StatefulWidget {
   final List<GroupMember> groupMembers;
+  final int groupId;
   const ExpenseCreatorScreen({
     super.key,
     required this.groupMembers,
+    required this.groupId,
   });
 
   @override
@@ -61,7 +63,10 @@ class _ExpenseCreatorScreenState extends State<ExpenseCreatorScreen> {
       create: (context) => ExpenseCreatorCubit(
         injectableUser: getIt<InjectableUser>(),
         iexpensesRepository: getIt<IExpensesRepository>(),
-      )..init(widget.groupMembers),
+      )..init(
+          gorupId: widget.groupId,
+          groupMembers: widget.groupMembers,
+        ),
       child: BlocConsumer<ExpenseCreatorCubit, ExpenseCreatorState>(
           listener: (context, state) {
             state.mapOrNull(initialized: (value) {
@@ -109,7 +114,8 @@ class _ExpenseCreatorScreenState extends State<ExpenseCreatorScreen> {
                                                     const EdgeInsets.symmetric(
                                                         vertical: 15),
                                                 child: Text(
-                                                  T(context).enter_the_title_of_expense,
+                                                  T(context)
+                                                      .enter_the_title_of_expense,
                                                   style: Font.h4Grey,
                                                 ),
                                               ),
@@ -125,7 +131,8 @@ class _ExpenseCreatorScreenState extends State<ExpenseCreatorScreen> {
                                                     const EdgeInsets.symmetric(
                                                         vertical: 15),
                                                 child: Text(
-                                                  T(context).how_much_did_it_cost,
+                                                  T(context)
+                                                      .how_much_did_it_cost,
                                                   style: Font.h4Grey,
                                                 ),
                                               ),

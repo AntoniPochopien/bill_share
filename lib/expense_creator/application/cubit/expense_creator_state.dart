@@ -7,6 +7,7 @@ class ExpenseCreatorState with _$ExpenseCreatorState {
     @Default(false) bool isLoading,
     @Default([]) List<GroupMember> beneficiers,
     @Default([]) List<GroupMember> groupMembers,
+    required int groupId,
     required GroupMember payer,
     @Default(false) bool beneficiersIsEmptyError,
     @Default(false) bool created,

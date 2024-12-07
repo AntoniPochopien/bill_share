@@ -15,14 +15,15 @@ class ExpensesRepository implements IExpensesRepository {
     try {
       final beneficientsIds = expense.beneficients.map((e) => e.id).toList();
       final body = {
-          'title': expense.title,
-          'amount': expense.amount,
-          'payer_id': expense.payer.id,
-          'beneficients_ids': beneficientsIds
+        'group_id': expense.groupId,
+        'title': expense.title,
+        'amount': expense.amount,
+        'payer_id': expense.payer.id,
+        'beneficients_ids': beneficientsIds
       };
       final response = await _supabase.functions
           .invoke('create-expense', body: jsonEncode(body));
-      if(response.status == 201){
+      if (response.status == 201) {
         return right(unit);
       }
       return left(Failure.unexpected());
