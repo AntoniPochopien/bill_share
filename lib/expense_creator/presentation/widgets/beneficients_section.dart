@@ -41,6 +41,7 @@ class _BeneficientsSectionState extends State<BeneficientsSection> {
       ),
     );
     if (result != null && context.mounted) {
+      FocusScope.of(context).unfocus();
       context.read<ExpenseCreatorCubit>()
         ..removeAllBeneficiers()
         ..addBeneficiers(result);
@@ -76,6 +77,7 @@ class _BeneficientsSectionState extends State<BeneficientsSection> {
               flex: 3,
               child: OptionPill(
                   onTap: () {
+                    FocusScope.of(context).unfocus();
                     context.read<ExpenseCreatorCubit>().addAllBeneficiers();
                     context
                         .read<ExpenseCreatorCubit>()
@@ -105,7 +107,10 @@ class _BeneficientsSectionState extends State<BeneficientsSection> {
       if (widget.beneficiersIsEmptyError)
         Padding(
           padding: const EdgeInsets.only(left: 32, top: 4),
-          child: Text('At least one beneficier needs to be selected', style: Font.h5Red,),
+          child: Text(
+            'At least one beneficier needs to be selected',
+            style: Font.h5Red,
+          ),
         )
     ]);
   }

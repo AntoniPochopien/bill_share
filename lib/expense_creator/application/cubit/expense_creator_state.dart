@@ -9,7 +9,7 @@ class ExpenseCreatorState with _$ExpenseCreatorState {
     @Default([]) List<GroupMember> groupMembers,
     required GroupMember payer,
     @Default(false) bool beneficiersIsEmptyError,
+    @Default(false) bool created,
   }) = _Initialized;
-  const factory ExpenseCreatorState.created() = _Created;
   const factory ExpenseCreatorState.error(Failure failure) = _Error;
 }
