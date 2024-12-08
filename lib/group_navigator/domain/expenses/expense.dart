@@ -9,8 +9,10 @@ class Expense with _$Expense {
   const factory Expense({
     required int id,
     required int groupId,
+    required String title,
     required GroupMember payer,
     required double amount,
+    required DateTime createdAt,
     required List<ExpenseBeneficiaries> beneficiaries,
   }) = _Expense;
 }

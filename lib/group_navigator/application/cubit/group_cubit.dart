@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bill_share/common/domain/failure.dart';
 import 'package:bill_share/group_navigator/domain/expenses/expense.dart';
@@ -35,11 +36,10 @@ class GroupCubit extends Cubit<GroupState> {
                   groupData: GroupData(
                       id: groupId, members: members, expenses: expenses))),
             ));
-    expensesObserver.fold(
-      (l) {},
-      (r) =>
-          _expensesSubscription = r.listen((event) => _expensesListener(event)),
-    );
+    expensesObserver.fold((l) {}, (r) {
+      log('expenses subscription established');
+      _expensesSubscription = r.listen((event) => _expensesListener(event));
+    });
   }
 
   void _expensesListener(ExpenseEvent event) {
@@ -53,7 +53,7 @@ class GroupCubit extends Cubit<GroupState> {
           update: (expense) {
             final index =
                 expenses.indexWhere((element) => element.id == expense.id);
-            if (index > 0) {
+            if (index >= 0) {
               expenses.removeAt(index);
               expenses.insert(index, expense);
               emit(s.copyWith(
@@ -62,7 +62,7 @@ class GroupCubit extends Cubit<GroupState> {
           },
           delete: (id) {
             final index = expenses.indexWhere((element) => element.id == id);
-            if (index > 0) {
+            if (index >= 0) {
               expenses.removeAt(index);
               emit(s.copyWith(
                   groupData: s.groupData.copyWith(expenses: expenses)));

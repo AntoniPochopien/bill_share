@@ -43,17 +43,22 @@ class GroupRepository implements IGroupRepository {
                 if (payload.eventType == PostgresChangeEvent.insert) {
                   final newRecord = payload.newRecord;
                   if (newRecord['group_id'] == groupId) {
-                    final event = await _onInsertOrUpdate(newRecord);
+                    log('expenses observer event: INSERT');
+                    final event =
+                        await _onInsertOrUpdate(newRecord, update: false);
                     streamController.add(event);
                   }
                 } else if (payload.eventType == PostgresChangeEvent.delete) {
+                  log('expenses observer event: DELETE');
                   final oldRecord = payload.oldRecord;
                   final event = ExpenseEvent.delete(oldRecord['id']);
                   streamController.add(event);
                 } else if (payload.eventType == PostgresChangeEvent.update) {
                   final newRecord = payload.newRecord;
                   if (newRecord['group_id'] == groupId) {
-                    final event = await _onInsertOrUpdate(newRecord);
+                    log('expenses observer event: UPDATE');
+                    final event =
+                        await _onInsertOrUpdate(newRecord, update: true);
                     streamController.add(event);
                   }
                 }
@@ -66,7 +71,8 @@ class GroupRepository implements IGroupRepository {
     }
   }
 
-  Future<ExpenseEvent> _onInsertOrUpdate(Map<String, dynamic> newRecord) async {
+  Future<ExpenseEvent> _onInsertOrUpdate(Map<String, dynamic> newRecord,
+      {required bool update}) async {
     final expenseId = newRecord['id'];
     final responses = await Future.wait([
       _supabase
@@ -75,11 +81,11 @@ class GroupRepository implements IGroupRepository {
           .eq('expense_id', expenseId),
       _supabase
           .from('expenses')
-          .select('profiles(id, username), group_id')
+          .select('profiles(id, username)')
           .eq('id', expenseId)
     ]);
     final beneficiariesResponse = responses[0];
-    final payerResponse = responses[1];
+    final expenseResponse = responses[1];
 
     final expenseBeneficiaries = beneficiariesResponse.map((e) {
       final profiles = e['profiles'];
@@ -91,19 +97,25 @@ class GroupRepository implements IGroupRepository {
           share: e['share'].toDouble());
     }).toList();
 
+    final expense = expenseResponse[0];
+    final payerProfile = expense['profiles'];
     final payer = GroupMember(
-        id: payerResponse[0]['id'],
-        username: payerResponse[0]['username'],
+        id: payerProfile['id'],
+        username: payerProfile['username'],
         isAdmin: false);
 
     final newExpense = Expense(
       id: expenseId,
-      groupId: payerResponse[0]['group_id'],
-      amount: newRecord['amount'],
+      title: newRecord['title'],
+      groupId: newRecord['group_id'],
+      amount: newRecord['amount'].toDouble(),
       beneficiaries: expenseBeneficiaries,
       payer: payer,
+      createdAt: DateTime.parse(newRecord['created_at']),
     );
-    return ExpenseEvent.insert(newExpense);
+    return update
+        ? ExpenseEvent.update(newExpense)
+        : ExpenseEvent.insert(newExpense);
   }
 
   @override
@@ -111,7 +123,8 @@ class GroupRepository implements IGroupRepository {
     try {
       final expenseResponse = await _supabase
           .from('expenses')
-          .select('id, profiles(id, username), group_id, amount')
+          .select(
+              'id, profiles(id, username), group_id, amount, created_at, title')
           .eq('group_id', groupId)
           .range(0, 10);
 
@@ -120,7 +133,6 @@ class GroupRepository implements IGroupRepository {
             .from('expense_beneficiaries')
             .select('profiles(id, username), share')
             .eq('expense_id', e['id']);
-        log(e.toString());
 
         final payerData = e['profiles'];
         final payer = GroupMember(
@@ -137,11 +149,12 @@ class GroupRepository implements IGroupRepository {
                   isAdmin: false),
               share: element['share'].toDouble());
         }).toList();
-
         return Expense(
           id: e['id'],
+          title: e['title'],
           groupId: e['group_id'],
           amount: e['amount'].toDouble(),
+          createdAt: DateTime.parse(e['created_at']),
           beneficiaries: beneficiaries,
           payer: payer,
         );
