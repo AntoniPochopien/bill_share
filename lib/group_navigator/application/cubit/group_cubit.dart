@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bill_share/common/domain/failure.dart';
+import 'package:bill_share/expense_creator/domain/i_expenses_repository.dart';
 import 'package:bill_share/group_navigator/domain/expenses/expense.dart';
 import 'package:bill_share/group_navigator/domain/expenses/expense_event.dart';
 import 'package:bill_share/group_navigator/domain/group_data.dart';
@@ -16,9 +17,11 @@ part 'group_cubit.freezed.dart';
 class GroupCubit extends Cubit<GroupState> {
   final ILocalStorageRepository iLocalStorageRepository;
   final IGroupRepository iGroupRepository;
+  final IExpensesRepository iExpensesRepository;
   GroupCubit({
     required this.iLocalStorageRepository,
     required this.iGroupRepository,
+    required this.iExpensesRepository,
   }) : super(GroupState.initial());
 
   StreamSubscription<ExpenseEvent>? _expensesSubscription;
@@ -26,8 +29,8 @@ class GroupCubit extends Cubit<GroupState> {
   void init(int groupId) async {
     final groupInfoResult = await iGroupRepository.fetchGroupInfo(groupId);
     final membersResult = await iGroupRepository.fetchGroupMembers(groupId);
-    final expensesResult = await iGroupRepository.fetchGroupExpenses(groupId);
-    final expensesObserver = iGroupRepository.observeExpenses(groupId);
+    final expensesResult = await iExpensesRepository.fetchGroupExpenses(groupId);
+    final expensesObserver = iExpensesRepository.observeExpenses(groupId);
     expensesResult.fold(
         (l) => GroupState.error(l),
         (expenses) => membersResult.fold(
