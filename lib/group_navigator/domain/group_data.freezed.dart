@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$GroupData {
   int get id => throw _privateConstructorUsedError;
+  GroupInfo get groupInfo => throw _privateConstructorUsedError;
   List<GroupMember> get members => throw _privateConstructorUsedError;
   List<Expense> get expenses => throw _privateConstructorUsedError;
 
@@ -32,7 +33,13 @@ abstract class $GroupDataCopyWith<$Res> {
   factory $GroupDataCopyWith(GroupData value, $Res Function(GroupData) then) =
       _$GroupDataCopyWithImpl<$Res, GroupData>;
   @useResult
-  $Res call({int id, List<GroupMember> members, List<Expense> expenses});
+  $Res call(
+      {int id,
+      GroupInfo groupInfo,
+      List<GroupMember> members,
+      List<Expense> expenses});
+
+  $GroupInfoCopyWith<$Res> get groupInfo;
 }
 
 /// @nodoc
@@ -51,6 +58,7 @@ class _$GroupDataCopyWithImpl<$Res, $Val extends GroupData>
   @override
   $Res call({
     Object? id = null,
+    Object? groupInfo = null,
     Object? members = null,
     Object? expenses = null,
   }) {
@@ -59,6 +67,10 @@ class _$GroupDataCopyWithImpl<$Res, $Val extends GroupData>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      groupInfo: null == groupInfo
+          ? _value.groupInfo
+          : groupInfo // ignore: cast_nullable_to_non_nullable
+              as GroupInfo,
       members: null == members
           ? _value.members
           : members // ignore: cast_nullable_to_non_nullable
@@ -68,6 +80,16 @@ class _$GroupDataCopyWithImpl<$Res, $Val extends GroupData>
           : expenses // ignore: cast_nullable_to_non_nullable
               as List<Expense>,
     ) as $Val);
+  }
+
+  /// Create a copy of GroupData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $GroupInfoCopyWith<$Res> get groupInfo {
+    return $GroupInfoCopyWith<$Res>(_value.groupInfo, (value) {
+      return _then(_value.copyWith(groupInfo: value) as $Val);
+    });
   }
 }
 
@@ -79,7 +101,14 @@ abstract class _$$GroupDataImplCopyWith<$Res>
       __$$GroupDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, List<GroupMember> members, List<Expense> expenses});
+  $Res call(
+      {int id,
+      GroupInfo groupInfo,
+      List<GroupMember> members,
+      List<Expense> expenses});
+
+  @override
+  $GroupInfoCopyWith<$Res> get groupInfo;
 }
 
 /// @nodoc
@@ -96,6 +125,7 @@ class __$$GroupDataImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? groupInfo = null,
     Object? members = null,
     Object? expenses = null,
   }) {
@@ -104,6 +134,10 @@ class __$$GroupDataImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      groupInfo: null == groupInfo
+          ? _value.groupInfo
+          : groupInfo // ignore: cast_nullable_to_non_nullable
+              as GroupInfo,
       members: null == members
           ? _value._members
           : members // ignore: cast_nullable_to_non_nullable
@@ -121,6 +155,7 @@ class __$$GroupDataImplCopyWithImpl<$Res>
 class _$GroupDataImpl implements _GroupData {
   const _$GroupDataImpl(
       {required this.id,
+      required this.groupInfo,
       required final List<GroupMember> members,
       required final List<Expense> expenses})
       : _members = members,
@@ -128,6 +163,8 @@ class _$GroupDataImpl implements _GroupData {
 
   @override
   final int id;
+  @override
+  final GroupInfo groupInfo;
   final List<GroupMember> _members;
   @override
   List<GroupMember> get members {
@@ -146,7 +183,7 @@ class _$GroupDataImpl implements _GroupData {
 
   @override
   String toString() {
-    return 'GroupData(id: $id, members: $members, expenses: $expenses)';
+    return 'GroupData(id: $id, groupInfo: $groupInfo, members: $members, expenses: $expenses)';
   }
 
   @override
@@ -155,6 +192,8 @@ class _$GroupDataImpl implements _GroupData {
         (other.runtimeType == runtimeType &&
             other is _$GroupDataImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.groupInfo, groupInfo) ||
+                other.groupInfo == groupInfo) &&
             const DeepCollectionEquality().equals(other._members, _members) &&
             const DeepCollectionEquality().equals(other._expenses, _expenses));
   }
@@ -163,6 +202,7 @@ class _$GroupDataImpl implements _GroupData {
   int get hashCode => Object.hash(
       runtimeType,
       id,
+      groupInfo,
       const DeepCollectionEquality().hash(_members),
       const DeepCollectionEquality().hash(_expenses));
 
@@ -178,11 +218,14 @@ class _$GroupDataImpl implements _GroupData {
 abstract class _GroupData implements GroupData {
   const factory _GroupData(
       {required final int id,
+      required final GroupInfo groupInfo,
       required final List<GroupMember> members,
       required final List<Expense> expenses}) = _$GroupDataImpl;
 
   @override
   int get id;
+  @override
+  GroupInfo get groupInfo;
   @override
   List<GroupMember> get members;
   @override

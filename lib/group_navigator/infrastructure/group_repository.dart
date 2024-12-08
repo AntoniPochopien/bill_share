@@ -5,6 +5,7 @@ import 'package:bill_share/common/domain/failure.dart';
 import 'package:bill_share/group_navigator/domain/expenses/expense.dart';
 import 'package:bill_share/group_navigator/domain/expenses/expense_beneficiaries.dart';
 import 'package:bill_share/group_navigator/domain/expenses/expense_event.dart';
+import 'package:bill_share/group_navigator/domain/group_info.dart';
 import 'package:bill_share/group_navigator/domain/group_member.dart';
 import 'package:bill_share/group_navigator/domain/i_group_repository.dart';
 import 'package:dartz/dartz.dart';
@@ -177,6 +178,19 @@ class GroupRepository implements IGroupRepository {
       return right(expenses);
     } catch (e) {
       log('fetchGroupExpenses unexpected error: $e');
+      return left(Failure.unexpected());
+    }
+  }
+
+  @override
+  Future<Either<Failure, GroupInfo>> fetchGroupInfo(int groupId) async {
+    try {
+      final groupResponse =
+          await _supabase.from('groups').select('id, name').eq('id', groupId);
+      final groupData = groupResponse[0];
+      return right(GroupInfo(id: groupData['id'], name: groupData['name']));
+    } catch (e) {
+      log('fetchGroupInfo unexpected error: $e');
       return left(Failure.unexpected());
     }
   }

@@ -24,7 +24,7 @@ class GroupCubit extends Cubit<GroupState> {
   StreamSubscription<ExpenseEvent>? _expensesSubscription;
 
   void init(int groupId) async {
-    await iLocalStorageRepository.saveLastGroupId(groupId);
+    final groupInfoResult = await iGroupRepository.fetchGroupInfo(groupId);
     final membersResult = await iGroupRepository.fetchGroupMembers(groupId);
     final expensesResult = await iGroupRepository.fetchGroupExpenses(groupId);
     final expensesObserver = iGroupRepository.observeExpenses(groupId);
@@ -32,9 +32,17 @@ class GroupCubit extends Cubit<GroupState> {
         (l) => GroupState.error(l),
         (expenses) => membersResult.fold(
               (l) => emit(GroupState.error(l)),
-              (members) => emit(GroupState.data(
-                  groupData: GroupData(
-                      id: groupId, members: members, expenses: expenses))),
+              (members) => groupInfoResult
+                  .fold((l) => emit(GroupState.error(l)), (groupInfo) async {
+                await iLocalStorageRepository.saveLastGroupId(groupInfo.id);
+                emit(GroupState.data(
+                    groupData: GroupData(
+                  id: groupId,
+                  members: members,
+                  expenses: expenses,
+                  groupInfo: groupInfo,
+                )));
+              }),
             ));
     expensesObserver.fold((l) {}, (r) {
       log('expenses subscription established');

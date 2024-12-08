@@ -4,7 +4,14 @@ import 'package:flutter/material.dart';
 class ProfileImage extends StatelessWidget {
   final String? imageUrl;
   final double? size;
-  const ProfileImage({super.key, this.imageUrl, this.size});
+  final double? iconSize;
+  final Color? backgroundColor;
+  const ProfileImage(
+      {super.key,
+      this.imageUrl,
+      this.size,
+      this.iconSize,
+      this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +20,10 @@ class ProfileImage extends StatelessWidget {
       height: size,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: AppColors.lightBlue,
+        color: backgroundColor ?? AppColors.lightBlue,
       ),
       child: imageUrl == null
-          ? Icon(Icons.question_mark, color: AppColors.white)
+          ? Icon(Icons.question_mark, size: iconSize, color: AppColors.white)
           : Image.network(imageUrl!),
     );
   }
