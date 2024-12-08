@@ -11,6 +11,7 @@ class Expense with _$Expense {
     required int groupId,
     required String title,
     required GroupMember payer,
+    required GroupMember creator,
     required double amount,
     required DateTime createdAt,
     required List<ExpenseBeneficiaries> beneficiaries,

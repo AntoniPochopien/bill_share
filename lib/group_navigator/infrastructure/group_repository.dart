@@ -79,10 +79,10 @@ class GroupRepository implements IGroupRepository {
           .from('expense_beneficiaries')
           .select('profiles(id, username), share')
           .eq('expense_id', expenseId),
-      _supabase
-          .from('expenses')
-          .select('profiles(id, username)')
-          .eq('id', expenseId)
+      _supabase.from('expenses').select('''
+              creator:profiles!expenses_creator_id_fkey(id, username),
+              payer:profiles!expenses_payer_id_fkey(id, username)
+              ''').eq('id', expenseId)
     ]);
     final beneficiariesResponse = responses[0];
     final expenseResponse = responses[1];
@@ -98,10 +98,15 @@ class GroupRepository implements IGroupRepository {
     }).toList();
 
     final expense = expenseResponse[0];
-    final payerProfile = expense['profiles'];
+    final payerProfile = expense['payer'];
     final payer = GroupMember(
         id: payerProfile['id'],
         username: payerProfile['username'],
+        isAdmin: false);
+    final creatorProfile = expense['creator'];
+    final creator = GroupMember(
+        id: creatorProfile['id'],
+        username: creatorProfile['username'],
         isAdmin: false);
 
     final newExpense = Expense(
@@ -111,6 +116,7 @@ class GroupRepository implements IGroupRepository {
       amount: newRecord['amount'].toDouble(),
       beneficiaries: expenseBeneficiaries,
       payer: payer,
+      creator: creator,
       createdAt: DateTime.parse(newRecord['created_at']),
     );
     return update
@@ -121,12 +127,15 @@ class GroupRepository implements IGroupRepository {
   @override
   Future<Either<Failure, List<Expense>>> fetchGroupExpenses(int groupId) async {
     try {
-      final expenseResponse = await _supabase
-          .from('expenses')
-          .select(
-              'id, profiles(id, username), group_id, amount, created_at, title')
-          .eq('group_id', groupId)
-          .range(0, 10);
+      final expenseResponse = await _supabase.from('expenses').select('''
+              id, 
+              group_id, 
+              amount, 
+              created_at, 
+              title, 
+              creator:profiles!expenses_creator_id_fkey(id, username), 
+              payer:profiles!expenses_payer_id_fkey(id, username)
+              ''').eq('group_id', groupId).range(0, 10);
 
       final expenses = await Future.wait(expenseResponse.map((e) async {
         final beneficiariesResponse = await _supabase
@@ -134,10 +143,15 @@ class GroupRepository implements IGroupRepository {
             .select('profiles(id, username), share')
             .eq('expense_id', e['id']);
 
-        final payerData = e['profiles'];
+        final payerData = e['payer'];
         final payer = GroupMember(
             id: payerData['id'],
             username: payerData['username'],
+            isAdmin: false);
+        final creatorData = e['creator'];
+        final creator = GroupMember(
+            id: creatorData['id'],
+            username: creatorData['username'],
             isAdmin: false);
 
         final beneficiaries = beneficiariesResponse.map((element) {
@@ -157,6 +171,7 @@ class GroupRepository implements IGroupRepository {
           createdAt: DateTime.parse(e['created_at']),
           beneficiaries: beneficiaries,
           payer: payer,
+          creator: creator,
         );
       }));
       return right(expenses);

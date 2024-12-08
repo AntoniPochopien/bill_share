@@ -5,11 +5,18 @@ const headers = { "Content-Type": "application/json" }
 
 Deno.serve(async (req) => {
   try{
+    const authHeader = req.headers.get('Authorization')!
+
     const supabase = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_ANON_KEY') ?? '',
-      { global: { headers: { Authorization: req.headers.get('Authorization')! } } }
+      { global: { headers: { Authorization: authHeader } } }
     )
+
+    const token = authHeader.replace('Bearer ', '')
+    const { data } = await supabase.auth.getUser(token)
+    const user = data.user
+
     const body = await req.json();
     const { title, amount, payer_id, beneficients_ids, group_id} = body;
     if (!title || typeof title !== "string") {
@@ -29,11 +36,11 @@ Deno.serve(async (req) => {
     }
 
     const sharePerUser = amount / beneficients_ids.length;
-
+    const creator_id = user.id;
     // Insert into expenses tabel
     const { data: expense, error: expenseError } = await supabase
       .from("expenses")
-      .insert([{ title, amount, payer_id, group_id }])
+      .insert([{ title, amount, payer_id, group_id, creator_id }])
       .select("id")
       .single();
 

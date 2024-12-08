@@ -20,6 +20,7 @@ mixin _$Expense {
   int get groupId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   GroupMember get payer => throw _privateConstructorUsedError;
+  GroupMember get creator => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   List<ExpenseBeneficiaries> get beneficiaries =>
@@ -41,11 +42,13 @@ abstract class $ExpenseCopyWith<$Res> {
       int groupId,
       String title,
       GroupMember payer,
+      GroupMember creator,
       double amount,
       DateTime createdAt,
       List<ExpenseBeneficiaries> beneficiaries});
 
   $GroupMemberCopyWith<$Res> get payer;
+  $GroupMemberCopyWith<$Res> get creator;
 }
 
 /// @nodoc
@@ -67,6 +70,7 @@ class _$ExpenseCopyWithImpl<$Res, $Val extends Expense>
     Object? groupId = null,
     Object? title = null,
     Object? payer = null,
+    Object? creator = null,
     Object? amount = null,
     Object? createdAt = null,
     Object? beneficiaries = null,
@@ -87,6 +91,10 @@ class _$ExpenseCopyWithImpl<$Res, $Val extends Expense>
       payer: null == payer
           ? _value.payer
           : payer // ignore: cast_nullable_to_non_nullable
+              as GroupMember,
+      creator: null == creator
+          ? _value.creator
+          : creator // ignore: cast_nullable_to_non_nullable
               as GroupMember,
       amount: null == amount
           ? _value.amount
@@ -112,6 +120,16 @@ class _$ExpenseCopyWithImpl<$Res, $Val extends Expense>
       return _then(_value.copyWith(payer: value) as $Val);
     });
   }
+
+  /// Create a copy of Expense
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $GroupMemberCopyWith<$Res> get creator {
+    return $GroupMemberCopyWith<$Res>(_value.creator, (value) {
+      return _then(_value.copyWith(creator: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -126,12 +144,15 @@ abstract class _$$ExpenseImplCopyWith<$Res> implements $ExpenseCopyWith<$Res> {
       int groupId,
       String title,
       GroupMember payer,
+      GroupMember creator,
       double amount,
       DateTime createdAt,
       List<ExpenseBeneficiaries> beneficiaries});
 
   @override
   $GroupMemberCopyWith<$Res> get payer;
+  @override
+  $GroupMemberCopyWith<$Res> get creator;
 }
 
 /// @nodoc
@@ -151,6 +172,7 @@ class __$$ExpenseImplCopyWithImpl<$Res>
     Object? groupId = null,
     Object? title = null,
     Object? payer = null,
+    Object? creator = null,
     Object? amount = null,
     Object? createdAt = null,
     Object? beneficiaries = null,
@@ -171,6 +193,10 @@ class __$$ExpenseImplCopyWithImpl<$Res>
       payer: null == payer
           ? _value.payer
           : payer // ignore: cast_nullable_to_non_nullable
+              as GroupMember,
+      creator: null == creator
+          ? _value.creator
+          : creator // ignore: cast_nullable_to_non_nullable
               as GroupMember,
       amount: null == amount
           ? _value.amount
@@ -196,6 +222,7 @@ class _$ExpenseImpl implements _Expense {
       required this.groupId,
       required this.title,
       required this.payer,
+      required this.creator,
       required this.amount,
       required this.createdAt,
       required final List<ExpenseBeneficiaries> beneficiaries})
@@ -210,6 +237,8 @@ class _$ExpenseImpl implements _Expense {
   @override
   final GroupMember payer;
   @override
+  final GroupMember creator;
+  @override
   final double amount;
   @override
   final DateTime createdAt;
@@ -223,7 +252,7 @@ class _$ExpenseImpl implements _Expense {
 
   @override
   String toString() {
-    return 'Expense(id: $id, groupId: $groupId, title: $title, payer: $payer, amount: $amount, createdAt: $createdAt, beneficiaries: $beneficiaries)';
+    return 'Expense(id: $id, groupId: $groupId, title: $title, payer: $payer, creator: $creator, amount: $amount, createdAt: $createdAt, beneficiaries: $beneficiaries)';
   }
 
   @override
@@ -235,6 +264,7 @@ class _$ExpenseImpl implements _Expense {
             (identical(other.groupId, groupId) || other.groupId == groupId) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.payer, payer) || other.payer == payer) &&
+            (identical(other.creator, creator) || other.creator == creator) &&
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
@@ -243,8 +273,16 @@ class _$ExpenseImpl implements _Expense {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, groupId, title, payer,
-      amount, createdAt, const DeepCollectionEquality().hash(_beneficiaries));
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      groupId,
+      title,
+      payer,
+      creator,
+      amount,
+      createdAt,
+      const DeepCollectionEquality().hash(_beneficiaries));
 
   /// Create a copy of Expense
   /// with the given fields replaced by the non-null parameter values.
@@ -261,6 +299,7 @@ abstract class _Expense implements Expense {
       required final int groupId,
       required final String title,
       required final GroupMember payer,
+      required final GroupMember creator,
       required final double amount,
       required final DateTime createdAt,
       required final List<ExpenseBeneficiaries> beneficiaries}) = _$ExpenseImpl;
@@ -273,6 +312,8 @@ abstract class _Expense implements Expense {
   String get title;
   @override
   GroupMember get payer;
+  @override
+  GroupMember get creator;
   @override
   double get amount;
   @override

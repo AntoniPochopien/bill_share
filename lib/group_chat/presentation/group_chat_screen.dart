@@ -11,14 +11,20 @@ class GroupChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //TODO add pagination
     return BlocBuilder<GroupCubit, GroupState>(
         builder: (context, state) => state.maybeWhen(
               orElse: () => SizedBox(),
               data: (groupData) => BillshareScaffold(
                 body: ListView.builder(
+                  reverse: true,
                   itemCount: groupData.expenses.length,
-                  itemBuilder: (context, index) =>
+                  itemBuilder: (context, index) => Column(
+                    children: [
                       ExpenseBubble(expense: groupData.expenses[index]),
+                      index == 0 ? SizedBox(height: 100) : SizedBox(),
+                    ],
+                  ),
                 ),
               ),
             ));
