@@ -32,15 +32,14 @@ class GroupNavPage extends StatelessWidget {
                   foregroundColor: AppColors.white,
                   onPressed: () {
                     state.whenOrNull(
-                      data: (groupData, expenses) {
-                    context.pushRoute(ExpenseCreatorRoute(
-                        groupId: groupData.id,
-                        groupMembers:  groupData.members,
-                      ));       
+                      data: (groupData) {
+                        context.pushRoute(ExpenseCreatorRoute(
+                          groupId: groupData.id,
+                          groupMembers: groupData.members,
+                        ));
                       },
                     );
-                 
-                  } ,
+                  },
                   child: Icon(Icons.add)),
               bottomNavigationBar: BottomNavigationBar(
                   currentIndex: tabsRouter.activeIndex,

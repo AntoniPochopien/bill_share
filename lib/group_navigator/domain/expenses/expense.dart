@@ -1,4 +1,4 @@
-import 'package:bill_share/group_navigator/domain/expense_beneficiaries.dart';
+import 'package:bill_share/group_navigator/domain/expenses/expense_beneficiaries.dart';
 import 'package:bill_share/group_navigator/domain/group_member.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

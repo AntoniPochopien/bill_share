@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bill_share/common/domain/failure.dart';
-import 'package:bill_share/group_navigator/domain/expense.dart';
+import 'package:bill_share/group_navigator/domain/expenses/expense.dart';
+import 'package:bill_share/group_navigator/domain/expenses/expense_beneficiaries.dart';
+import 'package:bill_share/group_navigator/domain/expenses/expense_event.dart';
 import 'package:bill_share/group_navigator/domain/group_member.dart';
 import 'package:bill_share/group_navigator/domain/i_group_repository.dart';
 import 'package:dartz/dartz.dart';
@@ -28,10 +30,9 @@ class GroupRepository implements IGroupRepository {
   }
 
   @override
-  Either<Failure, Stream<List<Expense>>> observeExpenses(int groupId) {
+  Either<Failure, Stream<ExpenseEvent>> observeExpenses(int groupId) {
     try {
-      final streamController = StreamController<List<Expense>>.broadcast();
-      print('dsadsa');
+      final streamController = StreamController<ExpenseEvent>.broadcast();
       _supabase
           .channel('public:expenses')
           .onPostgresChanges(
@@ -39,19 +40,22 @@ class GroupRepository implements IGroupRepository {
               schema: 'public',
               table: 'expenses',
               callback: (payload) async {
-                final newRecord = payload.newRecord;
-                final expenseGroupId = newRecord['group_id'];
-                if (expenseGroupId == groupId) {
-                  final beneficiers = newRecord[''];
-                  await _retriveGroupMembers(groupId: groupId, ids: beneficiers);
-                  // final beneficiers = ,
-                  // final payer = ,
-                  // Expense(
-                  //     id: newRecord['id'],
-                  //     groupId: groupId,
-                  //     payer: newRecord['id'],
-                  //     amount: newRecord['amount'],
-                  //     beneficiaries: []);
+                if (payload.eventType == PostgresChangeEvent.insert) {
+                  final newRecord = payload.newRecord;
+                  if (newRecord['group_id'] == groupId) {
+                    final event = await _onInsertOrUpdate(newRecord);
+                    streamController.add(event);
+                  }
+                } else if (payload.eventType == PostgresChangeEvent.delete) {
+                  final oldRecord = payload.oldRecord;
+                  final event = ExpenseEvent.delete(oldRecord['id']);
+                  streamController.add(event);
+                } else if (payload.eventType == PostgresChangeEvent.update) {
+                  final newRecord = payload.newRecord;
+                  if (newRecord['group_id'] == groupId) {
+                    final event = await _onInsertOrUpdate(newRecord);
+                    streamController.add(event);
+                  }
                 }
               })
           .subscribe();
@@ -62,29 +66,90 @@ class GroupRepository implements IGroupRepository {
     }
   }
 
-  Future<List<GroupMember>> _retriveGroupMembers(
-      {required int groupId, List<String>? ids}) async {
-    final query = _supabase
-        .from('groups_profiles')
-        .select('profiles(id, username), isAdmin')
-        .eq('group_id', groupId);
+  Future<ExpenseEvent> _onInsertOrUpdate(Map<String, dynamic> newRecord) async {
+    final expenseId = newRecord['id'];
+    final responses = await Future.wait([
+      _supabase
+          .from('expense_beneficiaries')
+          .select('profiles(id, username), share')
+          .eq('expense_id', expenseId),
+      _supabase
+          .from('expenses')
+          .select('profiles(id, username), group_id')
+          .eq('id', expenseId)
+    ]);
+    final beneficiariesResponse = responses[0];
+    final payerResponse = responses[1];
 
-    if (ids != null && ids.isNotEmpty) {
-      query.or('profiles.id.eq.${ids.join(",")}');
-    }
-    final response = await query;
-    final members = response.map((e) => GroupMember.fromJson(e)).toList();
-    return members;
+    final expenseBeneficiaries = beneficiariesResponse.map((e) {
+      final profiles = e['profiles'];
+      return ExpenseBeneficiaries(
+          beneficiary: GroupMember(
+              id: profiles['id'],
+              username: profiles['username'],
+              isAdmin: false),
+          share: e['share'].toDouble());
+    }).toList();
+
+    final payer = GroupMember(
+        id: payerResponse[0]['id'],
+        username: payerResponse[0]['username'],
+        isAdmin: false);
+
+    final newExpense = Expense(
+      id: expenseId,
+      groupId: payerResponse[0]['group_id'],
+      amount: newRecord['amount'],
+      beneficiaries: expenseBeneficiaries,
+      payer: payer,
+    );
+    return ExpenseEvent.insert(newExpense);
   }
 
-  // List<Expense> _mapPayloadToExpenses(PostgresChangePayload payload) {
-  //   final records = payload.newRecord;
-  //   Expense(
-  //     amount: ,
-  //     beneficiaries: ,
-  //     groupId: ,
-  //     id: ,
-  //     payer: ,
-  //   );
-  // }
+  @override
+  Future<Either<Failure, List<Expense>>> fetchGroupExpenses(int groupId) async {
+    try {
+      final expenseResponse = await _supabase
+          .from('expenses')
+          .select('id, profiles(id, username), group_id, amount')
+          .eq('group_id', groupId)
+          .range(0, 10);
+
+      final expenses = await Future.wait(expenseResponse.map((e) async {
+        final beneficiariesResponse = await _supabase
+            .from('expense_beneficiaries')
+            .select('profiles(id, username), share')
+            .eq('expense_id', e['id']);
+        log(e.toString());
+
+        final payerData = e['profiles'];
+        final payer = GroupMember(
+            id: payerData['id'],
+            username: payerData['username'],
+            isAdmin: false);
+
+        final beneficiaries = beneficiariesResponse.map((element) {
+          final profiles = element['profiles'];
+          return ExpenseBeneficiaries(
+              beneficiary: GroupMember(
+                  id: profiles['id'],
+                  username: profiles['username'],
+                  isAdmin: false),
+              share: element['share'].toDouble());
+        }).toList();
+
+        return Expense(
+          id: e['id'],
+          groupId: e['group_id'],
+          amount: e['amount'].toDouble(),
+          beneficiaries: beneficiaries,
+          payer: payer,
+        );
+      }));
+      return right(expenses);
+    } catch (e) {
+      log('fetchGroupExpenses unexpected error: $e');
+      return left(Failure.unexpected());
+    }
+  }
 }
