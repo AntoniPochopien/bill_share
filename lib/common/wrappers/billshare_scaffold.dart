@@ -6,6 +6,7 @@ class BillshareScaffold extends StatelessWidget {
   final BottomNavigationBar? bottomNavigationBar;
   final EdgeInsets? padding;
   final Widget? floatingActionButton;
+  final GlobalKey<ScaffoldState>? scaffoldKey;
 
   const BillshareScaffold({
     super.key,
@@ -14,6 +15,7 @@ class BillshareScaffold extends StatelessWidget {
     this.bottomNavigationBar,
     this.padding,
     this.floatingActionButton,
+    this.scaffoldKey,
   });
 
   @override
@@ -21,6 +23,7 @@ class BillshareScaffold extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        key: scaffoldKey,
         appBar: appBar,
         bottomNavigationBar: bottomNavigationBar,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

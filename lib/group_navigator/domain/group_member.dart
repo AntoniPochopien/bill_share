@@ -16,7 +16,7 @@ class GroupMember with _$GroupMember {
     return GroupMember(
       id: profiles['id'],
       username: profiles['username'],
-      isAdmin: data['isAdmin'],
+      isAdmin: data['is_admin'],
     );
   }
 }

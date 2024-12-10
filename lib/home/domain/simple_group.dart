@@ -15,6 +15,6 @@ class SimpleGroup with _$SimpleGroup {
   static SimpleGroup fromJson(Map<String, dynamic> data) {
     final group = data['groups'];
     return SimpleGroup(
-        id: group['id'], name: group['name'], isAdmin: data['isAdmin'], membersCount: group['membersCount'][0]['count']);
+        id: group['id'], name: group['name'], isAdmin: data['is_admin'], membersCount: group['membersCount'][0]['count']);
   }
 }

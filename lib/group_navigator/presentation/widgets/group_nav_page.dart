@@ -8,8 +8,15 @@ import 'package:bill_share/navigation/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class GroupNavPage extends StatelessWidget {
+class GroupNavPage extends StatefulWidget {
   const GroupNavPage({super.key});
+
+  @override
+  State<GroupNavPage> createState() => _GroupNavPageState();
+}
+
+class _GroupNavPageState extends State<GroupNavPage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +26,17 @@ class GroupNavPage extends StatelessWidget {
           GroupDashboardRoute(),
           GroupChatRoute(),
         ],
+        homeIndex: 2,
         builder: (context, child) {
           final tabsRouter = AutoTabsRouter.of(context);
           return BlocBuilder<GroupCubit, GroupState>(
               builder: (context, state) => state.maybeWhen(
                   orElse: () => SizedBox(),
                   data: (groupData) => BillshareScaffold(
-                        appBar: GroupAppbar(groupInfo: groupData.groupInfo),
+                        scaffoldKey: _scaffoldKey,
+                        appBar: GroupAppbar(groupInfo: groupData.groupInfo,
+                        onGroupTap: (){},
+                        ),
                         padding: EdgeInsets.zero,
                         body: child,
                         floatingActionButton: FloatingActionButton(
@@ -33,7 +44,7 @@ class GroupNavPage extends StatelessWidget {
                             foregroundColor: AppColors.white,
                             onPressed: () {
                               context.pushRoute(ExpenseCreatorRoute(
-                                groupId: groupData.id,
+                                groupId: groupData.groupInfo.id,
                                 groupMembers: groupData.members,
                               ));
                             },

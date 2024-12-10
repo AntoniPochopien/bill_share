@@ -19,7 +19,7 @@ class GroupsRepository implements IGroupsRepository {
       final newGroupResult = await _supabase
           .from('groups_profiles')
           .select(
-              'groups(id, name, membersCount:groups_profiles(count)), isAdmin')
+              'groups(id, name, membersCount:groups_profiles(count)), is_admin')
           .eq('group_id', newGroupId);
       final newGroup =
           newGroupResult.map((e) => SimpleGroup.fromJson(e)).toList();
@@ -37,7 +37,7 @@ class GroupsRepository implements IGroupsRepository {
       final response = await _supabase
           .from('groups_profiles')
           .select(
-              'groups(id, name, membersCount:groups_profiles(count)), isAdmin')
+              'groups(id, name, membersCount:groups_profiles(count)), is_admin')
           .eq('user_id', userId);
       final groups = response.map((e) => SimpleGroup.fromJson(e)).toList();
       return right(groups);

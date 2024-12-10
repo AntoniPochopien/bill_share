@@ -136,16 +136,28 @@ class Font {
   static final h5Green = _baseGreen.copyWith(fontSize: _h5);
   static final h6Green = _baseGreen.copyWith(fontSize: _h6);
 
-  //green bold
+   //green semibold
   static final h1GreenBold =
-      _baseGreen.copyWith(fontSize: _h1, fontWeight: FontWeight.bold);
+      _baseGreen.copyWith(fontSize: _h1, fontWeight: FontWeight.w600);
   static final h2GreenBold =
-      _baseGreen.copyWith(fontSize: _h2, fontWeight: FontWeight.bold);
+      _baseGreen.copyWith(fontSize: _h2, fontWeight: FontWeight.w600);
   static final h4GreenBold =
-      _baseGreen.copyWith(fontSize: _h4, fontWeight: FontWeight.bold);
+      _baseGreen.copyWith(fontSize: _h4, fontWeight: FontWeight.w600);
   static final h5GreenBold =
-      _baseGreen.copyWith(fontSize: _h5, fontWeight: FontWeight.bold);
+      _baseGreen.copyWith(fontSize: _h5, fontWeight: FontWeight.w600);
   static final h6GreenBold =
+      _baseGreen.copyWith(fontSize: _h6, fontWeight: FontWeight.w600);
+
+  //green bold
+  static final h1GreenSemiBold =
+      _baseGreen.copyWith(fontSize: _h1, fontWeight: FontWeight.bold);
+  static final h2GreenSemiBold =
+      _baseGreen.copyWith(fontSize: _h2, fontWeight: FontWeight.bold);
+  static final h4GreenSemiBold =
+      _baseGreen.copyWith(fontSize: _h4, fontWeight: FontWeight.bold);
+  static final h5GreenSemiBold =
+      _baseGreen.copyWith(fontSize: _h5, fontWeight: FontWeight.bold);
+  static final h6GreenSemiBold =
       _baseGreen.copyWith(fontSize: _h6, fontWeight: FontWeight.bold);
 
   //red
@@ -157,4 +169,16 @@ class Font {
   static final h4Red = _baseRed.copyWith(fontSize: _h4);
   static final h5Red = _baseRed.copyWith(fontSize: _h5);
   static final h6Red = _baseRed.copyWith(fontSize: _h6);
+
+  //red semibold
+  static final h1RedSemiBold =
+      _baseRed.copyWith(fontSize: _h1, fontWeight: FontWeight.w600);
+  static final h2RedSemiBold =
+      _baseRed.copyWith(fontSize: _h2, fontWeight: FontWeight.w600);
+  static final h4RedSemiBold =
+      _baseRed.copyWith(fontSize: _h4, fontWeight: FontWeight.w600);
+  static final h5RedSemiBold =
+      _baseRed.copyWith(fontSize: _h5, fontWeight: FontWeight.w600);
+  static final h6RedSemiBold =
+      _baseRed.copyWith(fontSize: _h6, fontWeight: FontWeight.w600);
 }

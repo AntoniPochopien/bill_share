@@ -21,9 +21,9 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: HomeRoute.page),
         AutoRoute(page: ExpenseCreatorRoute.page),
         AutoRoute(page: GroupNavigatorRoute.page, children: [
-          AutoRoute(page: GroupDashboardRoute.page),
-          AutoRoute(page: GroupChatRoute.page),
           AutoRoute(page: GroupMembersRoute.page),
+          AutoRoute(page: GroupDashboardRoute.page, initial: true),
+          AutoRoute(page: GroupChatRoute.page),
         ]),
       ];
 }

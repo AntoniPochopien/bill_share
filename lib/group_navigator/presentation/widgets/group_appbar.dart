@@ -6,7 +6,12 @@ import 'package:flutter/material.dart';
 
 class GroupAppbar extends StatelessWidget implements PreferredSizeWidget {
   final GroupInfo groupInfo;
-  const GroupAppbar({super.key, required this.groupInfo});
+  final Function onGroupTap;
+  const GroupAppbar({
+    super.key,
+    required this.groupInfo,
+    required this.onGroupTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +21,7 @@ class GroupAppbar extends StatelessWidget implements PreferredSizeWidget {
           padding: const EdgeInsets.only(right: 8),
           child: InkWell(
             borderRadius: BorderRadius.circular(8),
-            onTap: () {},
+            onTap: () => onGroupTap(),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(children: [
