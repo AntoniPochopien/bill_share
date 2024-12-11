@@ -7,6 +7,7 @@ class BillshareScaffold extends StatelessWidget {
   final EdgeInsets? padding;
   final Widget? floatingActionButton;
   final GlobalKey<ScaffoldState>? scaffoldKey;
+  final Widget? endDrawer;
 
   const BillshareScaffold({
     super.key,
@@ -16,6 +17,7 @@ class BillshareScaffold extends StatelessWidget {
     this.padding,
     this.floatingActionButton,
     this.scaffoldKey,
+    this.endDrawer,
   });
 
   @override
@@ -25,6 +27,7 @@ class BillshareScaffold extends StatelessWidget {
       child: Scaffold(
         key: scaffoldKey,
         appBar: appBar,
+        endDrawer: endDrawer,
         bottomNavigationBar: bottomNavigationBar,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: floatingActionButton,

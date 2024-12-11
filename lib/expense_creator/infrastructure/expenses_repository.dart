@@ -136,7 +136,9 @@ class ExpensesRepository implements IExpensesRepository {
   @override
   Future<Either<Failure, List<Expense>>> fetchGroupExpenses(int groupId) async {
     try {
-      final expenseResponse = await _supabase.from('expenses').select('''
+      final expenseResponse = await _supabase
+          .from('expenses')
+          .select('''
               id, 
               group_id, 
               amount, 
@@ -144,7 +146,10 @@ class ExpensesRepository implements IExpensesRepository {
               title, 
               creator:profiles!expenses_creator_id_fkey(id, username), 
               payer:profiles!expenses_payer_id_fkey(id, username)
-              ''').eq('group_id', groupId).range(0, 10);
+              ''')
+          .eq('group_id', groupId)
+          .order('created_at', ascending: false)
+          .range(0, 10);
 
       final expenses = await Future.wait(expenseResponse.map((e) async {
         final beneficiariesResponse = await _supabase

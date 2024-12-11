@@ -13,6 +13,21 @@ class ExpenseBubble extends StatelessWidget {
 
   bool _isMe() => expense.creator.id == getIt<InjectableUser>().currentUser.id;
 
+  Color _findBubbleColor() {
+    final userId = getIt<InjectableUser>().currentUser.id;
+    final beneficiariesContainsUser = expense.beneficiaries
+        .any((element) => element.beneficiary.id == userId);
+    final userIsPayer = expense.payer.id == userId;
+    if (userIsPayer) {
+      return AppColors.green;
+    }
+    if (beneficiariesContainsUser) {
+      return AppColors.errorRed;
+    } else {
+      return AppColors.black.withOpacity(0.25);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -37,7 +52,7 @@ class ExpenseBubble extends StatelessWidget {
               SizedBox(height: 4),
               Container(
                 decoration: BoxDecoration(
-                    color: AppColors.green,
+                    color: _findBubbleColor(),
                     borderRadius: BorderRadius.circular(8)),
                 child: Padding(
                   padding:

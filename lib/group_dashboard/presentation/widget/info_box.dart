@@ -28,8 +28,7 @@ class InfoBox extends StatelessWidget {
         ],
       ),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        AnimatedContainer(
-          duration: Duration(milliseconds: 300),
+        Container(
           width: double.infinity,
           decoration: BoxDecoration(
             color: AppColors.white.withOpacity(0.1),

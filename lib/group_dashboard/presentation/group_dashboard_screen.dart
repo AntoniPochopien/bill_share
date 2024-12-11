@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bill_share/common/widgets/title_with_underscore.dart';
 import 'package:bill_share/common/wrappers/billshare_scaffold.dart';
 import 'package:bill_share/constants/app_colors.dart';
 import 'package:bill_share/group_dashboard/presentation/widget/info_box.dart';
@@ -20,40 +21,43 @@ class GroupDashboardScreen extends StatelessWidget {
             final dashboardData = groupData.dashboardData;
             final total = dashboardData.toPay + dashboardData.toRecive;
             return BillshareScaffold(
-              body: Column(children: [
-                Row(children: [
-                  Expanded(
-                      child: InfoBox(
-                          gradient: AppColors.blueGradientDark,
-                          title: 'To pay',
-                          value: dashboardData.toPay.abs())),
-                  SizedBox(width: 24),
-                  Expanded(
-                      child: InfoBox(
-                          gradient: AppColors.blueGradientLight,
-                          title: 'To recive',
-                          value: dashboardData.toRecive)),
-                ]),
-                SizedBox(height: 24),
-                SizedBox(
-                    height: 200,
-                    child: InfoBox(
-                        gradient: total > 0
-                            ? AppColors.greenGradient
-                            : AppColors.redGradient,
-                        title: 'Total',
-                        value: total)),
-                SizedBox(height: 20),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: dashboardData.membersWithBalance.length,
-                    itemBuilder: (context, index) => MemberTileWithBalance(
-                      memberWithBalance:
-                          dashboardData.membersWithBalance[index],
-                    ),
-                  ),
-                )
-              ]),
+              body: SingleChildScrollView(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TitleWithUnderscore(title: 'Dashboard'),
+                      SizedBox(height: 20),
+                      Row(children: [
+                        Expanded(
+                            child: InfoBox(
+                                gradient: AppColors.blueGradientDark,
+                                title: 'To pay',
+                                value: dashboardData.toPay.abs())),
+                        SizedBox(width: 24),
+                        Expanded(
+                            child: InfoBox(
+                                gradient: AppColors.blueGradientLight,
+                                title: 'To recive',
+                                value: dashboardData.toRecive)),
+                      ]),
+                      SizedBox(height: 24),
+                      SizedBox(
+                          height: 200,
+                          child: InfoBox(
+                              gradient: total > 0
+                                  ? AppColors.greenGradient
+                                  : AppColors.redGradient,
+                              title: 'Total',
+                              value: total)),
+                      SizedBox(height: 20),
+                      ...dashboardData.membersWithBalance.map(
+                        (e) => MemberTileWithBalance(
+                          memberWithBalance: e,
+                        ),
+                      ),
+                      SizedBox(height: 100)
+                    ]),
+              ),
             );
           }),
     );

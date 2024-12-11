@@ -80,11 +80,6 @@ Deno.serve(async (req) => {
       balance,
     }
   });
-  console.log('start');
-  console.log(debtors);
-  console.log(owningTo);
-  console.log(groupMembersWithBalance);
-  console.log('end');
 
   return new Response(
       JSON.stringify(groupMembersWithBalance),

@@ -81,7 +81,7 @@ class GroupCubit extends Cubit<GroupState> {
             insert: (expense) => emit(s.copyWith(
                 groupData: s.groupData.copyWith(
                     dashboardData: dashboardData,
-                    expenses: expenses..add(expense)))),
+                    expenses: expenses..insert(0, expense)))),
             update: (expense) {
               final index =
                   expenses.indexWhere((element) => element.id == expense.id);
@@ -94,13 +94,10 @@ class GroupCubit extends Cubit<GroupState> {
               }
             },
             delete: (id) {
-              final index = expenses.indexWhere((element) => element.id == id);
-              if (index >= 0) {
-                expenses.removeAt(index);
-                emit(s.copyWith(
-                    groupData: s.groupData.copyWith(
-                        dashboardData: dashboardData, expenses: expenses)));
-              }
+              expenses.removeWhere((element) => element.id == id);
+              emit(s.copyWith(
+                  groupData: s.groupData.copyWith(
+                      dashboardData: dashboardData, expenses: expenses)));
             });
       });
     }

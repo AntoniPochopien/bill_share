@@ -16,6 +16,7 @@ class GroupAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      notificationPredicate: (_) => false,
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 8),
