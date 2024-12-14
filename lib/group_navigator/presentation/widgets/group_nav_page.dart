@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bill_share/auth/domain/injectable_user.dart';
 import 'package:bill_share/common/wrappers/billshare_scaffold.dart';
 import 'package:bill_share/constants/app_colors.dart';
+import 'package:bill_share/di.dart';
 import 'package:bill_share/group_navigator/application/cubit/group_cubit.dart';
 import 'package:bill_share/group_navigator/presentation/widgets/dashboard_drawer.dart';
 import 'package:bill_share/group_navigator/presentation/widgets/group_appbar.dart';
@@ -35,7 +37,15 @@ class _GroupNavPageState extends State<GroupNavPage> {
                   orElse: () => SizedBox(),
                   data: (groupData) => BillshareScaffold(
                         scaffoldKey: _scaffoldKey,
-                        endDrawer: DashboardDrawer(),
+                        endDrawer: DashboardDrawer(
+                          groupInfo: groupData.groupInfo,
+                          isAdmin: groupData.members.any(
+                            (element) =>
+                                element.id ==
+                                    getIt<InjectableUser>().currentUser.id &&
+                                element.isAdmin,
+                          ),
+                        ),
                         appBar: GroupAppbar(
                           groupInfo: groupData.groupInfo,
                           onGroupTap: () =>

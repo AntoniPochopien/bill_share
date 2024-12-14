@@ -21,7 +21,10 @@ class GroupMembersScreen extends StatelessWidget {
                   body: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TitleWithUnderscore(title: T(context).members),
+                        TitleWithUnderscore(
+                          title: T(context).members,
+                          padding: EdgeInsets.only(bottom: 8),
+                        ),
                         Expanded(
                             child: ListView.builder(
                                 itemCount: groupData.members.length,

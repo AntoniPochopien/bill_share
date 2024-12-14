@@ -25,7 +25,10 @@ class GroupDashboardScreen extends StatelessWidget {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      TitleWithUnderscore(title: 'Dashboard'),
+                      TitleWithUnderscore(
+                        title: 'Dashboard',
+                        padding: EdgeInsets.only(bottom: 8),
+                      ),
                       SizedBox(height: 20),
                       Row(children: [
                         Expanded(
