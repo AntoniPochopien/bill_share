@@ -14,10 +14,17 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+ExpenseBeneficiaries _$ExpenseBeneficiariesFromJson(Map<String, dynamic> json) {
+  return _ExpenseBeneficiaries.fromJson(json);
+}
+
 /// @nodoc
 mixin _$ExpenseBeneficiaries {
   GroupMember get beneficiary => throw _privateConstructorUsedError;
   double get share => throw _privateConstructorUsedError;
+
+  /// Serializes this ExpenseBeneficiaries to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of ExpenseBeneficiaries
   /// with the given fields replaced by the non-null parameter values.
@@ -123,10 +130,13 @@ class __$$ExpenseBeneficiariesImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$ExpenseBeneficiariesImpl implements _ExpenseBeneficiaries {
   const _$ExpenseBeneficiariesImpl(
       {required this.beneficiary, required this.share});
+
+  factory _$ExpenseBeneficiariesImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ExpenseBeneficiariesImplFromJson(json);
 
   @override
   final GroupMember beneficiary;
@@ -148,6 +158,7 @@ class _$ExpenseBeneficiariesImpl implements _ExpenseBeneficiaries {
             (identical(other.share, share) || other.share == share));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, beneficiary, share);
 
@@ -160,12 +171,22 @@ class _$ExpenseBeneficiariesImpl implements _ExpenseBeneficiaries {
       get copyWith =>
           __$$ExpenseBeneficiariesImplCopyWithImpl<_$ExpenseBeneficiariesImpl>(
               this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ExpenseBeneficiariesImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _ExpenseBeneficiaries implements ExpenseBeneficiaries {
   const factory _ExpenseBeneficiaries(
       {required final GroupMember beneficiary,
       required final double share}) = _$ExpenseBeneficiariesImpl;
+
+  factory _ExpenseBeneficiaries.fromJson(Map<String, dynamic> json) =
+      _$ExpenseBeneficiariesImpl.fromJson;
 
   @override
   GroupMember get beneficiary;

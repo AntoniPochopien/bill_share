@@ -21,7 +21,15 @@ class GroupRepository implements IGroupRepository {
           .from('groups_profiles')
           .select('profiles(id, username), is_admin')
           .eq('group_id', groupId);
-      final members = response.map((e) => GroupMember.fromJson(e)).toList();
+      //TODO fix freezed json serializer for that case
+      final members = response.map((e) {
+        final flattenJson = {
+          'is_admin': e['is_admin'],
+          'id': e['profiles']['id'],
+          'username': e['profiles']['username'],
+        };
+        return GroupMember.fromJson(flattenJson);
+      }).toList();
       return right(members);
     } catch (e) {
       log('fetchGroupMembers unexpected error: $e');
@@ -45,14 +53,76 @@ class GroupRepository implements IGroupRepository {
   @override
   Future<Either<Failure, DashboardData>> fetchDashboardData(int groupId) async {
     try {
-      final result =
-          await _supabase.functions.invoke('get-group-net-balances', body: {
-        'group_id': groupId,
-      });
+      final requestes = await Future.wait([
+        _supabase
+            .from('groups_profiles')
+            .select('profiles(id, username), is_admin')
+            .eq('group_id', groupId),
+        _supabase
+            .from('expense_beneficiaries')
+            .select('expenses(payer_id, amount), share, beneficiary_id')
+            .eq('expenses.group_id', groupId),
+      ]);
 
-      final data = result.data as List<dynamic>;
-      final membersWithBalance =
-          data.map((e) => MemberWithBalance.fromJson(e)).toList();
+      final user = _supabase.auth.currentUser!;
+
+      final groupMembersRequest = requestes[0];
+      final groupExpensesRequest = requestes[1];
+
+      //TODO fix freezed json serializer for that case
+      final members = groupMembersRequest.map((e) {
+        final flattenJson = {
+          'is_admin': e['is_admin'],
+          'id': e['profiles']['id'],
+          'username': e['profiles']['username'],
+        };
+        return GroupMember.fromJson(flattenJson);
+      }).toList();
+
+      final Map<String, double> debtors = {};
+      final Map<String, double> owningTo = {};
+
+      for (var expense in groupExpensesRequest) {
+        final share = expense['share'];
+        final beneficiaryId = expense['beneficiary_id'];
+        final expenses = expense['expenses'];
+        final payerId = expenses['payer_id'];
+        if (payerId == user.id && beneficiaryId != user.id) {
+          debtors.putIfAbsent(beneficiaryId, () => 0.0);
+          debtors[beneficiaryId] = (debtors[beneficiaryId] as double) + share;
+        } else if (beneficiaryId == user.id && payerId != user.id) {
+          if (owningTo.containsKey(payerId)) {
+            owningTo.putIfAbsent(payerId, () => 0.0);
+            owningTo[payerId] = (owningTo[payerId] as double) + share;
+          }
+        }
+      }
+
+      final Map<String, double> merged = {};
+
+      for (var key in debtors.keys) {
+        merged[key] = (merged[key] ?? 0.0) + (debtors[key] ?? 0.0);
+      }
+
+      for (var key in owningTo.keys) {
+        merged[key] = (merged[key] ?? 0.0) - (owningTo[key] ?? 0.0);
+      }
+
+      final membersWithBalance = merged.entries
+          .map((entry) {
+            final member = members.where((element) => element.id == entry.key);
+            if (member.isEmpty) {
+              return null;
+            } else {
+              return MemberWithBalance(
+                groupMember: member.first,
+                value: entry.value,
+              );
+            }
+          })
+          .where((element) => element != null)
+          .cast<MemberWithBalance>()
+          .toList();
 
       final toPay = membersWithBalance
           .map((e) => e.value < 0 ? e.value : 0)
@@ -63,13 +133,10 @@ class GroupRepository implements IGroupRepository {
           .reduce((a, b) => a + b)
           .toDouble();
 
-      final groupData = DashboardData(
-        toPay: toPay,
-        toRecive: toRecive,
-        membersWithBalance: membersWithBalance,
-      );
-
-      return right(groupData);
+      return right(DashboardData(
+          toPay: toPay,
+          toRecive: toRecive,
+          membersWithBalance: membersWithBalance));
     } catch (e) {
       log('fetchGroupData unexpected error: $e');
       return left(Failure.unexpected());

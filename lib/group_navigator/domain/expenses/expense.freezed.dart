@@ -14,17 +14,26 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+Expense _$ExpenseFromJson(Map<String, dynamic> json) {
+  return _Expense.fromJson(json);
+}
+
 /// @nodoc
 mixin _$Expense {
   int get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'group_id')
   int get groupId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   GroupMember get payer => throw _privateConstructorUsedError;
   GroupMember get creator => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
   List<ExpenseBeneficiaries> get beneficiaries =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this Expense to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of Expense
   /// with the given fields replaced by the non-null parameter values.
@@ -39,12 +48,12 @@ abstract class $ExpenseCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      int groupId,
+      @JsonKey(name: 'group_id') int groupId,
       String title,
       GroupMember payer,
       GroupMember creator,
       double amount,
-      DateTime createdAt,
+      @JsonKey(name: 'created_at') DateTime createdAt,
       List<ExpenseBeneficiaries> beneficiaries});
 
   $GroupMemberCopyWith<$Res> get payer;
@@ -141,12 +150,12 @@ abstract class _$$ExpenseImplCopyWith<$Res> implements $ExpenseCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      int groupId,
+      @JsonKey(name: 'group_id') int groupId,
       String title,
       GroupMember payer,
       GroupMember creator,
       double amount,
-      DateTime createdAt,
+      @JsonKey(name: 'created_at') DateTime createdAt,
       List<ExpenseBeneficiaries> beneficiaries});
 
   @override
@@ -215,22 +224,26 @@ class __$$ExpenseImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$ExpenseImpl implements _Expense {
   const _$ExpenseImpl(
       {required this.id,
-      required this.groupId,
+      @JsonKey(name: 'group_id') required this.groupId,
       required this.title,
       required this.payer,
       required this.creator,
       required this.amount,
-      required this.createdAt,
+      @JsonKey(name: 'created_at') required this.createdAt,
       required final List<ExpenseBeneficiaries> beneficiaries})
       : _beneficiaries = beneficiaries;
+
+  factory _$ExpenseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ExpenseImplFromJson(json);
 
   @override
   final int id;
   @override
+  @JsonKey(name: 'group_id')
   final int groupId;
   @override
   final String title;
@@ -241,6 +254,7 @@ class _$ExpenseImpl implements _Expense {
   @override
   final double amount;
   @override
+  @JsonKey(name: 'created_at')
   final DateTime createdAt;
   final List<ExpenseBeneficiaries> _beneficiaries;
   @override
@@ -272,6 +286,7 @@ class _$ExpenseImpl implements _Expense {
                 .equals(other._beneficiaries, _beneficiaries));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -291,22 +306,32 @@ class _$ExpenseImpl implements _Expense {
   @pragma('vm:prefer-inline')
   _$$ExpenseImplCopyWith<_$ExpenseImpl> get copyWith =>
       __$$ExpenseImplCopyWithImpl<_$ExpenseImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ExpenseImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _Expense implements Expense {
   const factory _Expense(
       {required final int id,
-      required final int groupId,
+      @JsonKey(name: 'group_id') required final int groupId,
       required final String title,
       required final GroupMember payer,
       required final GroupMember creator,
       required final double amount,
-      required final DateTime createdAt,
+      @JsonKey(name: 'created_at') required final DateTime createdAt,
       required final List<ExpenseBeneficiaries> beneficiaries}) = _$ExpenseImpl;
+
+  factory _Expense.fromJson(Map<String, dynamic> json) = _$ExpenseImpl.fromJson;
 
   @override
   int get id;
   @override
+  @JsonKey(name: 'group_id')
   int get groupId;
   @override
   String get title;
@@ -317,6 +342,7 @@ abstract class _Expense implements Expense {
   @override
   double get amount;
   @override
+  @JsonKey(name: 'created_at')
   DateTime get createdAt;
   @override
   List<ExpenseBeneficiaries> get beneficiaries;

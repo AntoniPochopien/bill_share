@@ -14,11 +14,19 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+GroupMember _$GroupMemberFromJson(Map<String, dynamic> json) {
+  return _GroupMember.fromJson(json);
+}
+
 /// @nodoc
 mixin _$GroupMember {
   String get id => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_admin')
   bool get isAdmin => throw _privateConstructorUsedError;
+
+  /// Serializes this GroupMember to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of GroupMember
   /// with the given fields replaced by the non-null parameter values.
@@ -33,7 +41,8 @@ abstract class $GroupMemberCopyWith<$Res> {
           GroupMember value, $Res Function(GroupMember) then) =
       _$GroupMemberCopyWithImpl<$Res, GroupMember>;
   @useResult
-  $Res call({String id, String username, bool isAdmin});
+  $Res call(
+      {String id, String username, @JsonKey(name: 'is_admin') bool isAdmin});
 }
 
 /// @nodoc
@@ -80,7 +89,8 @@ abstract class _$$GroupMemberImplCopyWith<$Res>
       __$$GroupMemberImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String username, bool isAdmin});
+  $Res call(
+      {String id, String username, @JsonKey(name: 'is_admin') bool isAdmin});
 }
 
 /// @nodoc
@@ -118,17 +128,23 @@ class __$$GroupMemberImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$GroupMemberImpl extends _GroupMember {
   const _$GroupMemberImpl(
-      {required this.id, required this.username, required this.isAdmin})
+      {required this.id,
+      required this.username,
+      @JsonKey(name: 'is_admin') required this.isAdmin})
       : super._();
+
+  factory _$GroupMemberImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GroupMemberImplFromJson(json);
 
   @override
   final String id;
   @override
   final String username;
   @override
+  @JsonKey(name: 'is_admin')
   final bool isAdmin;
 
   @override
@@ -147,6 +163,7 @@ class _$GroupMemberImpl extends _GroupMember {
             (identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, username, isAdmin);
 
@@ -157,20 +174,32 @@ class _$GroupMemberImpl extends _GroupMember {
   @pragma('vm:prefer-inline')
   _$$GroupMemberImplCopyWith<_$GroupMemberImpl> get copyWith =>
       __$$GroupMemberImplCopyWithImpl<_$GroupMemberImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$GroupMemberImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _GroupMember extends GroupMember {
   const factory _GroupMember(
-      {required final String id,
-      required final String username,
-      required final bool isAdmin}) = _$GroupMemberImpl;
+          {required final String id,
+          required final String username,
+          @JsonKey(name: 'is_admin') required final bool isAdmin}) =
+      _$GroupMemberImpl;
   const _GroupMember._() : super._();
+
+  factory _GroupMember.fromJson(Map<String, dynamic> json) =
+      _$GroupMemberImpl.fromJson;
 
   @override
   String get id;
   @override
   String get username;
   @override
+  @JsonKey(name: 'is_admin')
   bool get isAdmin;
 
   /// Create a copy of GroupMember

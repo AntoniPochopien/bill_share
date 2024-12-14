@@ -1,5 +1,6 @@
 import 'package:bill_share/common/widgets/profile_image.dart';
 import 'package:bill_share/constants/app_colors.dart';
+import 'package:bill_share/constants/assets.dart';
 import 'package:bill_share/group_navigator/domain/group_member.dart';
 import 'package:flutter/material.dart';
 
@@ -14,11 +15,16 @@ class MemberTile extends StatelessWidget {
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(children: [
-          ProfileImage(
-            size: 47,
-          ),
+          ProfileImage(size: 47),
           SizedBox(width: 16),
           Text(groupMember.username),
+          SizedBox(width: 8),
+          if (groupMember.isAdmin)
+            Image.asset(
+              Assets.crown,
+              width: 16,
+              height: 16,
+            ),
         ]),
       ),
       Positioned.fill(
