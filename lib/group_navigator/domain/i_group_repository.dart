@@ -8,4 +8,6 @@ abstract class IGroupRepository {
   Future<Either<Failure, List<GroupMember>>> fetchGroupMembers(int groupId);
   Future<Either<Failure, GroupInfo>> fetchGroupInfo(int groupId);
   Future<Either<Failure, DashboardData>> fetchDashboardData(int groupId);
+  Future<Either<Failure, String>> regenerateAccessCode(int groupId);
+  Future<Either<Failure, bool>> toogleLock({required bool value, required int groupId});
 }

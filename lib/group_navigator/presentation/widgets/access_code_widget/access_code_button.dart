@@ -18,20 +18,27 @@ class AccessCodeButton extends StatelessWidget {
       backgroundColor: AppColors.green,
       child: Padding(
         padding: const EdgeInsets.all(2),
-        child: CircleAvatar(
-          backgroundColor: AppColors.background,
-          child: isLoading
-              ? Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CircularProgressIndicator(
-                    color: AppColors.green,
-                    strokeWidth: 2,
-                  ),
-                )
-              : Icon(
-                  iconData,
-                  color: AppColors.green,
-                ),
+        child: Material(
+          shape: CircleBorder(),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(100),
+            onTap: () => onTap(),
+            child: CircleAvatar(
+              backgroundColor: AppColors.transparent,
+              child: isLoading
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircularProgressIndicator(
+                        color: AppColors.green,
+                        strokeWidth: 2,
+                      ),
+                    )
+                  : Icon(
+                      iconData,
+                      color: AppColors.green,
+                    ),
+            ),
+          ),
         ),
       ),
     );

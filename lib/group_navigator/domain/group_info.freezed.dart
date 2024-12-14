@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$GroupInfo {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String get accessCode => throw _privateConstructorUsedError;
+  bool get locked => throw _privateConstructorUsedError;
 
   /// Create a copy of GroupInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -31,7 +33,7 @@ abstract class $GroupInfoCopyWith<$Res> {
   factory $GroupInfoCopyWith(GroupInfo value, $Res Function(GroupInfo) then) =
       _$GroupInfoCopyWithImpl<$Res, GroupInfo>;
   @useResult
-  $Res call({int id, String name});
+  $Res call({int id, String name, String accessCode, bool locked});
 }
 
 /// @nodoc
@@ -51,6 +53,8 @@ class _$GroupInfoCopyWithImpl<$Res, $Val extends GroupInfo>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? accessCode = null,
+    Object? locked = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -61,6 +65,14 @@ class _$GroupInfoCopyWithImpl<$Res, $Val extends GroupInfo>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      accessCode: null == accessCode
+          ? _value.accessCode
+          : accessCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      locked: null == locked
+          ? _value.locked
+          : locked // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -73,7 +85,7 @@ abstract class _$$GroupInfoImplCopyWith<$Res>
       __$$GroupInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name});
+  $Res call({int id, String name, String accessCode, bool locked});
 }
 
 /// @nodoc
@@ -91,6 +103,8 @@ class __$$GroupInfoImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? accessCode = null,
+    Object? locked = null,
   }) {
     return _then(_$GroupInfoImpl(
       id: null == id
@@ -101,6 +115,14 @@ class __$$GroupInfoImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      accessCode: null == accessCode
+          ? _value.accessCode
+          : accessCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      locked: null == locked
+          ? _value.locked
+          : locked // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -108,16 +130,24 @@ class __$$GroupInfoImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$GroupInfoImpl implements _GroupInfo {
-  const _$GroupInfoImpl({required this.id, required this.name});
+  const _$GroupInfoImpl(
+      {required this.id,
+      required this.name,
+      required this.accessCode,
+      required this.locked});
 
   @override
   final int id;
   @override
   final String name;
+  @override
+  final String accessCode;
+  @override
+  final bool locked;
 
   @override
   String toString() {
-    return 'GroupInfo(id: $id, name: $name)';
+    return 'GroupInfo(id: $id, name: $name, accessCode: $accessCode, locked: $locked)';
   }
 
   @override
@@ -126,11 +156,14 @@ class _$GroupInfoImpl implements _GroupInfo {
         (other.runtimeType == runtimeType &&
             other is _$GroupInfoImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.accessCode, accessCode) ||
+                other.accessCode == accessCode) &&
+            (identical(other.locked, locked) || other.locked == locked));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(runtimeType, id, name, accessCode, locked);
 
   /// Create a copy of GroupInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -143,12 +176,19 @@ class _$GroupInfoImpl implements _GroupInfo {
 
 abstract class _GroupInfo implements GroupInfo {
   const factory _GroupInfo(
-      {required final int id, required final String name}) = _$GroupInfoImpl;
+      {required final int id,
+      required final String name,
+      required final String accessCode,
+      required final bool locked}) = _$GroupInfoImpl;
 
   @override
   int get id;
   @override
   String get name;
+  @override
+  String get accessCode;
+  @override
+  bool get locked;
 
   /// Create a copy of GroupInfo
   /// with the given fields replaced by the non-null parameter values.

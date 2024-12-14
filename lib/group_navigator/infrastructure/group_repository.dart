@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:math' as math;
 
 import 'package:bill_share/common/domain/failure.dart';
 import 'package:bill_share/group_dashboard/domain/dashboard_data.dart';
@@ -40,10 +41,16 @@ class GroupRepository implements IGroupRepository {
   @override
   Future<Either<Failure, GroupInfo>> fetchGroupInfo(int groupId) async {
     try {
-      final groupResponse =
-          await _supabase.from('groups').select('id, name').eq('id', groupId);
+      final groupResponse = await _supabase
+          .from('groups')
+          .select('id, name, access_code, locked')
+          .eq('id', groupId);
       final groupData = groupResponse[0];
-      return right(GroupInfo(id: groupData['id'], name: groupData['name']));
+      return right(GroupInfo(
+          id: groupData['id'],
+          name: groupData['name'],
+          accessCode: groupData['access_code'],
+          locked: groupData['locked']));
     } catch (e) {
       log('fetchGroupInfo unexpected error: $e');
       return left(Failure.unexpected());
@@ -137,6 +144,46 @@ class GroupRepository implements IGroupRepository {
           toPay: toPay,
           toRecive: toRecive,
           membersWithBalance: membersWithBalance));
+    } catch (e) {
+      log('fetchGroupData unexpected error: $e');
+      return left(Failure.unexpected());
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> regenerateAccessCode(int groupId) async {
+    try {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      final random = math.Random();
+
+      final newCode = List.generate(
+          6, (index) => characters[random.nextInt(characters.length)]).join();
+      await _supabase
+          .from('groups')
+          .update({'access_code': newCode})
+          .eq('id', groupId)
+          .select();
+
+      return right(newCode);
+    } catch (e) {
+      log('fetchGroupData unexpected error: $e');
+      return left(Failure.unexpected());
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> toogleLock({
+    required bool value,
+    required int groupId,
+  }) async {
+    try {
+      await _supabase
+          .from('groups')
+          .update({'locked': value})
+          .eq('id', groupId)
+          .select();
+
+      return right(value);
     } catch (e) {
       log('fetchGroupData unexpected error: $e');
       return left(Failure.unexpected());

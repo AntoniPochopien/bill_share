@@ -103,6 +103,35 @@ class GroupCubit extends Cubit<GroupState> {
     }
   }
 
+  Future<void> regenerateAccessCode() async {
+    if (state is _Data) {
+      final s = state as _Data;
+      final result =
+          await iGroupRepository.regenerateAccessCode(s.groupData.groupInfo.id);
+      result.fold(
+        (l) => emit(GroupState.error(l)),
+        (r) => emit(s.copyWith(
+            groupData: s.groupData.copyWith(
+                groupInfo: s.groupData.groupInfo.copyWith(accessCode: r)))),
+      );
+    }
+  }
+
+  Future<void> toggleLock() async {
+    if (state is _Data) {
+      final s = state as _Data;
+      final result = await iGroupRepository.toogleLock(
+          value: !s.groupData.groupInfo.locked,
+          groupId: s.groupData.groupInfo.id);
+      result.fold(
+        (l) => emit(GroupState.error(l)),
+        (r) => emit(s.copyWith(
+            groupData: s.groupData.copyWith(
+                groupInfo: s.groupData.groupInfo.copyWith(locked: r)))),
+      );
+    }
+  }
+
   @override
   Future<void> close() async {
     await _expensesSubscription?.cancel();

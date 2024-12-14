@@ -7,5 +7,7 @@ class GroupInfo with _$GroupInfo {
   const factory GroupInfo({
     required int id,
     required String name,
+    required String accessCode,
+    required bool locked,
   }) = _GroupInfo;
 }

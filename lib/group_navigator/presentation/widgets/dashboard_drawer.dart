@@ -39,7 +39,7 @@ class DashboardDrawer extends StatelessWidget {
                   ),
                 ]),
               ),
-              AccessCodeWidget(),
+              AccessCodeWidget(groupInfo: groupInfo),
               Column(children: [
                 ListTile(
                   onTap: () {},
