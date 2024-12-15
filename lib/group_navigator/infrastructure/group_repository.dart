@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
-import 'dart:math' as math;
 
 import 'package:bill_share/common/domain/failure.dart';
+import 'package:bill_share/common/utils/helpers.dart';
 import 'package:bill_share/group_dashboard/domain/dashboard_data.dart';
 import 'package:bill_share/group_dashboard/domain/member_with_balance.dart';
 import 'package:bill_share/group_navigator/domain/group_info.dart';
@@ -45,6 +45,9 @@ class GroupRepository implements IGroupRepository {
           .from('groups')
           .select('id, name, access_code, locked')
           .eq('id', groupId);
+      if (groupResponse.isEmpty) {
+        return left(Failure.groupNotExists());
+      }
       final groupData = groupResponse[0];
       return right(GroupInfo(
           id: groupData['id'],
@@ -67,7 +70,7 @@ class GroupRepository implements IGroupRepository {
             .eq('group_id', groupId),
         _supabase
             .from('expense_beneficiaries')
-            .select('expenses(payer_id, amount), share, beneficiary_id')
+            .select('expenses!inner(payer_id, amount), share, beneficiary_id')
             .eq('expenses.group_id', groupId),
       ]);
 
@@ -130,7 +133,10 @@ class GroupRepository implements IGroupRepository {
           .where((element) => element != null)
           .cast<MemberWithBalance>()
           .toList();
-
+      if (membersWithBalance.isEmpty) {
+        return right(DashboardData(
+            toPay: 0, toRecive: 0, membersWithBalance: membersWithBalance));
+      }
       final toPay = membersWithBalance
           .map((e) => e.value < 0 ? e.value : 0)
           .reduce((a, b) => a + b)
@@ -145,7 +151,7 @@ class GroupRepository implements IGroupRepository {
           toRecive: toRecive,
           membersWithBalance: membersWithBalance));
     } catch (e) {
-      log('fetchGroupData unexpected error: $e');
+      log('fetchDashboardData unexpected error: $e');
       return left(Failure.unexpected());
     }
   }
@@ -153,11 +159,7 @@ class GroupRepository implements IGroupRepository {
   @override
   Future<Either<Failure, String>> regenerateAccessCode(int groupId) async {
     try {
-      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-      final random = math.Random();
-
-      final newCode = List.generate(
-          6, (index) => characters[random.nextInt(characters.length)]).join();
+      final newCode = Helpers.generateAccessCode();
       await _supabase
           .from('groups')
           .update({'access_code': newCode})
@@ -166,7 +168,7 @@ class GroupRepository implements IGroupRepository {
 
       return right(newCode);
     } catch (e) {
-      log('fetchGroupData unexpected error: $e');
+      log('regenerateAccessCode unexpected error: $e');
       return left(Failure.unexpected());
     }
   }
@@ -185,7 +187,7 @@ class GroupRepository implements IGroupRepository {
 
       return right(value);
     } catch (e) {
-      log('fetchGroupData unexpected error: $e');
+      log('toogleLock unexpected error: $e');
       return left(Failure.unexpected());
     }
   }

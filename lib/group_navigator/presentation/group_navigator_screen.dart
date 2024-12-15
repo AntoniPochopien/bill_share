@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bill_share/common/domain/failure.dart';
+import 'package:bill_share/auth/domain/injectable_user.dart';
 import 'package:bill_share/common/screens/error_screen.dart';
 import 'package:bill_share/common/screens/loading_screen.dart';
 import 'package:bill_share/di.dart';
@@ -21,23 +21,30 @@ class GroupNavigatorScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) => GroupCubit(
-            iGroupRepository: getIt<IGroupRepository>(),
-            iLocalStorageRepository: getIt<ILocalStorageRepository>(),
-            iExpensesRepository: getIt<IExpensesRepository>())
-          ..init(groupId),
+              iGroupRepository: getIt<IGroupRepository>(),
+              iLocalStorageRepository: getIt<ILocalStorageRepository>(),
+              iExpensesRepository: getIt<IExpensesRepository>(),
+              injectableUser: getIt<InjectableUser>(),
+            )..init(groupId),
         child: BlocConsumer<GroupCubit, GroupState>(
             listener: (context, state) {
               state.whenOrNull(
                 error: (failure) {
-                  if (failure == Failure.groupNotExists()) {
-                    context.replaceRoute(HomeRoute());
-                  }
+                  failure.whenOrNull(
+                    groupNotExists: () => context.replaceRoute(HomeRoute()),
+                    dontBelongToGroup: () => context.replaceRoute(HomeRoute()),
+                  );
                 },
               );
             },
             builder: (context, state) => state.maybeWhen(
                   orElse: () => LoadingScreen(),
-                  error: (failure) => ErrorScreen(onRetry: () {}),
+                  error: (failure) => failure.maybeWhen(
+                      orElse: () => ErrorScreen(
+                          onRetry: () =>
+                              context.read<GroupCubit>().init(groupId)),
+                      dontBelongToGroup: () => SizedBox(),
+                      groupNotExists: () => SizedBox()),
                   data: (members) => GroupNavPage(),
                 )));
   }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:bill_share/auth/domain/injectable_user.dart';
 import 'package:bill_share/common/domain/failure.dart';
 import 'package:bill_share/expense_creator/domain/i_expenses_repository.dart';
 import 'package:bill_share/group_dashboard/domain/dashboard_data.dart';
@@ -22,15 +23,18 @@ class GroupCubit extends Cubit<GroupState> {
   final ILocalStorageRepository iLocalStorageRepository;
   final IGroupRepository iGroupRepository;
   final IExpensesRepository iExpensesRepository;
+  final InjectableUser injectableUser;
   GroupCubit({
     required this.iLocalStorageRepository,
     required this.iGroupRepository,
     required this.iExpensesRepository,
+    required this.injectableUser,
   }) : super(GroupState.initial());
 
   StreamSubscription<ExpenseEvent>? _expensesSubscription;
 
   void init(int groupId) async {
+    _expensesSubscription?.cancel();
     final results = await Future.wait([
       iGroupRepository.fetchGroupInfo(groupId),
       iGroupRepository.fetchGroupMembers(groupId),
@@ -51,16 +55,21 @@ class GroupCubit extends Cubit<GroupState> {
                 (members) => groupInfoResult
                     .fold((l) => emit(GroupState.error(l)), (groupInfo) async {
                   await iLocalStorageRepository.saveLastGroupId(groupInfo.id);
-                  emit(
-                    GroupState.data(
-                      groupData: GroupData(
-                        members: members,
-                        expenses: expenses,
-                        groupInfo: groupInfo,
-                        dashboardData: dashboardData,
+                  if (members.any((element) =>
+                      element.id == injectableUser.currentUser.id)) {
+                    emit(
+                      GroupState.data(
+                        groupData: GroupData(
+                          members: members,
+                          expenses: expenses,
+                          groupInfo: groupInfo,
+                          dashboardData: dashboardData,
+                        ),
                       ),
-                    ),
-                  );
+                    );
+                  } else {
+                    emit(GroupState.error(Failure.dontBelongToGroup()));
+                  }
                 }),
               ),
             ));

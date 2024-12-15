@@ -35,6 +35,6 @@ class LocalStorageRepository implements ILocalStorageRepository {
   int? readLastGroupId() => box.get(_Tables.lastGroupId.name);
 
   @override
-  Future<void> saveLastGroupId(int groupId) async =>
+  Future<void> saveLastGroupId(int? groupId) async =>
       await box.put(_Tables.lastGroupId.name, groupId);
 }

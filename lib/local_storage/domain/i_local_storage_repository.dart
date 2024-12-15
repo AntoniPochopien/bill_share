@@ -5,5 +5,5 @@ abstract class ILocalStorageRepository {
   Locale? readLocale();
   Future<void> saveLocale(Locale? locale);
   int? readLastGroupId();
-  Future<void> saveLastGroupId(int groupId);
+  Future<void> saveLastGroupId(int? groupId);
 }

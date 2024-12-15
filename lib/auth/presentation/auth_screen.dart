@@ -8,6 +8,7 @@ import 'package:bill_share/common/utils/error_handler.dart';
 import 'package:bill_share/common/utils/validators.dart';
 import 'package:bill_share/constants/assets.dart';
 import 'package:bill_share/di.dart';
+import 'package:bill_share/local_storage/domain/i_local_storage_repository.dart';
 import 'package:bill_share/navigation/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:bill_share/auth/presentation/widgets/divider_with_text.dart';
@@ -80,6 +81,7 @@ class _AuthScreenState extends State<AuthScreen> {
       create: (context) => AuthCubit(
         iAuthRepository: getIt<IAuthRepository>(),
         injectableUser: getIt<InjectableUser>(),
+        iLocalStorageRepository: getIt<ILocalStorageRepository>()
       )..init(),
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {

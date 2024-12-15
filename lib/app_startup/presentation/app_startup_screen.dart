@@ -19,9 +19,10 @@ class AppStartupScreen extends StatelessWidget {
         providers: [
           BlocProvider(
               create: (context) => AuthCubit(
-                  iAuthRepository: getIt<IAuthRepository>(),
-                  injectableUser: getIt<InjectableUser>())
-                ..init()),
+                    iAuthRepository: getIt<IAuthRepository>(),
+                    injectableUser: getIt<InjectableUser>(),
+                    iLocalStorageRepository: getIt<ILocalStorageRepository>(),
+                  )..init()),
           BlocProvider(
               create: (context) => AppStartupCubit(
                   iLocalStorageRepository: getIt<ILocalStorageRepository>())

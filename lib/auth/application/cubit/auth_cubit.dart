@@ -5,6 +5,7 @@ import 'package:bill_share/auth/domain/i_auth_repository.dart';
 import 'package:bill_share/auth/domain/injectable_user.dart';
 import 'package:bill_share/auth/infrastructure/user_to_domain.dart';
 import 'package:bill_share/common/domain/failure.dart';
+import 'package:bill_share/local_storage/domain/i_local_storage_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as sb;
@@ -16,11 +17,13 @@ part 'auth_cubit.freezed.dart';
 class AuthCubit extends Cubit<AuthState> {
   final IAuthRepository iAuthRepository;
   final InjectableUser injectableUser;
+  final ILocalStorageRepository iLocalStorageRepository;
   AuthCubit({
     required this.iAuthRepository,
     required this.injectableUser,
+    required this.iLocalStorageRepository,
   }) : super(AuthState.unauthenticated());
-  late final StreamSubscription<sb.AuthState> authSubscription;
+  StreamSubscription<sb.AuthState>? authSubscription;
 
   void init() {
     authSubscription = iAuthRepository.authStateChange().listen((data) async {
@@ -74,9 +77,16 @@ class AuthCubit extends Cubit<AuthState> {
     result.fold((l) => emit(AuthState.error(l)), (r) {});
   }
 
+  void logOut() async {
+    emit(AuthState.unauthenticated());
+    await iAuthRepository.logOut();
+    await iLocalStorageRepository.saveLastGroupId(null);
+    injectableUser.clearUser();
+  }
+
   @override
   Future<void> close() {
-    authSubscription.cancel();
+    authSubscription?.cancel();
     return super.close();
   }
 }

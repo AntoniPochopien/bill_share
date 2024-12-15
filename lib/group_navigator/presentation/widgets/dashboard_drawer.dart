@@ -1,9 +1,12 @@
+import 'package:bill_share/common/widgets/logout_button.dart';
 import 'package:bill_share/common/widgets/profile_image.dart';
 import 'package:bill_share/constants/app_colors.dart';
 import 'package:bill_share/constants/font.dart';
 import 'package:bill_share/group_navigator/domain/group_info.dart';
 import 'package:bill_share/group_navigator/presentation/widgets/access_code_widget/access_code_widget.dart';
+import 'package:bill_share/navigation/app_router.dart';
 import 'package:flutter/material.dart';
+import 'package:auto_route/auto_route.dart';
 
 class DashboardDrawer extends StatelessWidget {
   final bool isAdmin;
@@ -42,7 +45,7 @@ class DashboardDrawer extends StatelessWidget {
               AccessCodeWidget(groupInfo: groupInfo),
               Column(children: [
                 ListTile(
-                  onTap: () {},
+                  onTap: () => context.router.replaceAll([HomeRoute()]),
                   title: Text('Switch group'),
                   trailing: Icon(Icons.swap_vert_rounded),
                 ),
@@ -67,11 +70,7 @@ class DashboardDrawer extends StatelessWidget {
                   trailing: Icon(Icons.settings),
                 ),
               ]),
-              ListTile(
-                onTap: () {},
-                title: Text('Logout'),
-                trailing: Icon(Icons.logout),
-              ),
+              LogoutButton(),
             ]),
       ),
     );

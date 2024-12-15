@@ -9,9 +9,11 @@ import 'package:bill_share/common/wrappers/billshare_scaffold.dart';
 import 'package:bill_share/di.dart';
 import 'package:bill_share/home/application/group_creator_cubit/group_creator_cubit.dart';
 import 'package:bill_share/home/application/groups_cubit/groups_cubit.dart';
+import 'package:bill_share/home/application/join_group_cubit/join_group_cubit.dart';
 import 'package:bill_share/home/domain/i_groups_repository.dart';
 import 'package:bill_share/home/presentation/widgets/groups_list_view.dart';
 import 'package:bill_share/home/presentation/widgets/no_groups_view.dart';
+import 'package:bill_share/local_storage/domain/i_local_storage_repository.dart';
 import 'package:bill_share/navigation/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,9 +28,14 @@ class HomeScreen extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (context) => AuthCubit(
-                  iAuthRepository: getIt<IAuthRepository>(),
-                  injectableUser: getIt<InjectableUser>(),
-                )..init()),
+                iAuthRepository: getIt<IAuthRepository>(),
+                injectableUser: getIt<InjectableUser>(),
+                iLocalStorageRepository: getIt<ILocalStorageRepository>())
+              ..init()),
+        BlocProvider(
+            create: (context) => JoinGroupCubit(
+                  iGroupRepository: getIt<IGroupsRepository>(),
+                )),
         BlocProvider(
             create: (context) => GroupCreatorCubit(
                   iGroupsRepository: getIt<IGroupsRepository>(),
@@ -57,7 +64,7 @@ class HomeScreen extends StatelessWidget {
             },
           );
         },
-        child: BlocConsumer<GroupCreatorCubit, GroupCreatorState>(
+        child: BlocListener<GroupCreatorCubit, GroupCreatorState>(
           listener: (context, state) {
             state.whenOrNull(
               created: (newGroup) {
@@ -66,18 +73,28 @@ class HomeScreen extends StatelessWidget {
               },
             );
           },
-          builder: (context, state) => BlocBuilder<GroupsCubit, GroupsState>(
-            builder: (context, state) {
-              return state.maybeWhen(
-                orElse: () => LoadingScreen(),
-                groups: (groups) => BillshareScaffold(
-                  appBar: AppBarWithSettings(),
-                  body: groups.isEmpty
-                      ? NoGroupsView()
-                      : GroupsListView(groups: groups),
-                ),
+          child: BlocListener<JoinGroupCubit, JoinGroupState>(
+            listener: (context, state) {
+              state.whenOrNull(
+                joined: (newGroup) {
+                  context.read<GroupsCubit>().addGroupToList(newGroup);
+                  context.pushRoute(GroupNavigatorRoute(groupId: newGroup.id));
+                },
               );
             },
+            child: BlocBuilder<GroupsCubit, GroupsState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                  orElse: () => LoadingScreen(),
+                  groups: (groups) => BillshareScaffold(
+                    appBar: AppBarWithSettings(),
+                    body: groups.isEmpty
+                        ? NoGroupsView()
+                        : GroupsListView(groups: groups),
+                  ),
+                );
+              },
+            ),
           ),
         ),
       ),
