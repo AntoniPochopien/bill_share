@@ -4,6 +4,7 @@ import 'package:bill_share/constants/font.dart';
 import 'package:bill_share/group_navigator/application/cubit/group_cubit.dart';
 import 'package:bill_share/group_navigator/domain/group_info.dart';
 import 'package:bill_share/group_navigator/presentation/widgets/access_code_widget/access_code_button.dart';
+import 'package:bill_share/l10n/l10n.dart';
 import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,7 +23,7 @@ class _AccessCodeWidgetState extends State<AccessCodeWidget> {
   bool lockingLoading = false;
 
   String _formatCode(String value) =>
-      ' ${value.substring(0, 3)} ${value.substring(3)} ';
+      '${value.substring(0, 3)} ${value.substring(3)}';
 
   @override
   Widget build(BuildContext context) {
@@ -30,28 +31,45 @@ class _AccessCodeWidgetState extends State<AccessCodeWidget> {
       padding: const EdgeInsets.symmetric(horizontal: 14),
       child: Column(children: [
         TitleWithUnderscore(
-          title: 'Access code',
-          description: 'Give this code, someone who wants to join the group',
+          title: T(context).access_code,
+          description: T(context).give_this_code_someone,
         ),
-        Blur(
-          blur: widget.groupInfo.locked ? 5 : 0,
-          colorOpacity: widget.groupInfo.locked ? 0.5 : 0,
-          blurColor: AppColors.background,
-          child: GestureDetector(
-            onLongPress: () async {
-              if (widget.groupInfo.locked) {
-                return;
-              }
-              HapticFeedback.mediumImpact();
-              await Clipboard.setData(
-                  ClipboardData(text: widget.groupInfo.accessCode));
-            },
-            child: Text(
-              _formatCode(widget.groupInfo.accessCode),
-              style: Font.h1DarkSemiBold,
+        Stack(children: [
+          Blur(
+            blur: widget.groupInfo.locked ? 5 : 0,
+            colorOpacity: widget.groupInfo.locked ? 0.5 : 0,
+            blurColor: AppColors.background,
+            child: Container(
+              decoration: BoxDecoration(
+                color: AppColors.grey.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              width: double.infinity,
+              child: Center(
+                child: Text(
+                  _formatCode(widget.groupInfo.accessCode),
+                  style: Font.h1DarkSemiBold,
+                ),
+              ),
             ),
           ),
-        ),
+          Positioned.fill(
+            child: Material(
+              color: AppColors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                onLongPress: () async {
+                  if (widget.groupInfo.locked) {
+                    return;
+                  }
+                  HapticFeedback.mediumImpact();
+                  await Clipboard.setData(
+                      ClipboardData(text: widget.groupInfo.accessCode));
+                },
+              ),
+            ),
+          )
+        ]),
         SizedBox(height: 16),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           if (!widget.groupInfo.locked)

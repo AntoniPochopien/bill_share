@@ -53,5 +53,11 @@
     "clear":"Clear",
     "select_payer":"Select payer",
     "select_debtors":"Select debtors",
-    "members":"Members"
+    "members":"Members",
+    "access_code":"Access code",
+    "give_this_code_someone":"Give this code, someone who wants to join the group",
+    "switch_group":"Switch group",
+    "profile":"Profile",
+    "settings":"Settings",
+    "logout":"Logout"
 }

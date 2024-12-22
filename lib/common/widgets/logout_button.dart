@@ -2,6 +2,7 @@ import 'package:bill_share/auth/application/cubit/auth_cubit.dart';
 import 'package:bill_share/auth/domain/i_auth_repository.dart';
 import 'package:bill_share/auth/domain/injectable_user.dart';
 import 'package:bill_share/di.dart';
+import 'package:bill_share/l10n/l10n.dart';
 import 'package:bill_share/local_storage/domain/i_local_storage_repository.dart';
 import 'package:bill_share/navigation/app_router.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class LogoutButton extends StatelessWidget {
           onTap: () {
             context.read<AuthCubit>().logOut();
           },
-          title: Text('Logout'),
+          title: Text(T(context).logout),
           trailing: Icon(Icons.logout),
         ),
       ),

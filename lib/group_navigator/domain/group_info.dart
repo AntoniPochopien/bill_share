@@ -9,5 +9,6 @@ class GroupInfo with _$GroupInfo {
     required String name,
     required String accessCode,
     required bool locked,
+    String? imageUrl,
   }) = _GroupInfo;
 }

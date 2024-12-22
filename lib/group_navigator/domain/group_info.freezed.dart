@@ -20,6 +20,7 @@ mixin _$GroupInfo {
   String get name => throw _privateConstructorUsedError;
   String get accessCode => throw _privateConstructorUsedError;
   bool get locked => throw _privateConstructorUsedError;
+  String? get imageUrl => throw _privateConstructorUsedError;
 
   /// Create a copy of GroupInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -33,7 +34,8 @@ abstract class $GroupInfoCopyWith<$Res> {
   factory $GroupInfoCopyWith(GroupInfo value, $Res Function(GroupInfo) then) =
       _$GroupInfoCopyWithImpl<$Res, GroupInfo>;
   @useResult
-  $Res call({int id, String name, String accessCode, bool locked});
+  $Res call(
+      {int id, String name, String accessCode, bool locked, String? imageUrl});
 }
 
 /// @nodoc
@@ -55,6 +57,7 @@ class _$GroupInfoCopyWithImpl<$Res, $Val extends GroupInfo>
     Object? name = null,
     Object? accessCode = null,
     Object? locked = null,
+    Object? imageUrl = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -73,6 +76,10 @@ class _$GroupInfoCopyWithImpl<$Res, $Val extends GroupInfo>
           ? _value.locked
           : locked // ignore: cast_nullable_to_non_nullable
               as bool,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -85,7 +92,8 @@ abstract class _$$GroupInfoImplCopyWith<$Res>
       __$$GroupInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name, String accessCode, bool locked});
+  $Res call(
+      {int id, String name, String accessCode, bool locked, String? imageUrl});
 }
 
 /// @nodoc
@@ -105,6 +113,7 @@ class __$$GroupInfoImplCopyWithImpl<$Res>
     Object? name = null,
     Object? accessCode = null,
     Object? locked = null,
+    Object? imageUrl = freezed,
   }) {
     return _then(_$GroupInfoImpl(
       id: null == id
@@ -123,6 +132,10 @@ class __$$GroupInfoImplCopyWithImpl<$Res>
           ? _value.locked
           : locked // ignore: cast_nullable_to_non_nullable
               as bool,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -134,7 +147,8 @@ class _$GroupInfoImpl implements _GroupInfo {
       {required this.id,
       required this.name,
       required this.accessCode,
-      required this.locked});
+      required this.locked,
+      this.imageUrl});
 
   @override
   final int id;
@@ -144,10 +158,12 @@ class _$GroupInfoImpl implements _GroupInfo {
   final String accessCode;
   @override
   final bool locked;
+  @override
+  final String? imageUrl;
 
   @override
   String toString() {
-    return 'GroupInfo(id: $id, name: $name, accessCode: $accessCode, locked: $locked)';
+    return 'GroupInfo(id: $id, name: $name, accessCode: $accessCode, locked: $locked, imageUrl: $imageUrl)';
   }
 
   @override
@@ -159,11 +175,14 @@ class _$GroupInfoImpl implements _GroupInfo {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.accessCode, accessCode) ||
                 other.accessCode == accessCode) &&
-            (identical(other.locked, locked) || other.locked == locked));
+            (identical(other.locked, locked) || other.locked == locked) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, accessCode, locked);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, accessCode, locked, imageUrl);
 
   /// Create a copy of GroupInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -179,7 +198,8 @@ abstract class _GroupInfo implements GroupInfo {
       {required final int id,
       required final String name,
       required final String accessCode,
-      required final bool locked}) = _$GroupInfoImpl;
+      required final bool locked,
+      final String? imageUrl}) = _$GroupInfoImpl;
 
   @override
   int get id;
@@ -189,6 +209,8 @@ abstract class _GroupInfo implements GroupInfo {
   String get accessCode;
   @override
   bool get locked;
+  @override
+  String? get imageUrl;
 
   /// Create a copy of GroupInfo
   /// with the given fields replaced by the non-null parameter values.

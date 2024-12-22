@@ -53,5 +53,11 @@
   "clear": "Wyczyść",
   "select_payer": "Wybierz osobę płacącą",
   "select_debtors": "Wybierz dłużników",
-  "members":"Członkowie"
+  "members":"Członkowie",
+  "access_code":"Kod dostępu",
+  "give_this_code_someone":"Podaj ten kod osobie chcącej dołączyć do grupy",
+   "switch_group":"Zmień grupę",
+    "profile":"Profil",
+    "settings":"Ustawienia",
+    "logout":"Wyloguj się"
 }

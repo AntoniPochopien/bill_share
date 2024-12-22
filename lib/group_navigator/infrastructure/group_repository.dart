@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:bill_share/common/domain/failure.dart';
 import 'package:bill_share/common/utils/helpers.dart';
@@ -9,6 +10,7 @@ import 'package:bill_share/group_navigator/domain/group_info.dart';
 import 'package:bill_share/group_navigator/domain/group_member.dart';
 import 'package:bill_share/group_navigator/domain/i_group_repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class GroupRepository implements IGroupRepository {
@@ -188,6 +190,25 @@ class GroupRepository implements IGroupRepository {
       return right(value);
     } catch (e) {
       log('toogleLock unexpected error: $e');
+      return left(Failure.unexpected());
+    }
+  }
+
+  @override
+  Future<Either<Failure, String?>> selectGroupImage(int groupId) async {
+    try {
+      final ImagePicker picker = ImagePicker();
+      final image =
+          await picker.pickImage(source: ImageSource.gallery, imageQuality: 30);
+      if (image != null) {
+        final url = await _supabase.storage
+            .from('groups_avatars')
+            .upload('$groupId', File(image.path));
+        return right(url);
+      }
+      return right(null);
+    } catch (e) {
+      log('updateGroupImage unexpected error: $e');
       return left(Failure.unexpected());
     }
   }
