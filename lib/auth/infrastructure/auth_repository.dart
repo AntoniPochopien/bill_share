@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:bill_share/auth/domain/i_auth_repository.dart';
 import 'package:bill_share/common/domain/failure.dart';
@@ -22,7 +23,9 @@ class AuthRepository implements IAuthRepository {
       ];
 
       final googleSignIn = GoogleSignIn(
-        clientId: Secrets.googleClientId,
+        clientId: Platform.isAndroid
+            ? Secrets.googleClientIdAndroid
+            : Secrets.googleClientIdIos,
         serverClientId: Secrets.googleServerClientId,
         scopes: googleSignInScopes,
       );
