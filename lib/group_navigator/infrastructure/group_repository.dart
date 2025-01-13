@@ -66,11 +66,11 @@ class GroupRepository implements IGroupRepository {
 
       final user = _supabase.auth.currentUser!;
 
-      final groupMembersRequest = requestes[0];
-      final groupExpensesRequest = requestes[1];
+      final groupMembersResponse = requestes[0];
+      final groupExpensesResponse = requestes[1];
 
       //TODO fix freezed json serializer for that case
-      final members = groupMembersRequest.map((e) {
+      final members = groupMembersResponse.map((e) {
         final flattenJson = {
           'is_admin': e['is_admin'],
           'id': e['profiles']['id'],
@@ -79,10 +79,19 @@ class GroupRepository implements IGroupRepository {
         return GroupMember.fromJson(flattenJson);
       }).toList();
 
+      if (groupExpensesResponse.isEmpty) {
+        return right(DashboardData(
+            toPay: 0,
+            toRecive: 0,
+            membersWithBalance: members
+                .map((e) => MemberWithBalance(groupMember: e, value: 0))
+                .toList()));
+      }
+
       final Map<String, double> debtors = {};
       final Map<String, double> owningTo = {};
 
-      for (var expense in groupExpensesRequest) {
+      for (var expense in groupExpensesResponse) {
         final share = expense['share'];
         final beneficiaryId = expense['beneficiary_id'];
         final expenses = expense['expenses'];
