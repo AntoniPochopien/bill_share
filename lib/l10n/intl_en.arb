@@ -64,5 +64,8 @@
     "change_group_name_description": "You can change group name anytime",
     "update": "Update",
     "cancel": "Cancel",
-    "total": "Total"
+    "total": "Total",
+    "settings":"Settings",
+    "language":"Language",
+    "choose_language":"Choose language"
 }

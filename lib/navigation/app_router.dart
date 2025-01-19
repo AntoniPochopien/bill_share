@@ -8,6 +8,7 @@ import 'package:bill_share/group_members_screen/presentation/group_members_scree
 import 'package:bill_share/group_navigator/domain/group_member.dart';
 import 'package:bill_share/group_navigator/presentation/group_navigator_screen.dart';
 import 'package:bill_share/home/presentation/home_screen.dart';
+import 'package:bill_share/settings/presentation/settings_screen.dart';
 import 'package:flutter/material.dart';
 
 part 'app_router.gr.dart';
@@ -20,6 +21,7 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: AuthRoute.page),
         AutoRoute(page: HomeRoute.page),
         AutoRoute(page: ExpenseCreatorRoute.page),
+        AutoRoute(page: SettingsRoute.page),
         AutoRoute(page: GroupNavigatorRoute.page, children: [
           AutoRoute(page: GroupMembersRoute.page),
           AutoRoute(page: GroupDashboardRoute.page, initial: true),

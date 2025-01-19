@@ -106,7 +106,7 @@ class DashboardDrawer extends StatelessWidget {
                   color: AppColors.grey,
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () => context.pushRoute(SettingsRoute()),
                   title: Text(T(context).settings),
                   trailing: Icon(Icons.settings),
                 ),

@@ -17,7 +17,7 @@ class L10n {
         GlobalCupertinoLocalizations.delegate,
       ];
 
-  static String getNativeLangName(String langCode) {
+  static String getNativeLangName(String? langCode) {
     switch (langCode) {
       case 'en':
         return 'English';
