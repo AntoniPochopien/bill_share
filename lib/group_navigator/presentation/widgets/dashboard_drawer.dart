@@ -1,12 +1,15 @@
+import 'package:bill_share/auth/domain/injectable_user.dart';
 import 'package:bill_share/common/utils/image_url_generator.dart';
 import 'package:bill_share/common/widgets/logout_button.dart';
 import 'package:bill_share/common/widgets/profile_image.dart';
 import 'package:bill_share/constants/app_colors.dart';
 import 'package:bill_share/constants/font.dart';
+import 'package:bill_share/di.dart';
 import 'package:bill_share/group_navigator/application/cubit/group_cubit.dart';
-import 'package:bill_share/group_navigator/domain/group_info.dart';
+import 'package:bill_share/group_navigator/domain/group_data.dart';
 import 'package:bill_share/group_navigator/presentation/widgets/access_code_widget/access_code_widget.dart';
-import 'package:bill_share/group_navigator/presentation/widgets/change_group_name_dialog.dart';
+import 'package:bill_share/group_navigator/presentation/dialogs/change_group_name_dialog.dart';
+import 'package:bill_share/home/presentation/widgets/dialogs/update_profile_dialog.dart';
 import 'package:bill_share/l10n/l10n.dart';
 import 'package:bill_share/navigation/app_router.dart';
 import 'package:flutter/material.dart';
@@ -15,15 +18,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DashboardDrawer extends StatelessWidget {
   final bool isAdmin;
-  final GroupInfo groupInfo;
+  final GroupData groupData;
   const DashboardDrawer({
     super.key,
     required this.isAdmin,
-    required this.groupInfo,
+    required this.groupData,
   });
 
   @override
   Widget build(BuildContext context) {
+    final groupInfo = groupData.groupInfo;
     return Drawer(
       child: SafeArea(
         child: Column(
@@ -43,20 +47,21 @@ class DashboardDrawer extends StatelessWidget {
                         textAlign: TextAlign.end,
                       ),
                     ),
-                    Positioned.fill(
-                        child: Material(
-                      color: AppColors.transparent,
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(8),
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (ctx) => ChangeGroupNameDialog(
-                                    groupCubit: context.read<GroupCubit>(),
-                                  ));
-                        },
-                      ),
-                    )),
+                    if (isAdmin)
+                      Positioned.fill(
+                          child: Material(
+                        color: AppColors.transparent,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(8),
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (ctx) => ChangeGroupNameDialog(
+                                      groupCubit: context.read<GroupCubit>(),
+                                    ));
+                          },
+                        ),
+                      )),
                   ])),
                   SizedBox(width: 20),
                   ProfileImage(
@@ -84,7 +89,14 @@ class DashboardDrawer extends StatelessWidget {
                   color: AppColors.grey,
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () => showDialog(
+                      context: context,
+                      builder: (ctx) => UpdateProfileDialog(
+                          onUpdate: (newUsername, newImage) async => context
+                              .read<GroupCubit>()
+                              .updateUserProfile(
+                                  newUsername: newUsername, newImage: newImage),
+                          user: getIt<InjectableUser>().currentUser)),
                   title: Text(T(context).profile),
                   trailing: Icon(Icons.person),
                 ),

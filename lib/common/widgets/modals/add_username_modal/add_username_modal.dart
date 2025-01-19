@@ -1,4 +1,4 @@
-import 'package:bill_share/auth/domain/i_auth_repository.dart';
+import 'package:bill_share/auth/domain/i_user_repository.dart';
 import 'package:bill_share/common/utils/validators.dart';
 import 'package:bill_share/common/widgets/billshare_text_field.dart';
 import 'package:bill_share/common/widgets/button.dart';
@@ -25,7 +25,7 @@ class _AddUsernameModalState extends State<AddUsernameModal> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          UsernameCubit(iAuthRepository: getIt<IAuthRepository>()),
+          UsernameCubit(iUserRepository: getIt<IUserRepository>()),
       child: BlocConsumer<UsernameCubit, UsernameState>(
         listener: (context, state) {
           state.whenOrNull(added: () => context.maybePop());

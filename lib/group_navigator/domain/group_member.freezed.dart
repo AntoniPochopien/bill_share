@@ -22,6 +22,8 @@ GroupMember _$GroupMemberFromJson(Map<String, dynamic> json) {
 mixin _$GroupMember {
   String get id => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
+  @JsonKey(name: 'image_url')
+  String? get imageUrl => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_admin')
   bool get isAdmin => throw _privateConstructorUsedError;
 
@@ -42,7 +44,10 @@ abstract class $GroupMemberCopyWith<$Res> {
       _$GroupMemberCopyWithImpl<$Res, GroupMember>;
   @useResult
   $Res call(
-      {String id, String username, @JsonKey(name: 'is_admin') bool isAdmin});
+      {String id,
+      String username,
+      @JsonKey(name: 'image_url') String? imageUrl,
+      @JsonKey(name: 'is_admin') bool isAdmin});
 }
 
 /// @nodoc
@@ -62,6 +67,7 @@ class _$GroupMemberCopyWithImpl<$Res, $Val extends GroupMember>
   $Res call({
     Object? id = null,
     Object? username = null,
+    Object? imageUrl = freezed,
     Object? isAdmin = null,
   }) {
     return _then(_value.copyWith(
@@ -73,6 +79,10 @@ class _$GroupMemberCopyWithImpl<$Res, $Val extends GroupMember>
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       isAdmin: null == isAdmin
           ? _value.isAdmin
           : isAdmin // ignore: cast_nullable_to_non_nullable
@@ -90,7 +100,10 @@ abstract class _$$GroupMemberImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id, String username, @JsonKey(name: 'is_admin') bool isAdmin});
+      {String id,
+      String username,
+      @JsonKey(name: 'image_url') String? imageUrl,
+      @JsonKey(name: 'is_admin') bool isAdmin});
 }
 
 /// @nodoc
@@ -108,6 +121,7 @@ class __$$GroupMemberImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? username = null,
+    Object? imageUrl = freezed,
     Object? isAdmin = null,
   }) {
     return _then(_$GroupMemberImpl(
@@ -119,6 +133,10 @@ class __$$GroupMemberImplCopyWithImpl<$Res>
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       isAdmin: null == isAdmin
           ? _value.isAdmin
           : isAdmin // ignore: cast_nullable_to_non_nullable
@@ -133,7 +151,8 @@ class _$GroupMemberImpl extends _GroupMember {
   const _$GroupMemberImpl(
       {required this.id,
       required this.username,
-      @JsonKey(name: 'is_admin') required this.isAdmin})
+      @JsonKey(name: 'image_url') required this.imageUrl,
+      @JsonKey(name: 'is_admin') this.isAdmin = false})
       : super._();
 
   factory _$GroupMemberImpl.fromJson(Map<String, dynamic> json) =>
@@ -144,12 +163,15 @@ class _$GroupMemberImpl extends _GroupMember {
   @override
   final String username;
   @override
+  @JsonKey(name: 'image_url')
+  final String? imageUrl;
+  @override
   @JsonKey(name: 'is_admin')
   final bool isAdmin;
 
   @override
   String toString() {
-    return 'GroupMember(id: $id, username: $username, isAdmin: $isAdmin)';
+    return 'GroupMember(id: $id, username: $username, imageUrl: $imageUrl, isAdmin: $isAdmin)';
   }
 
   @override
@@ -160,12 +182,14 @@ class _$GroupMemberImpl extends _GroupMember {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.username, username) ||
                 other.username == username) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl) &&
             (identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, username, isAdmin);
+  int get hashCode => Object.hash(runtimeType, id, username, imageUrl, isAdmin);
 
   /// Create a copy of GroupMember
   /// with the given fields replaced by the non-null parameter values.
@@ -185,10 +209,10 @@ class _$GroupMemberImpl extends _GroupMember {
 
 abstract class _GroupMember extends GroupMember {
   const factory _GroupMember(
-          {required final String id,
-          required final String username,
-          @JsonKey(name: 'is_admin') required final bool isAdmin}) =
-      _$GroupMemberImpl;
+      {required final String id,
+      required final String username,
+      @JsonKey(name: 'image_url') required final String? imageUrl,
+      @JsonKey(name: 'is_admin') final bool isAdmin}) = _$GroupMemberImpl;
   const _GroupMember._() : super._();
 
   factory _GroupMember.fromJson(Map<String, dynamic> json) =
@@ -198,6 +222,9 @@ abstract class _GroupMember extends GroupMember {
   String get id;
   @override
   String get username;
+  @override
+  @JsonKey(name: 'image_url')
+  String? get imageUrl;
   @override
   @JsonKey(name: 'is_admin')
   bool get isAdmin;

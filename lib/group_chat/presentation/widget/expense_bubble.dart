@@ -1,10 +1,12 @@
 import 'package:bill_share/auth/domain/injectable_user.dart';
 import 'package:bill_share/common/utils/helpers.dart';
+import 'package:bill_share/common/utils/image_url_generator.dart';
 import 'package:bill_share/common/widgets/profile_image.dart';
 import 'package:bill_share/constants/app_colors.dart';
 import 'package:bill_share/constants/font.dart';
 import 'package:bill_share/di.dart';
 import 'package:bill_share/group_navigator/domain/expenses/expense.dart';
+import 'package:bill_share/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class ExpenseBubble extends StatelessWidget {
@@ -24,7 +26,7 @@ class ExpenseBubble extends StatelessWidget {
     if (beneficiariesContainsUser) {
       return AppColors.errorRed;
     } else {
-      return AppColors.black.withOpacity(0.25);
+      return AppColors.black.withValues(alpha: 0.25);
     }
   }
 
@@ -37,6 +39,8 @@ class ExpenseBubble extends StatelessWidget {
             ? Row(children: [
                 ProfileImage(
                   size: 47,
+                  imageUrl: ImageUrlGenerator.generatePublicImageUrl(
+                      expense.creator.imageUrl),
                 ),
                 SizedBox(width: 11),
               ])
@@ -65,7 +69,7 @@ class ExpenseBubble extends StatelessWidget {
                           style: Font.h1BrightkSemiBold,
                         ),
                         Text(
-                          'Total:',
+                          '${T(context).total}:',
                           style: Font.h4Bright,
                         ),
                         Text(
@@ -93,6 +97,8 @@ class ExpenseBubble extends StatelessWidget {
                 SizedBox(width: 11),
                 ProfileImage(
                   size: 47,
+                  imageUrl: ImageUrlGenerator.generatePublicImageUrl(
+                      expense.creator.imageUrl),
                 ),
               ])
             : SizedBox(width: 47),

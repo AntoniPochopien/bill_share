@@ -86,11 +86,11 @@ class ExpensesRepository implements IExpensesRepository {
     final responses = await Future.wait([
       _supabase
           .from('expense_beneficiaries')
-          .select('profiles(id, username), share')
+          .select('profiles(id, username, image_url), share')
           .eq('expense_id', expenseId),
       _supabase.from('expenses').select('''
-              creator:profiles!expenses_creator_id_fkey(id, username),
-              payer:profiles!expenses_payer_id_fkey(id, username)
+              creator:profiles!expenses_creator_id_fkey(id, username, image_url),
+              payer:profiles!expenses_payer_id_fkey(id, username, image_url)
               ''').eq('id', expenseId)
     ]);
     final beneficiariesResponse = responses[0];
@@ -99,24 +99,15 @@ class ExpensesRepository implements IExpensesRepository {
     final expenseBeneficiaries = beneficiariesResponse.map((e) {
       final profiles = e['profiles'];
       return ExpenseBeneficiaries(
-          beneficiary: GroupMember(
-              id: profiles['id'],
-              username: profiles['username'],
-              isAdmin: false),
+          beneficiary: GroupMember.fromJson(profiles),
           share: e['share'].toDouble());
     }).toList();
 
     final expense = expenseResponse[0];
     final payerProfile = expense['payer'];
-    final payer = GroupMember(
-        id: payerProfile['id'],
-        username: payerProfile['username'],
-        isAdmin: false);
+    final payer = GroupMember.fromJson(payerProfile);
     final creatorProfile = expense['creator'];
-    final creator = GroupMember(
-        id: creatorProfile['id'],
-        username: creatorProfile['username'],
-        isAdmin: false);
+    final creator = GroupMember.fromJson(creatorProfile);
 
     final newExpense = Expense(
       id: expenseId,
@@ -144,8 +135,8 @@ class ExpensesRepository implements IExpensesRepository {
               amount, 
               created_at, 
               title, 
-              creator:profiles!expenses_creator_id_fkey(id, username), 
-              payer:profiles!expenses_payer_id_fkey(id, username)
+              creator:profiles!expenses_creator_id_fkey(id, username, image_url), 
+              payer:profiles!expenses_payer_id_fkey(id, username, image_url)
               ''')
           .eq('group_id', groupId)
           .order('created_at', ascending: false)
@@ -154,27 +145,19 @@ class ExpensesRepository implements IExpensesRepository {
       final expenses = await Future.wait(expenseResponse.map((e) async {
         final beneficiariesResponse = await _supabase
             .from('expense_beneficiaries')
-            .select('profiles(id, username), share')
+            .select('profiles(id, username, image_url), share')
             .eq('expense_id', e['id']);
 
         final payerData = e['payer'];
-        final payer = GroupMember(
-            id: payerData['id'],
-            username: payerData['username'],
-            isAdmin: false);
+        final payer = GroupMember.fromJson(payerData);
+
         final creatorData = e['creator'];
-        final creator = GroupMember(
-            id: creatorData['id'],
-            username: creatorData['username'],
-            isAdmin: false);
+        final creator = GroupMember.fromJson(creatorData);
 
         final beneficiaries = beneficiariesResponse.map((element) {
           final profiles = element['profiles'];
           return ExpenseBeneficiaries(
-              beneficiary: GroupMember(
-                  id: profiles['id'],
-                  username: profiles['username'],
-                  isAdmin: false),
+              beneficiary: GroupMember.fromJson(profiles),
               share: element['share'].toDouble());
         }).toList();
         return Expense(

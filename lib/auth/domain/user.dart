@@ -7,5 +7,6 @@ class User with _$User {
   const factory User({
     required String id,
     String? username,
+    String? imageUrl,
   }) = _User;
 }

@@ -38,7 +38,7 @@ class _GroupNavPageState extends State<GroupNavPage> {
                   data: (groupData) => BillshareScaffold(
                         scaffoldKey: _scaffoldKey,
                         endDrawer: DashboardDrawer(
-                          groupInfo: groupData.groupInfo,
+                          groupData: groupData,
                           isAdmin: groupData.members.any(
                             (element) =>
                                 element.id ==

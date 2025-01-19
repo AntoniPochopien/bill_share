@@ -1,5 +1,6 @@
 import 'package:bill_share/auth/application/cubit/auth_cubit.dart';
 import 'package:bill_share/auth/domain/i_auth_repository.dart';
+import 'package:bill_share/auth/domain/i_user_repository.dart';
 import 'package:bill_share/auth/domain/injectable_user.dart';
 import 'package:bill_share/di.dart';
 import 'package:bill_share/l10n/l10n.dart';
@@ -16,6 +17,7 @@ class LogoutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AuthCubit(
+        iUserRepository: getIt<IUserRepository>(),
         iAuthRepository: getIt<IAuthRepository>(),
         injectableUser: getIt<InjectableUser>(),
         iLocalStorageRepository: getIt<ILocalStorageRepository>(),

@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:bill_share/constants/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileImage extends StatelessWidget {
   final String? imageUrl;
+  final XFile? imageFile;
   final double? size;
   final double? iconSize;
   final Color? backgroundColor;
@@ -10,11 +14,38 @@ class ProfileImage extends StatelessWidget {
   const ProfileImage({
     super.key,
     this.imageUrl,
+    this.imageFile,
     this.size,
     this.iconSize,
     this.backgroundColor,
     this.onTap,
   });
+
+  Widget _buildImage() {
+    if (imageFile != null) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: Image.file(
+          File(imageFile!.path),
+          fit: BoxFit.cover,
+        ),
+      );
+    } else if (imageUrl != null) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: Image.network(
+          imageUrl!,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return Icon(
+        Icons.question_mark,
+        size: iconSize,
+        color: AppColors.white,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +57,7 @@ class ProfileImage extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           color: backgroundColor ?? AppColors.lightBlue,
         ),
-        child: imageUrl == null
-            ? Icon(Icons.question_mark, size: iconSize, color: AppColors.white)
-            : ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  imageUrl!,
-                  fit: BoxFit.cover,
-                ),
-              ),
+        child: _buildImage(),
       ),
       Positioned.fill(
           child: Material(

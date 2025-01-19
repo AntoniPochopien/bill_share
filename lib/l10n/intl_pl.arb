@@ -63,5 +63,6 @@
   "update_group_name": "Zaktualizuj nazwę grupy",
   "change_group_name_description": "Możesz zmienić nazwę grupy w dowolnym momencie",
   "update": "Aktualizuj",
-  "cancel": "Anuluj"
+  "cancel": "Anuluj",
+  "total":"Suma"
 }

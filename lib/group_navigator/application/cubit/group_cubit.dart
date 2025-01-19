@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:bill_share/auth/domain/i_user_repository.dart';
 import 'package:bill_share/auth/domain/injectable_user.dart';
 import 'package:bill_share/common/domain/failure.dart';
 import 'package:bill_share/expense_creator/domain/i_expenses_repository.dart';
@@ -15,6 +16,7 @@ import 'package:bill_share/local_storage/domain/i_local_storage_repository.dart'
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:image_picker/image_picker.dart';
 
 part 'group_state.dart';
 part 'group_cubit.freezed.dart';
@@ -24,11 +26,13 @@ class GroupCubit extends Cubit<GroupState> {
   final IGroupRepository iGroupRepository;
   final IExpensesRepository iExpensesRepository;
   final InjectableUser injectableUser;
+  final IUserRepository iUserRepository;
   GroupCubit({
     required this.iLocalStorageRepository,
     required this.iGroupRepository,
     required this.iExpensesRepository,
     required this.injectableUser,
+    required this.iUserRepository,
   }) : super(GroupState.initial());
 
   StreamSubscription<ExpenseEvent>? _expensesSubscription;
@@ -168,6 +172,18 @@ class GroupCubit extends Cubit<GroupState> {
                     s.groupData.groupInfo.copyWith(name: newGroupName))));
       });
     }
+  }
+
+  Future<void> updateUserProfile({
+    required String newUsername,
+    required XFile? newImage,
+  }) async {
+    final result = await iUserRepository.updateUserProfile(
+      id: injectableUser.currentUser.id,
+      newUsername: newUsername,
+      newProfileImage: newImage,
+    );
+    result.fold((l) => emit(GroupState.error(l)), (r) {});
   }
 
   @override

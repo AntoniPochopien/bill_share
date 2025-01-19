@@ -9,7 +9,8 @@ class GroupMember with _$GroupMember {
   const factory GroupMember({
     required String id,
     required String username,
-    @JsonKey(name: 'is_admin') required bool isAdmin,
+    @JsonKey(name: 'image_url') required String? imageUrl,
+    @JsonKey(name: 'is_admin') @Default(false) bool isAdmin,
   }) = _GroupMember;
 
   factory GroupMember.fromJson(Map<String, dynamic> json) =>

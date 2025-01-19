@@ -22,7 +22,7 @@ class GroupRepository implements IGroupRepository {
     try {
       final response = await _supabase
           .from('groups_profiles')
-          .select('profiles(id, username), is_admin')
+          .select('profiles(id, username, image_url), is_admin')
           .eq('group_id', groupId);
       //TODO fix freezed json serializer for that case
       final members = response.map((e) {
@@ -30,6 +30,7 @@ class GroupRepository implements IGroupRepository {
           'is_admin': e['is_admin'],
           'id': e['profiles']['id'],
           'username': e['profiles']['username'],
+          'image_url': e['profiles']['image_url'],
         };
         return GroupMember.fromJson(flattenJson);
       }).toList();

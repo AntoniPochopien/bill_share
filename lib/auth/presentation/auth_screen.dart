@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bill_share/auth/application/cubit/auth_cubit.dart';
 import 'package:bill_share/auth/domain/i_auth_repository.dart';
+import 'package:bill_share/auth/domain/i_user_repository.dart';
 import 'package:bill_share/auth/domain/injectable_user.dart';
 import 'package:bill_share/auth/presentation/widgets/expand_and_fade/expand_and_fade_controller.dart';
 import 'package:bill_share/auth/presentation/widgets/expand_and_fade/expand_and_fade_widget.dart';
@@ -79,6 +80,7 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AuthCubit(
+        iUserRepository: getIt<IUserRepository>(),
         iAuthRepository: getIt<IAuthRepository>(),
         injectableUser: getIt<InjectableUser>(),
         iLocalStorageRepository: getIt<ILocalStorageRepository>()

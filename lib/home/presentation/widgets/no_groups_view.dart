@@ -32,10 +32,10 @@ class NoGroupsView extends StatelessWidget {
     );
 
     final disabledPinTheme = defaultPinTheme.copyWith(
-      textStyle:
-          Font.h4Grey.copyWith(color: Font.h4Grey.color!.withOpacity(0.4)),
+      textStyle: Font.h4Grey
+          .copyWith(color: Font.h4Grey.color!.withValues(alpha: 0.4)),
       decoration: baseDecoration.copyWith(
-          border: Border.all(color: AppColors.grey.withOpacity(0.4))),
+          border: Border.all(color: AppColors.grey.withValues(alpha: 0.4))),
     );
 
     return Center(
@@ -59,8 +59,9 @@ class NoGroupsView extends StatelessWidget {
                 disabledPinTheme: disabledPinTheme,
                 textCapitalization: TextCapitalization.characters,
                 keyboardType: TextInputType.text,
-                onCompleted: (value) =>
-                    context.read<JoinGroupCubit>().joinGroup(value.toUpperCase()),
+                onCompleted: (value) => context
+                    .read<JoinGroupCubit>()
+                    .joinGroup(value.toUpperCase()),
               ),
             ),
             Padding(

@@ -63,5 +63,6 @@
     "update_group_name": "Update group name",
     "change_group_name_description": "You can change group name anytime",
     "update": "Update",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "total": "Total"
 }

@@ -1,6 +1,8 @@
 import 'package:bill_share/auth/domain/i_auth_repository.dart';
+import 'package:bill_share/auth/domain/i_user_repository.dart';
 import 'package:bill_share/auth/domain/injectable_user.dart';
 import 'package:bill_share/auth/infrastructure/auth_repository.dart';
+import 'package:bill_share/auth/infrastructure/user_repository.dart';
 import 'package:bill_share/expense_creator/domain/i_expenses_repository.dart';
 import 'package:bill_share/expense_creator/infrastructure/expenses_repository.dart';
 import 'package:bill_share/group_navigator/domain/i_group_repository.dart';
@@ -23,4 +25,5 @@ void diInit() {
   getIt.registerLazySingleton<IGroupsRepository>(() => GroupsRepository());
   getIt.registerLazySingleton<IGroupRepository>(() => GroupRepository());
   getIt.registerLazySingleton<IExpensesRepository>(() => ExpensesRepository());
+  getIt.registerLazySingleton<IUserRepository>(() => UserRepository());
 }

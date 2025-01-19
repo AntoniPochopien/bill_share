@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bill_share/auth/domain/i_user_repository.dart';
 import 'package:bill_share/auth/domain/injectable_user.dart';
 import 'package:bill_share/common/screens/error_screen.dart';
 import 'package:bill_share/common/screens/loading_screen.dart';
@@ -25,6 +26,7 @@ class GroupNavigatorScreen extends StatelessWidget {
               iLocalStorageRepository: getIt<ILocalStorageRepository>(),
               iExpensesRepository: getIt<IExpensesRepository>(),
               injectableUser: getIt<InjectableUser>(),
+              iUserRepository: getIt<IUserRepository>(),
             )..init(groupId),
         child: BlocConsumer<GroupCubit, GroupState>(
             listener: (context, state) {

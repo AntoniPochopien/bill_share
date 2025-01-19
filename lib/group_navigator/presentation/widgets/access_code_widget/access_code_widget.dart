@@ -41,7 +41,7 @@ class _AccessCodeWidgetState extends State<AccessCodeWidget> {
             blurColor: AppColors.background,
             child: Container(
               decoration: BoxDecoration(
-                color: AppColors.grey.withOpacity(0.3),
+                color: AppColors.grey.withValues(alpha: 0.3),
                 borderRadius: BorderRadius.circular(8),
               ),
               width: double.infinity,

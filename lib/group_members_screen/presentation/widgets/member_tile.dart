@@ -1,3 +1,4 @@
+import 'package:bill_share/common/utils/image_url_generator.dart';
 import 'package:bill_share/common/widgets/profile_image.dart';
 import 'package:bill_share/constants/app_colors.dart';
 import 'package:bill_share/constants/assets.dart';
@@ -15,7 +16,11 @@ class MemberTile extends StatelessWidget {
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(children: [
-          ProfileImage(size: 47),
+          ProfileImage(
+            size: 47,
+            imageUrl:
+                ImageUrlGenerator.generatePublicImageUrl(groupMember.imageUrl),
+          ),
           SizedBox(width: 16),
           Text(groupMember.username),
           SizedBox(width: 8),

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bill_share/auth/application/cubit/auth_cubit.dart';
 import 'package:bill_share/auth/domain/i_auth_repository.dart';
+import 'package:bill_share/auth/domain/i_user_repository.dart';
 import 'package:bill_share/auth/domain/injectable_user.dart';
 import 'package:bill_share/common/screens/loading_screen.dart';
 import 'package:bill_share/common/widgets/app_bars/app_bar_with_settings.dart';
@@ -28,6 +29,7 @@ class HomeScreen extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (context) => AuthCubit(
+                iUserRepository: getIt<IUserRepository>(),
                 iAuthRepository: getIt<IAuthRepository>(),
                 injectableUser: getIt<InjectableUser>(),
                 iLocalStorageRepository: getIt<ILocalStorageRepository>())

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bill_share/auth/domain/i_auth_repository.dart';
+import 'package:bill_share/auth/domain/i_user_repository.dart';
 import 'package:bill_share/auth/domain/injectable_user.dart';
 import 'package:bill_share/auth/infrastructure/user_to_domain.dart';
 import 'package:bill_share/common/domain/failure.dart';
@@ -18,7 +19,9 @@ class AuthCubit extends Cubit<AuthState> {
   final IAuthRepository iAuthRepository;
   final InjectableUser injectableUser;
   final ILocalStorageRepository iLocalStorageRepository;
+  final IUserRepository iUserRepository;
   AuthCubit({
+    required this.iUserRepository,
     required this.iAuthRepository,
     required this.injectableUser,
     required this.iLocalStorageRepository,
@@ -30,11 +33,11 @@ class AuthCubit extends Cubit<AuthState> {
       final session = data.session;
       if (session?.user != null) {
         log('user authenticated');
-        final username = await iAuthRepository.getUsername(session!.user.id);
-        username.fold(
+        final userData = await iUserRepository.getUserData(session!.user.id);
+        userData.fold(
           (l) => emit(AuthState.error(l)),
-          (r) {
-            final user = session.user.toDomain(r);
+          (userData) {
+            final user = session.user.toDomain(userData);
             injectableUser.setUser(user);
             emit(AuthState.authenticated(user));
           },
