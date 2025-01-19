@@ -56,8 +56,12 @@
   "members":"Członkowie",
   "access_code":"Kod dostępu",
   "give_this_code_someone":"Podaj ten kod osobie chcącej dołączyć do grupy",
-   "switch_group":"Zmień grupę",
-    "profile":"Profil",
-    "settings":"Ustawienia",
-    "logout":"Wyloguj się"
+  "switch_group":"Zmień grupę",
+  "profile":"Profil",
+  "settings":"Ustawienia",
+  "logout":"Wyloguj się",
+  "update_group_name": "Zaktualizuj nazwę grupy",
+  "change_group_name_description": "Możesz zmienić nazwę grupy w dowolnym momencie",
+  "update": "Aktualizuj",
+  "cancel": "Anuluj"
 }

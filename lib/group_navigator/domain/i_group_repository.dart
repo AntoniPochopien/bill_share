@@ -11,4 +11,5 @@ abstract class IGroupRepository {
   Future<Either<Failure, String>> regenerateAccessCode(int groupId);
   Future<Either<Failure, bool>> toogleLock({required bool value, required int groupId});
   Future<Either<Failure, String?>> selectGroupImage(int groupId);
+  Future<Either<Failure, Unit>> updateGroupName({required String newGroupName, required int id});
 }

@@ -6,6 +6,7 @@ import 'package:bill_share/constants/font.dart';
 import 'package:bill_share/group_navigator/application/cubit/group_cubit.dart';
 import 'package:bill_share/group_navigator/domain/group_info.dart';
 import 'package:bill_share/group_navigator/presentation/widgets/access_code_widget/access_code_widget.dart';
+import 'package:bill_share/group_navigator/presentation/widgets/change_group_name_dialog.dart';
 import 'package:bill_share/l10n/l10n.dart';
 import 'package:bill_share/navigation/app_router.dart';
 import 'package:flutter/material.dart';
@@ -33,19 +34,40 @@ class DashboardDrawer extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                   Expanded(
+                      child: Stack(children: [
+                    Align(
+                      alignment: Alignment.centerRight,
                       child: Text(
-                    groupInfo.name,
-                    style: Font.h2DarkSemiBold,
-                    textAlign: TextAlign.end,
-                  )),
+                        groupInfo.name,
+                        style: Font.h2DarkSemiBold,
+                        textAlign: TextAlign.end,
+                      ),
+                    ),
+                    Positioned.fill(
+                        child: Material(
+                      color: AppColors.transparent,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(8),
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (ctx) => ChangeGroupNameDialog(
+                                    groupCubit: context.read<GroupCubit>(),
+                                  ));
+                        },
+                      ),
+                    )),
+                  ])),
                   SizedBox(width: 20),
                   ProfileImage(
                     size: 66,
                     iconSize: 18,
                     backgroundColor: AppColors.green,
-                    imageUrl: ImageUrlGenerator.generateGroupImageUrl(
+                    imageUrl: ImageUrlGenerator.generatePublicImageUrl(
                         groupInfo.imageUrl),
-                    onTap: () => context.read<GroupCubit>().selectGroupImage(),
+                    onTap: isAdmin
+                        ? () => context.read<GroupCubit>().selectGroupImage()
+                        : null,
                   ),
                 ]),
               ),

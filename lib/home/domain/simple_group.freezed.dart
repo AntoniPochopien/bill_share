@@ -20,6 +20,7 @@ mixin _$SimpleGroup {
   String get name => throw _privateConstructorUsedError;
   bool get isAdmin => throw _privateConstructorUsedError;
   int get membersCount => throw _privateConstructorUsedError;
+  String? get imageUrl => throw _privateConstructorUsedError;
 
   /// Create a copy of SimpleGroup
   /// with the given fields replaced by the non-null parameter values.
@@ -34,7 +35,8 @@ abstract class $SimpleGroupCopyWith<$Res> {
           SimpleGroup value, $Res Function(SimpleGroup) then) =
       _$SimpleGroupCopyWithImpl<$Res, SimpleGroup>;
   @useResult
-  $Res call({int id, String name, bool isAdmin, int membersCount});
+  $Res call(
+      {int id, String name, bool isAdmin, int membersCount, String? imageUrl});
 }
 
 /// @nodoc
@@ -56,6 +58,7 @@ class _$SimpleGroupCopyWithImpl<$Res, $Val extends SimpleGroup>
     Object? name = null,
     Object? isAdmin = null,
     Object? membersCount = null,
+    Object? imageUrl = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -74,6 +77,10 @@ class _$SimpleGroupCopyWithImpl<$Res, $Val extends SimpleGroup>
           ? _value.membersCount
           : membersCount // ignore: cast_nullable_to_non_nullable
               as int,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -86,7 +93,8 @@ abstract class _$$SimpleGroupImplCopyWith<$Res>
       __$$SimpleGroupImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name, bool isAdmin, int membersCount});
+  $Res call(
+      {int id, String name, bool isAdmin, int membersCount, String? imageUrl});
 }
 
 /// @nodoc
@@ -106,6 +114,7 @@ class __$$SimpleGroupImplCopyWithImpl<$Res>
     Object? name = null,
     Object? isAdmin = null,
     Object? membersCount = null,
+    Object? imageUrl = freezed,
   }) {
     return _then(_$SimpleGroupImpl(
       id: null == id
@@ -124,6 +133,10 @@ class __$$SimpleGroupImplCopyWithImpl<$Res>
           ? _value.membersCount
           : membersCount // ignore: cast_nullable_to_non_nullable
               as int,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -135,7 +148,8 @@ class _$SimpleGroupImpl extends _SimpleGroup {
       {required this.id,
       required this.name,
       required this.isAdmin,
-      required this.membersCount})
+      required this.membersCount,
+      this.imageUrl})
       : super._();
 
   @override
@@ -146,10 +160,12 @@ class _$SimpleGroupImpl extends _SimpleGroup {
   final bool isAdmin;
   @override
   final int membersCount;
+  @override
+  final String? imageUrl;
 
   @override
   String toString() {
-    return 'SimpleGroup(id: $id, name: $name, isAdmin: $isAdmin, membersCount: $membersCount)';
+    return 'SimpleGroup(id: $id, name: $name, isAdmin: $isAdmin, membersCount: $membersCount, imageUrl: $imageUrl)';
   }
 
   @override
@@ -161,11 +177,14 @@ class _$SimpleGroupImpl extends _SimpleGroup {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin) &&
             (identical(other.membersCount, membersCount) ||
-                other.membersCount == membersCount));
+                other.membersCount == membersCount) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, isAdmin, membersCount);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, isAdmin, membersCount, imageUrl);
 
   /// Create a copy of SimpleGroup
   /// with the given fields replaced by the non-null parameter values.
@@ -181,7 +200,8 @@ abstract class _SimpleGroup extends SimpleGroup {
       {required final int id,
       required final String name,
       required final bool isAdmin,
-      required final int membersCount}) = _$SimpleGroupImpl;
+      required final int membersCount,
+      final String? imageUrl}) = _$SimpleGroupImpl;
   const _SimpleGroup._() : super._();
 
   @override
@@ -192,6 +212,8 @@ abstract class _SimpleGroup extends SimpleGroup {
   bool get isAdmin;
   @override
   int get membersCount;
+  @override
+  String? get imageUrl;
 
   /// Create a copy of SimpleGroup
   /// with the given fields replaced by the non-null parameter values.

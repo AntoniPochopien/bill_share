@@ -146,12 +146,27 @@ class GroupCubit extends Cubit<GroupState> {
       final s = state as _Data;
       final result =
           await iGroupRepository.selectGroupImage(s.groupData.groupInfo.id);
-      result.fold(
-        (l) => emit(GroupState.error(l)),
-        (r) => emit(s.copyWith(
+      result.fold((l) => emit(GroupState.error(l)), (r) {
+        if (r != null) {
+          emit(s.copyWith(
+              groupData: s.groupData.copyWith(
+                  groupInfo: s.groupData.groupInfo.copyWith(imageUrl: r))));
+        }
+      });
+    }
+  }
+
+  Future<void> updateGroupName(String newGroupName) async {
+    if (state is _Data) {
+      final s = state as _Data;
+      final result = await iGroupRepository.updateGroupName(
+          newGroupName: newGroupName, id: s.groupData.groupInfo.id);
+      result.fold((l) => emit(GroupState.error(l)), (r) {
+        emit(s.copyWith(
             groupData: s.groupData.copyWith(
-                groupInfo: s.groupData.groupInfo.copyWith(imageUrl: r)))),
-      );
+                groupInfo:
+                    s.groupData.groupInfo.copyWith(name: newGroupName))));
+      });
     }
   }
 

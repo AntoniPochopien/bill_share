@@ -31,7 +31,7 @@ class GroupAppbar extends StatelessWidget implements PreferredSizeWidget {
                   size: 25,
                   iconSize: 18,
                   backgroundColor: AppColors.green,
-                  imageUrl: ImageUrlGenerator.generateGroupImageUrl(
+                  imageUrl: ImageUrlGenerator.generatePublicImageUrl(
                       groupInfo.imageUrl),
                 ),
                 SizedBox(width: 7),
