@@ -74,11 +74,11 @@ class _GroupNavPageState extends State<GroupNavPage> {
                               ),
                               BottomNavigationBarItem(
                                 icon: Icon(Icons.data_usage_outlined),
-                                label: 'Dashboard',
+                                label: T(context).dashboard,
                               ),
                               BottomNavigationBarItem(
                                 icon: Icon(Icons.chat_bubble),
-                                label: 'Chat',
+                                label: T(context).chat,
                               )
                             ]),
                       )));

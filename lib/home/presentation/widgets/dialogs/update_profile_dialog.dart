@@ -49,9 +49,8 @@ class _UpdateProfileDialogState extends State<UpdateProfileDialog> {
             mainAxisSize: MainAxisSize.min,
             children: [
               TitleWithUnderscore(
-                title: 'Twój profil',
-                description:
-                    'Możesz zaktualizować swoje dane w każdym momencie',
+                title: T(context).your_profile,
+                description: T(context).update_profile_description,
               ),
               Column(
                 children: [

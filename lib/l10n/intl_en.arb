@@ -67,5 +67,12 @@
     "total": "Total",
     "settings":"Settings",
     "language":"Language",
-    "choose_language":"Choose language"
+    "choose_language":"Choose language",
+    "dashboard": "Dashboard",
+    "to_pay": "To pay",
+    "to_receive": "To receive",
+    "who_needs_to_pay_this_back": "Who needs to pay this back?",
+    "chat":"Chat",
+    "your_profile": "Your profile",
+    "update_profile_description": "You can update your information anytime"
 }

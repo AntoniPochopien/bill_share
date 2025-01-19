@@ -5,6 +5,7 @@ import 'package:bill_share/constants/app_colors.dart';
 import 'package:bill_share/group_dashboard/presentation/widget/info_box.dart';
 import 'package:bill_share/group_dashboard/presentation/widget/member_tile_with_balance.dart';
 import 'package:bill_share/group_navigator/application/cubit/group_cubit.dart';
+import 'package:bill_share/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,7 +27,7 @@ class GroupDashboardScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TitleWithUnderscore(
-                        title: 'Dashboard',
+                        title: T(context).dashboard,
                         padding: EdgeInsets.only(bottom: 8),
                       ),
                       SizedBox(height: 20),
@@ -34,13 +35,13 @@ class GroupDashboardScreen extends StatelessWidget {
                         Expanded(
                             child: InfoBox(
                                 gradient: AppColors.blueGradientDark,
-                                title: 'To pay',
+                                title: T(context).to_pay,
                                 value: dashboardData.toPay.abs())),
                         SizedBox(width: 24),
                         Expanded(
                             child: InfoBox(
                                 gradient: AppColors.blueGradientLight,
-                                title: 'To recive',
+                                title: T(context).to_receive,
                                 value: dashboardData.toRecive)),
                       ]),
                       SizedBox(height: 24),
@@ -50,7 +51,7 @@ class GroupDashboardScreen extends StatelessWidget {
                               gradient: total > 0
                                   ? AppColors.greenGradient
                                   : AppColors.redGradient,
-                              title: 'Total',
+                              title: T(context).total,
                               value: total)),
                       SizedBox(height: 20),
                       ...dashboardData.membersWithBalance.map(

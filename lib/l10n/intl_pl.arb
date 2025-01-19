@@ -67,5 +67,12 @@
   "total":"Suma",
   "settings":"Ustawienia",
   "language":"Język",
-  "choose_language":"Wybierz język"
+  "choose_language":"Wybierz język",
+  "dashboard": "Panel główny",
+  "to_pay": "Do zapłaty",
+  "to_receive": "Do otrzymania",
+  "who_needs_to_pay_this_back": "Kto musi to oddać?",
+  "chat":"Czat",
+  "your_profile": "Twój profil",
+  "update_profile_description": "Możesz zaktualizować swoje dane w każdym momencie"
 }

@@ -2,6 +2,7 @@ import 'package:bill_share/constants/app_colors.dart';
 import 'package:bill_share/constants/font.dart';
 import 'package:bill_share/group_dashboard/domain/member_with_balance.dart';
 import 'package:bill_share/group_members_screen/presentation/widgets/member_tile.dart';
+import 'package:bill_share/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class MemberTileWithBalance extends StatelessWidget {
@@ -25,8 +26,9 @@ class MemberTileWithBalance extends StatelessWidget {
             child: Center(
               child: Text.rich(TextSpan(children: [
                 TextSpan(
-                    text:
-                        memberWithBalance.value < 0 ? 'To pay' : 'To recive:'),
+                    text: memberWithBalance.value < 0
+                        ? T(context).to_pay
+                        : T(context).to_receive),
                 TextSpan(
                   text: ' ${memberWithBalance.value.abs()}\$',
                   style: memberWithBalance.value < 0
