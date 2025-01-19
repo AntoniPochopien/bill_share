@@ -67,7 +67,7 @@ class _BeneficientsSectionState extends State<BeneficientsSection> {
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 15),
         child: Text(
-          'Who needs to pay this back?',
+          T(context).who_needs_to_pay_this_back,
           style: Font.h4Grey,
         ),
       ),

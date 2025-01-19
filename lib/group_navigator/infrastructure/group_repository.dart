@@ -90,6 +90,7 @@ class GroupRepository implements IGroupRepository {
           'is_admin': e['is_admin'],
           'id': e['profiles']['id'],
           'username': e['profiles']['username'],
+          'image_url': e['profiles']['image_url'],
         };
         return GroupMember.fromJson(flattenJson);
       }).toList();

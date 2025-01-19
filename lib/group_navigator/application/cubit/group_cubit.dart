@@ -183,7 +183,14 @@ class GroupCubit extends Cubit<GroupState> {
       newUsername: newUsername,
       newProfileImage: newImage,
     );
-    result.fold((l) => emit(GroupState.error(l)), (r) {});
+    result.fold((l) => emit(GroupState.error(l)), (userData) {
+      final currentUser = injectableUser.currentUser;
+      injectableUser.setUser(currentUser.copyWith(username: userData.username));
+      if (userData.imageUrl != null) {
+        injectableUser
+            .setUser(currentUser.copyWith(imageUrl: userData.imageUrl));
+      }
+    });
   }
 
   @override

@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:image_picker/image_picker.dart';
 
 abstract class IUserRepository {
-  Future<Either<Failure, Unit>> updateUserProfile({
+  Future<Either<Failure, UserData>> updateUserProfile({
     required String id,
     required String newUsername,
     required XFile? newProfileImage,

@@ -12,7 +12,7 @@ class UserRepository implements IUserRepository {
   final _supabase = sb.Supabase.instance.client;
 
   @override
-  Future<Either<Failure, Unit>> updateUserProfile({
+  Future<Either<Failure, UserData>> updateUserProfile({
     required String id,
     required String newUsername,
     required XFile? newProfileImage,
@@ -31,7 +31,7 @@ class UserRepository implements IUserRepository {
 
       await _supabase.from('profiles').update(body).eq('id', id);
 
-      return right(unit);
+      return right(UserData(username: newUsername, imageUrl: newImageUrl));
     } catch (e) {
       log('updateUserProfile unexpected error: $e');
       return left(Failure.unexpected());

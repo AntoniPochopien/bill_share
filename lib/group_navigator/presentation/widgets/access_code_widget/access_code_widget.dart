@@ -12,7 +12,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AccessCodeWidget extends StatefulWidget {
   final GroupInfo groupInfo;
-  const AccessCodeWidget({super.key, required this.groupInfo});
+  final bool isAdmin;
+  const AccessCodeWidget({
+    super.key,
+    required this.groupInfo,
+    required this.isAdmin,
+  });
 
   @override
   State<AccessCodeWidget> createState() => _AccessCodeWidgetState();
@@ -71,32 +76,33 @@ class _AccessCodeWidgetState extends State<AccessCodeWidget> {
           )
         ]),
         SizedBox(height: 16),
-        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          if (!widget.groupInfo.locked)
-            Row(children: [
-              AccessCodeButton(
-                iconData: Icons.refresh,
-                isLoading: regenerateAccessCodeLoading,
-                onTap: () async {
-                  setState(() => regenerateAccessCodeLoading = true);
-                  await context.read<GroupCubit>().regenerateAccessCode();
-                  setState(() => regenerateAccessCodeLoading = false);
-                },
-              ),
-              SizedBox(width: 16),
-            ]),
-          AccessCodeButton(
-            iconData: widget.groupInfo.locked
-                ? Icons.lock_open_outlined
-                : Icons.lock_outline,
-            isLoading: lockingLoading,
-            onTap: () async {
-              setState(() => lockingLoading = true);
-              await context.read<GroupCubit>().toggleLock();
-              setState(() => lockingLoading = false);
-            },
-          ),
-        ])
+        if (widget.isAdmin)
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            if (!widget.groupInfo.locked)
+              Row(children: [
+                AccessCodeButton(
+                  iconData: Icons.refresh,
+                  isLoading: regenerateAccessCodeLoading,
+                  onTap: () async {
+                    setState(() => regenerateAccessCodeLoading = true);
+                    await context.read<GroupCubit>().regenerateAccessCode();
+                    setState(() => regenerateAccessCodeLoading = false);
+                  },
+                ),
+                SizedBox(width: 16),
+              ]),
+            AccessCodeButton(
+              iconData: widget.groupInfo.locked
+                  ? Icons.lock_open_outlined
+                  : Icons.lock_outline,
+              isLoading: lockingLoading,
+              onTap: () async {
+                setState(() => lockingLoading = true);
+                await context.read<GroupCubit>().toggleLock();
+                setState(() => lockingLoading = false);
+              },
+            ),
+          ])
       ]),
     );
   }

@@ -13,6 +13,7 @@ import 'package:bill_share/home/application/groups_cubit/groups_cubit.dart';
 import 'package:bill_share/home/application/join_group_cubit/join_group_cubit.dart';
 import 'package:bill_share/home/domain/i_groups_repository.dart';
 import 'package:bill_share/home/presentation/widgets/groups_list_view.dart';
+import 'package:bill_share/home/presentation/widgets/home_drawer.dart';
 import 'package:bill_share/home/presentation/widgets/no_groups_view.dart';
 import 'package:bill_share/local_storage/domain/i_local_storage_repository.dart';
 import 'package:bill_share/navigation/app_router.dart';
@@ -20,8 +21,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +97,9 @@ class HomeScreen extends StatelessWidget {
                 return state.maybeWhen(
                   orElse: () => LoadingScreen(),
                   groups: (groups) => BillshareScaffold(
-                    appBar: AppBarWithSettings(),
+                    scaffoldKey: _scaffoldKey,
+                    appBar: AppBarWithSettings(scaffoldKey: _scaffoldKey),
+                    endDrawer: HomeDrawer(),
                     body: groups.isEmpty
                         ? NoGroupsView()
                         : GroupsListView(groups: groups),

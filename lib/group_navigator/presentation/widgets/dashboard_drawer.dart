@@ -76,7 +76,7 @@ class DashboardDrawer extends StatelessWidget {
                   ),
                 ]),
               ),
-              AccessCodeWidget(groupInfo: groupInfo),
+              AccessCodeWidget(groupInfo: groupInfo, isAdmin: isAdmin),
               Column(children: [
                 ListTile(
                   onTap: () => context.router.replaceAll([HomeRoute()]),
