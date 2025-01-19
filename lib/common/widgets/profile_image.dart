@@ -28,7 +28,13 @@ class ProfileImage extends StatelessWidget {
         ),
         child: imageUrl == null
             ? Icon(Icons.question_mark, size: iconSize, color: AppColors.white)
-            : Image.network(imageUrl!),
+            : ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.network(
+                  imageUrl!,
+                  fit: BoxFit.cover,
+                ),
+              ),
       ),
       Positioned.fill(
           child: Material(

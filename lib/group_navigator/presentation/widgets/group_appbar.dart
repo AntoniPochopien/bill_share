@@ -1,3 +1,4 @@
+import 'package:bill_share/common/utils/image_url_generator.dart';
 import 'package:bill_share/common/widgets/profile_image.dart';
 import 'package:bill_share/constants/app_colors.dart';
 import 'package:bill_share/constants/font.dart';
@@ -30,6 +31,8 @@ class GroupAppbar extends StatelessWidget implements PreferredSizeWidget {
                   size: 25,
                   iconSize: 18,
                   backgroundColor: AppColors.green,
+                  imageUrl: ImageUrlGenerator.generateGroupImageUrl(
+                      groupInfo.imageUrl),
                 ),
                 SizedBox(width: 7),
                 Text(groupInfo.name, style: Font.h4DarkSemiBold),

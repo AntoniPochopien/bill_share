@@ -45,17 +45,19 @@ class GroupRepository implements IGroupRepository {
     try {
       final groupResponse = await _supabase
           .from('groups')
-          .select('id, name, access_code, locked')
+          .select('id, name, access_code, locked, image_url')
           .eq('id', groupId);
       if (groupResponse.isEmpty) {
         return left(Failure.groupNotExists());
       }
       final groupData = groupResponse[0];
       return right(GroupInfo(
-          id: groupData['id'],
-          name: groupData['name'],
-          accessCode: groupData['access_code'],
-          locked: groupData['locked']));
+        id: groupData['id'],
+        name: groupData['name'],
+        accessCode: groupData['access_code'],
+        locked: groupData['locked'],
+        imageUrl: groupData['image_url'],
+      ));
     } catch (e) {
       log('fetchGroupInfo unexpected error: $e');
       return left(Failure.unexpected());
@@ -204,6 +206,9 @@ class GroupRepository implements IGroupRepository {
         final url = await _supabase.storage
             .from('groups_avatars')
             .upload('$groupId', File(image.path));
+        await _supabase.from('groups').update({
+          'image_url': url,
+        }).eq('id', groupId);
         return right(url);
       }
       return right(null);

@@ -1,3 +1,4 @@
+import 'package:bill_share/common/utils/image_url_generator.dart';
 import 'package:bill_share/common/widgets/logout_button.dart';
 import 'package:bill_share/common/widgets/profile_image.dart';
 import 'package:bill_share/constants/app_colors.dart';
@@ -42,7 +43,9 @@ class DashboardDrawer extends StatelessWidget {
                     size: 66,
                     iconSize: 18,
                     backgroundColor: AppColors.green,
-                    onTap: ()=> context.read<GroupCubit>().selectGroupImage(),
+                    imageUrl: ImageUrlGenerator.generateGroupImageUrl(
+                        groupInfo.imageUrl),
+                    onTap: () => context.read<GroupCubit>().selectGroupImage(),
                   ),
                 ]),
               ),
