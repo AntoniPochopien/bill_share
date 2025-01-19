@@ -1,6 +1,7 @@
 import 'package:bill_share/common/utils/validators.dart';
 import 'package:bill_share/common/widgets/billshare_text_field.dart';
 import 'package:bill_share/common/widgets/button.dart';
+import 'package:bill_share/common/widgets/framed_button.dart';
 import 'package:bill_share/common/widgets/modals/modal_sheet_structure.dart';
 import 'package:bill_share/home/application/group_creator_cubit/group_creator_cubit.dart';
 import 'package:bill_share/l10n/l10n.dart';
@@ -43,7 +44,8 @@ class _CreateGroupModalState extends State<CreateGroupModal> {
                     BillshareTextField(
                       controller: _groupNameController,
                       label: T(context).group_name,
-                      validator: (v) => Validators.groupNameValidator(context, v),
+                      validator: (v) =>
+                          Validators.groupNameValidator(context, v),
                     ),
                     SizedBox(height: MediaQuery.sizeOf(context).height * 0.05),
                     Button(
@@ -57,6 +59,9 @@ class _CreateGroupModalState extends State<CreateGroupModal> {
                                 .createGroup(_groupNameController.text);
                           }
                         }),
+                    FramedButton(
+                        text: T(context).cancel,
+                        onPressed: () => context.maybePop())
                   ]),
             )),
       ),

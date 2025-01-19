@@ -74,5 +74,9 @@
     "who_needs_to_pay_this_back": "Who needs to pay this back?",
     "chat":"Chat",
     "your_profile": "Your profile",
-    "update_profile_description": "You can update your information anytime"
+    "update_profile_description": "You can update your information anytime",
+    "choose": "Choose",
+    "create_or_join_group": "Create group, or join existing one",
+    "join": "Join",
+    "join_group":"Join group"
 }
