@@ -81,6 +81,8 @@ class GroupRepository implements IGroupRepository {
 
       final user = _supabase.auth.currentUser!;
 
+      print(user.id);
+
       final groupMembersRequest = requestes[0];
       final groupExpensesRequest = requestes[1];
 
@@ -107,10 +109,8 @@ class GroupRepository implements IGroupRepository {
           debtors.putIfAbsent(beneficiaryId, () => 0.0);
           debtors[beneficiaryId] = (debtors[beneficiaryId] as double) + share;
         } else if (beneficiaryId == user.id && payerId != user.id) {
-          if (owningTo.containsKey(payerId)) {
-            owningTo.putIfAbsent(payerId, () => 0.0);
-            owningTo[payerId] = (owningTo[payerId] as double) + share;
-          }
+          owningTo.putIfAbsent(payerId, () => 0.0);
+          owningTo[payerId] = (owningTo[payerId] as double) + share;
         }
       }
 
@@ -145,12 +145,10 @@ class GroupRepository implements IGroupRepository {
       }
       final toPay = membersWithBalance
           .map((e) => e.value < 0 ? e.value : 0)
-          .reduce((a, b) => a + b)
-          .toDouble();
+          .fold(0.0, (a, b) => a + b);
       final toRecive = membersWithBalance
           .map((e) => e.value > 0 ? e.value : 0)
-          .reduce((a, b) => a + b)
-          .toDouble();
+          .fold(0.0, (a, b) => a + b);
 
       return right(DashboardData(
           toPay: toPay,
