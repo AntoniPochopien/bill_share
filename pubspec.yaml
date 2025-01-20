@@ -36,6 +36,8 @@ dependencies:
   lottie: ^3.1.3
   blur: ^4.0.0
   image_picker: ^1.1.2
+  flutter_native_splash: ^2.4.4
+  flutter_launcher_icons: ^0.14.3
 
 
 dev_dependencies:
@@ -53,6 +55,8 @@ flutter:
   
   assets:
     - assets/images/png/
+    - assets/images/png/android/
+    - assets/images/png/ios/
     - assets/lottie/
   
   fonts:

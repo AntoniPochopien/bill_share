@@ -8,8 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:bill_share/di.dart';
 import 'package:bill_share/navigation/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() async {
+  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   diInit();
   await Future.wait([
     getIt<ILocalStorageRepository>().init(),

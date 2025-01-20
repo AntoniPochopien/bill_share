@@ -7,8 +7,10 @@ import 'package:bill_share/auth/domain/injectable_user.dart';
 import 'package:bill_share/di.dart';
 import 'package:bill_share/local_storage/domain/i_local_storage_repository.dart';
 import 'package:bill_share/navigation/app_router.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 @RoutePage()
 class AppStartupScreen extends StatelessWidget {
@@ -37,17 +39,24 @@ class AppStartupScreen extends StatelessWidget {
                   authState.whenOrNull(
                     authenticated: (user) {
                       appStartupState.whenOrNull(
-                        navigateToGroup: (groupId) => context.replaceRoute(
-                            GroupNavigatorRoute(groupId: groupId)),
-                        navigateToHome: () => context.replaceRoute(HomeRoute()),
+                        navigateToGroup: (groupId) {
+                          FlutterNativeSplash.remove();
+                          context.replaceRoute(
+                              GroupNavigatorRoute(groupId: groupId));
+                        },
+                        navigateToHome: () {
+                          FlutterNativeSplash.remove();
+                          context.replaceRoute(HomeRoute());
+                        },
                       );
                     },
                     unauthenticated: () {
+                      FlutterNativeSplash.remove();
                       context.replaceRoute(AuthRoute());
                     },
                   );
                 },
-                child: const Placeholder());
+                child: Scaffold());
           },
         ));
   }
