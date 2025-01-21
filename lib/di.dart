@@ -9,6 +9,8 @@ import 'package:bill_share/group_navigator/domain/i_group_repository.dart';
 import 'package:bill_share/group_navigator/infrastructure/group_repository.dart';
 import 'package:bill_share/home/domain/i_groups_repository.dart';
 import 'package:bill_share/home/infrastructure/groups_repository.dart';
+import 'package:bill_share/payments/domain/i_payments_repository.dart';
+import 'package:bill_share/payments/infrastructure/payments_repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:bill_share/local_storage/domain/i_local_storage_repository.dart';
 import 'package:bill_share/local_storage/infrastructure/local_storage_repository.dart';
@@ -26,4 +28,5 @@ void diInit() {
   getIt.registerLazySingleton<IGroupRepository>(() => GroupRepository());
   getIt.registerLazySingleton<IExpensesRepository>(() => ExpensesRepository());
   getIt.registerLazySingleton<IUserRepository>(() => UserRepository());
+  getIt.registerLazySingleton<IPaymentsRepository>(() => PaymentsRepository());
 }

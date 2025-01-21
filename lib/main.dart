@@ -4,6 +4,8 @@ import 'package:bill_share/common/utils/supabase_initialization.dart';
 import 'package:bill_share/l10n/application/cubit/language_cubit.dart';
 import 'package:bill_share/l10n/l10n.dart';
 import 'package:bill_share/local_storage/domain/i_local_storage_repository.dart';
+import 'package:bill_share/payments/application/cubit/payment_cubit.dart';
+import 'package:bill_share/payments/domain/i_payments_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:bill_share/di.dart';
 import 'package:bill_share/navigation/app_router.dart';
@@ -27,10 +29,14 @@ class BillShare extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => LanguageCubit(
-          localStorageRepository: getIt<ILocalStorageRepository>())
-        ..init(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (context) => LanguageCubit(
+                localStorageRepository: getIt<ILocalStorageRepository>())
+              ..init()),
+        BlocProvider(create: (context) => PaymentCubit(iPaymentsRepository: getIt<IPaymentsRepository>()))
+      ],
       child: BlocBuilder<LanguageCubit, LanguageState>(
         builder: (context, languageState) => MaterialApp.router(
           routerConfig: getIt<AppRouter>().config(
