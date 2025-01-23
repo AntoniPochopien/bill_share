@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:bill_share/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ProfileImage extends StatelessWidget {
   final String? imageUrl;
@@ -21,6 +22,21 @@ class ProfileImage extends StatelessWidget {
     this.onTap,
   });
 
+  Widget _buildShimmerEffect() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        width: size,
+        height: size,
+      ),
+    );
+  }
+
   Widget _buildImage() {
     if (imageFile != null) {
       return ClipRRect(
@@ -36,6 +52,13 @@ class ProfileImage extends StatelessWidget {
         child: Image.network(
           imageUrl!,
           fit: BoxFit.cover,
+          loadingBuilder: (context, child, loadingProgress) {
+            if (loadingProgress == null) {
+              return child;
+            } else {
+              return _buildShimmerEffect();
+            }
+          },
         ),
       );
     } else {
