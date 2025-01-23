@@ -178,14 +178,14 @@ class _AuthScreenState extends State<AuthScreen> {
                                 iconUrl: Assets.googleG,
                               ),
                             ),
-                            ExpandAndFadeWidget(
-                                controller: _buttonsExpandAndFadeController[1],
-                                initialExpanded: true,
-                                child: FramedButton(
-                                  text: T(context).sign_in_with_apple,
-                                  onPressed: () {},
-                                  iconUrl: Assets.apple,
-                                )),
+                            // ExpandAndFadeWidget(
+                            //     controller: _buttonsExpandAndFadeController[1],
+                            //     initialExpanded: true,
+                            //     child: FramedButton(
+                            //       text: T(context).sign_in_with_apple,
+                            //       onPressed: () {},
+                            //       iconUrl: Assets.apple,
+                            //     )),
                             AnimatedSwitcher(
                               duration: Duration(milliseconds: 300),
                               child: _signUpWithEmail
