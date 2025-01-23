@@ -23,6 +23,7 @@ mixin _$Failure {
     required TResult Function() wrongCredentials,
     required TResult Function() groupNotExists,
     required TResult Function() dontBelongToGroup,
+    required TResult Function() userAlreadyExists,
     required TResult Function(String? message) unexpected,
   }) =>
       throw _privateConstructorUsedError;
@@ -33,6 +34,7 @@ mixin _$Failure {
     TResult? Function()? wrongCredentials,
     TResult? Function()? groupNotExists,
     TResult? Function()? dontBelongToGroup,
+    TResult? Function()? userAlreadyExists,
     TResult? Function(String? message)? unexpected,
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +45,7 @@ mixin _$Failure {
     TResult Function()? wrongCredentials,
     TResult Function()? groupNotExists,
     TResult Function()? dontBelongToGroup,
+    TResult Function()? userAlreadyExists,
     TResult Function(String? message)? unexpected,
     required TResult orElse(),
   }) =>
@@ -54,6 +57,7 @@ mixin _$Failure {
     required TResult Function(_WrongCredentials value) wrongCredentials,
     required TResult Function(_GroupNotExists value) groupNotExists,
     required TResult Function(_DontBelongToGroup value) dontBelongToGroup,
+    required TResult Function(_UserAlreadyExists value) userAlreadyExists,
     required TResult Function(_Unexpected value) unexpected,
   }) =>
       throw _privateConstructorUsedError;
@@ -64,6 +68,7 @@ mixin _$Failure {
     TResult? Function(_WrongCredentials value)? wrongCredentials,
     TResult? Function(_GroupNotExists value)? groupNotExists,
     TResult? Function(_DontBelongToGroup value)? dontBelongToGroup,
+    TResult? Function(_UserAlreadyExists value)? userAlreadyExists,
     TResult? Function(_Unexpected value)? unexpected,
   }) =>
       throw _privateConstructorUsedError;
@@ -74,6 +79,7 @@ mixin _$Failure {
     TResult Function(_WrongCredentials value)? wrongCredentials,
     TResult Function(_GroupNotExists value)? groupNotExists,
     TResult Function(_DontBelongToGroup value)? dontBelongToGroup,
+    TResult Function(_UserAlreadyExists value)? userAlreadyExists,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) =>
@@ -146,6 +152,7 @@ class _$CannotReachImpl implements _CannotReach {
     required TResult Function() wrongCredentials,
     required TResult Function() groupNotExists,
     required TResult Function() dontBelongToGroup,
+    required TResult Function() userAlreadyExists,
     required TResult Function(String? message) unexpected,
   }) {
     return cannotReach();
@@ -159,6 +166,7 @@ class _$CannotReachImpl implements _CannotReach {
     TResult? Function()? wrongCredentials,
     TResult? Function()? groupNotExists,
     TResult? Function()? dontBelongToGroup,
+    TResult? Function()? userAlreadyExists,
     TResult? Function(String? message)? unexpected,
   }) {
     return cannotReach?.call();
@@ -172,6 +180,7 @@ class _$CannotReachImpl implements _CannotReach {
     TResult Function()? wrongCredentials,
     TResult Function()? groupNotExists,
     TResult Function()? dontBelongToGroup,
+    TResult Function()? userAlreadyExists,
     TResult Function(String? message)? unexpected,
     required TResult orElse(),
   }) {
@@ -189,6 +198,7 @@ class _$CannotReachImpl implements _CannotReach {
     required TResult Function(_WrongCredentials value) wrongCredentials,
     required TResult Function(_GroupNotExists value) groupNotExists,
     required TResult Function(_DontBelongToGroup value) dontBelongToGroup,
+    required TResult Function(_UserAlreadyExists value) userAlreadyExists,
     required TResult Function(_Unexpected value) unexpected,
   }) {
     return cannotReach(this);
@@ -202,6 +212,7 @@ class _$CannotReachImpl implements _CannotReach {
     TResult? Function(_WrongCredentials value)? wrongCredentials,
     TResult? Function(_GroupNotExists value)? groupNotExists,
     TResult? Function(_DontBelongToGroup value)? dontBelongToGroup,
+    TResult? Function(_UserAlreadyExists value)? userAlreadyExists,
     TResult? Function(_Unexpected value)? unexpected,
   }) {
     return cannotReach?.call(this);
@@ -215,6 +226,7 @@ class _$CannotReachImpl implements _CannotReach {
     TResult Function(_WrongCredentials value)? wrongCredentials,
     TResult Function(_GroupNotExists value)? groupNotExists,
     TResult Function(_DontBelongToGroup value)? dontBelongToGroup,
+    TResult Function(_UserAlreadyExists value)? userAlreadyExists,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) {
@@ -275,6 +287,7 @@ class _$UnauthorizedImpl implements _Unauthorized {
     required TResult Function() wrongCredentials,
     required TResult Function() groupNotExists,
     required TResult Function() dontBelongToGroup,
+    required TResult Function() userAlreadyExists,
     required TResult Function(String? message) unexpected,
   }) {
     return unauthorized();
@@ -288,6 +301,7 @@ class _$UnauthorizedImpl implements _Unauthorized {
     TResult? Function()? wrongCredentials,
     TResult? Function()? groupNotExists,
     TResult? Function()? dontBelongToGroup,
+    TResult? Function()? userAlreadyExists,
     TResult? Function(String? message)? unexpected,
   }) {
     return unauthorized?.call();
@@ -301,6 +315,7 @@ class _$UnauthorizedImpl implements _Unauthorized {
     TResult Function()? wrongCredentials,
     TResult Function()? groupNotExists,
     TResult Function()? dontBelongToGroup,
+    TResult Function()? userAlreadyExists,
     TResult Function(String? message)? unexpected,
     required TResult orElse(),
   }) {
@@ -318,6 +333,7 @@ class _$UnauthorizedImpl implements _Unauthorized {
     required TResult Function(_WrongCredentials value) wrongCredentials,
     required TResult Function(_GroupNotExists value) groupNotExists,
     required TResult Function(_DontBelongToGroup value) dontBelongToGroup,
+    required TResult Function(_UserAlreadyExists value) userAlreadyExists,
     required TResult Function(_Unexpected value) unexpected,
   }) {
     return unauthorized(this);
@@ -331,6 +347,7 @@ class _$UnauthorizedImpl implements _Unauthorized {
     TResult? Function(_WrongCredentials value)? wrongCredentials,
     TResult? Function(_GroupNotExists value)? groupNotExists,
     TResult? Function(_DontBelongToGroup value)? dontBelongToGroup,
+    TResult? Function(_UserAlreadyExists value)? userAlreadyExists,
     TResult? Function(_Unexpected value)? unexpected,
   }) {
     return unauthorized?.call(this);
@@ -344,6 +361,7 @@ class _$UnauthorizedImpl implements _Unauthorized {
     TResult Function(_WrongCredentials value)? wrongCredentials,
     TResult Function(_GroupNotExists value)? groupNotExists,
     TResult Function(_DontBelongToGroup value)? dontBelongToGroup,
+    TResult Function(_UserAlreadyExists value)? userAlreadyExists,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) {
@@ -404,6 +422,7 @@ class _$WrongCredentialsImpl implements _WrongCredentials {
     required TResult Function() wrongCredentials,
     required TResult Function() groupNotExists,
     required TResult Function() dontBelongToGroup,
+    required TResult Function() userAlreadyExists,
     required TResult Function(String? message) unexpected,
   }) {
     return wrongCredentials();
@@ -417,6 +436,7 @@ class _$WrongCredentialsImpl implements _WrongCredentials {
     TResult? Function()? wrongCredentials,
     TResult? Function()? groupNotExists,
     TResult? Function()? dontBelongToGroup,
+    TResult? Function()? userAlreadyExists,
     TResult? Function(String? message)? unexpected,
   }) {
     return wrongCredentials?.call();
@@ -430,6 +450,7 @@ class _$WrongCredentialsImpl implements _WrongCredentials {
     TResult Function()? wrongCredentials,
     TResult Function()? groupNotExists,
     TResult Function()? dontBelongToGroup,
+    TResult Function()? userAlreadyExists,
     TResult Function(String? message)? unexpected,
     required TResult orElse(),
   }) {
@@ -447,6 +468,7 @@ class _$WrongCredentialsImpl implements _WrongCredentials {
     required TResult Function(_WrongCredentials value) wrongCredentials,
     required TResult Function(_GroupNotExists value) groupNotExists,
     required TResult Function(_DontBelongToGroup value) dontBelongToGroup,
+    required TResult Function(_UserAlreadyExists value) userAlreadyExists,
     required TResult Function(_Unexpected value) unexpected,
   }) {
     return wrongCredentials(this);
@@ -460,6 +482,7 @@ class _$WrongCredentialsImpl implements _WrongCredentials {
     TResult? Function(_WrongCredentials value)? wrongCredentials,
     TResult? Function(_GroupNotExists value)? groupNotExists,
     TResult? Function(_DontBelongToGroup value)? dontBelongToGroup,
+    TResult? Function(_UserAlreadyExists value)? userAlreadyExists,
     TResult? Function(_Unexpected value)? unexpected,
   }) {
     return wrongCredentials?.call(this);
@@ -473,6 +496,7 @@ class _$WrongCredentialsImpl implements _WrongCredentials {
     TResult Function(_WrongCredentials value)? wrongCredentials,
     TResult Function(_GroupNotExists value)? groupNotExists,
     TResult Function(_DontBelongToGroup value)? dontBelongToGroup,
+    TResult Function(_UserAlreadyExists value)? userAlreadyExists,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) {
@@ -533,6 +557,7 @@ class _$GroupNotExistsImpl implements _GroupNotExists {
     required TResult Function() wrongCredentials,
     required TResult Function() groupNotExists,
     required TResult Function() dontBelongToGroup,
+    required TResult Function() userAlreadyExists,
     required TResult Function(String? message) unexpected,
   }) {
     return groupNotExists();
@@ -546,6 +571,7 @@ class _$GroupNotExistsImpl implements _GroupNotExists {
     TResult? Function()? wrongCredentials,
     TResult? Function()? groupNotExists,
     TResult? Function()? dontBelongToGroup,
+    TResult? Function()? userAlreadyExists,
     TResult? Function(String? message)? unexpected,
   }) {
     return groupNotExists?.call();
@@ -559,6 +585,7 @@ class _$GroupNotExistsImpl implements _GroupNotExists {
     TResult Function()? wrongCredentials,
     TResult Function()? groupNotExists,
     TResult Function()? dontBelongToGroup,
+    TResult Function()? userAlreadyExists,
     TResult Function(String? message)? unexpected,
     required TResult orElse(),
   }) {
@@ -576,6 +603,7 @@ class _$GroupNotExistsImpl implements _GroupNotExists {
     required TResult Function(_WrongCredentials value) wrongCredentials,
     required TResult Function(_GroupNotExists value) groupNotExists,
     required TResult Function(_DontBelongToGroup value) dontBelongToGroup,
+    required TResult Function(_UserAlreadyExists value) userAlreadyExists,
     required TResult Function(_Unexpected value) unexpected,
   }) {
     return groupNotExists(this);
@@ -589,6 +617,7 @@ class _$GroupNotExistsImpl implements _GroupNotExists {
     TResult? Function(_WrongCredentials value)? wrongCredentials,
     TResult? Function(_GroupNotExists value)? groupNotExists,
     TResult? Function(_DontBelongToGroup value)? dontBelongToGroup,
+    TResult? Function(_UserAlreadyExists value)? userAlreadyExists,
     TResult? Function(_Unexpected value)? unexpected,
   }) {
     return groupNotExists?.call(this);
@@ -602,6 +631,7 @@ class _$GroupNotExistsImpl implements _GroupNotExists {
     TResult Function(_WrongCredentials value)? wrongCredentials,
     TResult Function(_GroupNotExists value)? groupNotExists,
     TResult Function(_DontBelongToGroup value)? dontBelongToGroup,
+    TResult Function(_UserAlreadyExists value)? userAlreadyExists,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) {
@@ -662,6 +692,7 @@ class _$DontBelongToGroupImpl implements _DontBelongToGroup {
     required TResult Function() wrongCredentials,
     required TResult Function() groupNotExists,
     required TResult Function() dontBelongToGroup,
+    required TResult Function() userAlreadyExists,
     required TResult Function(String? message) unexpected,
   }) {
     return dontBelongToGroup();
@@ -675,6 +706,7 @@ class _$DontBelongToGroupImpl implements _DontBelongToGroup {
     TResult? Function()? wrongCredentials,
     TResult? Function()? groupNotExists,
     TResult? Function()? dontBelongToGroup,
+    TResult? Function()? userAlreadyExists,
     TResult? Function(String? message)? unexpected,
   }) {
     return dontBelongToGroup?.call();
@@ -688,6 +720,7 @@ class _$DontBelongToGroupImpl implements _DontBelongToGroup {
     TResult Function()? wrongCredentials,
     TResult Function()? groupNotExists,
     TResult Function()? dontBelongToGroup,
+    TResult Function()? userAlreadyExists,
     TResult Function(String? message)? unexpected,
     required TResult orElse(),
   }) {
@@ -705,6 +738,7 @@ class _$DontBelongToGroupImpl implements _DontBelongToGroup {
     required TResult Function(_WrongCredentials value) wrongCredentials,
     required TResult Function(_GroupNotExists value) groupNotExists,
     required TResult Function(_DontBelongToGroup value) dontBelongToGroup,
+    required TResult Function(_UserAlreadyExists value) userAlreadyExists,
     required TResult Function(_Unexpected value) unexpected,
   }) {
     return dontBelongToGroup(this);
@@ -718,6 +752,7 @@ class _$DontBelongToGroupImpl implements _DontBelongToGroup {
     TResult? Function(_WrongCredentials value)? wrongCredentials,
     TResult? Function(_GroupNotExists value)? groupNotExists,
     TResult? Function(_DontBelongToGroup value)? dontBelongToGroup,
+    TResult? Function(_UserAlreadyExists value)? userAlreadyExists,
     TResult? Function(_Unexpected value)? unexpected,
   }) {
     return dontBelongToGroup?.call(this);
@@ -731,6 +766,7 @@ class _$DontBelongToGroupImpl implements _DontBelongToGroup {
     TResult Function(_WrongCredentials value)? wrongCredentials,
     TResult Function(_GroupNotExists value)? groupNotExists,
     TResult Function(_DontBelongToGroup value)? dontBelongToGroup,
+    TResult Function(_UserAlreadyExists value)? userAlreadyExists,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) {
@@ -743,6 +779,141 @@ class _$DontBelongToGroupImpl implements _DontBelongToGroup {
 
 abstract class _DontBelongToGroup implements Failure {
   const factory _DontBelongToGroup() = _$DontBelongToGroupImpl;
+}
+
+/// @nodoc
+abstract class _$$UserAlreadyExistsImplCopyWith<$Res> {
+  factory _$$UserAlreadyExistsImplCopyWith(_$UserAlreadyExistsImpl value,
+          $Res Function(_$UserAlreadyExistsImpl) then) =
+      __$$UserAlreadyExistsImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$UserAlreadyExistsImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$UserAlreadyExistsImpl>
+    implements _$$UserAlreadyExistsImplCopyWith<$Res> {
+  __$$UserAlreadyExistsImplCopyWithImpl(_$UserAlreadyExistsImpl _value,
+      $Res Function(_$UserAlreadyExistsImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$UserAlreadyExistsImpl implements _UserAlreadyExists {
+  const _$UserAlreadyExistsImpl();
+
+  @override
+  String toString() {
+    return 'Failure.userAlreadyExists()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$UserAlreadyExistsImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() cannotReach,
+    required TResult Function() unauthorized,
+    required TResult Function() wrongCredentials,
+    required TResult Function() groupNotExists,
+    required TResult Function() dontBelongToGroup,
+    required TResult Function() userAlreadyExists,
+    required TResult Function(String? message) unexpected,
+  }) {
+    return userAlreadyExists();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? cannotReach,
+    TResult? Function()? unauthorized,
+    TResult? Function()? wrongCredentials,
+    TResult? Function()? groupNotExists,
+    TResult? Function()? dontBelongToGroup,
+    TResult? Function()? userAlreadyExists,
+    TResult? Function(String? message)? unexpected,
+  }) {
+    return userAlreadyExists?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? cannotReach,
+    TResult Function()? unauthorized,
+    TResult Function()? wrongCredentials,
+    TResult Function()? groupNotExists,
+    TResult Function()? dontBelongToGroup,
+    TResult Function()? userAlreadyExists,
+    TResult Function(String? message)? unexpected,
+    required TResult orElse(),
+  }) {
+    if (userAlreadyExists != null) {
+      return userAlreadyExists();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CannotReach value) cannotReach,
+    required TResult Function(_Unauthorized value) unauthorized,
+    required TResult Function(_WrongCredentials value) wrongCredentials,
+    required TResult Function(_GroupNotExists value) groupNotExists,
+    required TResult Function(_DontBelongToGroup value) dontBelongToGroup,
+    required TResult Function(_UserAlreadyExists value) userAlreadyExists,
+    required TResult Function(_Unexpected value) unexpected,
+  }) {
+    return userAlreadyExists(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_CannotReach value)? cannotReach,
+    TResult? Function(_Unauthorized value)? unauthorized,
+    TResult? Function(_WrongCredentials value)? wrongCredentials,
+    TResult? Function(_GroupNotExists value)? groupNotExists,
+    TResult? Function(_DontBelongToGroup value)? dontBelongToGroup,
+    TResult? Function(_UserAlreadyExists value)? userAlreadyExists,
+    TResult? Function(_Unexpected value)? unexpected,
+  }) {
+    return userAlreadyExists?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CannotReach value)? cannotReach,
+    TResult Function(_Unauthorized value)? unauthorized,
+    TResult Function(_WrongCredentials value)? wrongCredentials,
+    TResult Function(_GroupNotExists value)? groupNotExists,
+    TResult Function(_DontBelongToGroup value)? dontBelongToGroup,
+    TResult Function(_UserAlreadyExists value)? userAlreadyExists,
+    TResult Function(_Unexpected value)? unexpected,
+    required TResult orElse(),
+  }) {
+    if (userAlreadyExists != null) {
+      return userAlreadyExists(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UserAlreadyExists implements Failure {
+  const factory _UserAlreadyExists() = _$UserAlreadyExistsImpl;
 }
 
 /// @nodoc
@@ -819,6 +990,7 @@ class _$UnexpectedImpl implements _Unexpected {
     required TResult Function() wrongCredentials,
     required TResult Function() groupNotExists,
     required TResult Function() dontBelongToGroup,
+    required TResult Function() userAlreadyExists,
     required TResult Function(String? message) unexpected,
   }) {
     return unexpected(message);
@@ -832,6 +1004,7 @@ class _$UnexpectedImpl implements _Unexpected {
     TResult? Function()? wrongCredentials,
     TResult? Function()? groupNotExists,
     TResult? Function()? dontBelongToGroup,
+    TResult? Function()? userAlreadyExists,
     TResult? Function(String? message)? unexpected,
   }) {
     return unexpected?.call(message);
@@ -845,6 +1018,7 @@ class _$UnexpectedImpl implements _Unexpected {
     TResult Function()? wrongCredentials,
     TResult Function()? groupNotExists,
     TResult Function()? dontBelongToGroup,
+    TResult Function()? userAlreadyExists,
     TResult Function(String? message)? unexpected,
     required TResult orElse(),
   }) {
@@ -862,6 +1036,7 @@ class _$UnexpectedImpl implements _Unexpected {
     required TResult Function(_WrongCredentials value) wrongCredentials,
     required TResult Function(_GroupNotExists value) groupNotExists,
     required TResult Function(_DontBelongToGroup value) dontBelongToGroup,
+    required TResult Function(_UserAlreadyExists value) userAlreadyExists,
     required TResult Function(_Unexpected value) unexpected,
   }) {
     return unexpected(this);
@@ -875,6 +1050,7 @@ class _$UnexpectedImpl implements _Unexpected {
     TResult? Function(_WrongCredentials value)? wrongCredentials,
     TResult? Function(_GroupNotExists value)? groupNotExists,
     TResult? Function(_DontBelongToGroup value)? dontBelongToGroup,
+    TResult? Function(_UserAlreadyExists value)? userAlreadyExists,
     TResult? Function(_Unexpected value)? unexpected,
   }) {
     return unexpected?.call(this);
@@ -888,6 +1064,7 @@ class _$UnexpectedImpl implements _Unexpected {
     TResult Function(_WrongCredentials value)? wrongCredentials,
     TResult Function(_GroupNotExists value)? groupNotExists,
     TResult Function(_DontBelongToGroup value)? dontBelongToGroup,
+    TResult Function(_UserAlreadyExists value)? userAlreadyExists,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) {

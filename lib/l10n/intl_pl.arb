@@ -88,5 +88,7 @@
   "sign_in_with_apple": "Zaloguj się przez Apple",
   "already_have_account": "Masz już konto?",
   "sign_up_with_email": "Zarejestruj się przez e-mail",
-  "privacy_policy_info": "Informacje o Polityce Prywatności"
+  "privacy_policy_info": "Informacje o Polityce Prywatności",
+  "user_already_exists":"Użytkownik już istnieje",
+  "account_with_this_email_already_exists":"Konto z tym adresem e-mail już istnieje. Zaloguj się lub użyj innego adresu e-mail, aby utworzyć nowe konto."
 }

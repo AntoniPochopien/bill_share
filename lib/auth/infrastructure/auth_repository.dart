@@ -57,6 +57,14 @@ class AuthRepository implements IAuthRepository {
         'username': username,
       });
       return right(unit);
+    } on AuthException catch (e) {
+      if (e.code == 'user_already_exists') {
+        log('signUp user already exist: $e');
+        return Left(Failure.userAlreadyExists());
+      } else {
+        log('signUp AuthException unexpected error: $e');
+        return Left(Failure.unexpected(e.toString()));
+      }
     } catch (e) {
       log('signUpWithEmail unexpected error: $e');
       return left(Failure.unexpected());

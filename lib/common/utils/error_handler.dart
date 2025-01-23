@@ -18,6 +18,7 @@ class ErrorHandler {
       failure.maybeWhen(
         unauthorized: () => T(context).the_session_has_expired,
         wrongCredentials: () => T(context).auth_wrong_credentials,
+        userAlreadyExists: () => T(context).user_already_exists,
         orElse: () => T(context).error,
       );
 
@@ -25,5 +26,7 @@ class ErrorHandler {
       failure.maybeWhen(
           unauthorized: () => T(context).you_will_be_logged_out,
           wrongCredentials: () => T(context).auth_username_or_password,
+          userAlreadyExists: () =>
+              T(context).account_with_this_email_already_exists,
           orElse: () => T(context).unexpected_error_occurred);
 }

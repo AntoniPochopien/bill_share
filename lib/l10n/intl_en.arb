@@ -89,5 +89,8 @@
     "sign_in_with_apple": "Sign in with Apple",
     "already_have_account": "Already have an account",
     "sign_up_with_email": "Sign up with Email",
-    "privacy_policy_info": "Privacy Policy Info"
+    "privacy_policy_info": "Privacy Policy Info",
+    "user_already_exists":"User already exists",
+    "account_with_this_email_already_exists":"An account with this email already exists. Log in or use a different email address to create a new account."
+
 }

@@ -9,6 +9,7 @@ class Failure with _$Failure {
   const factory Failure.wrongCredentials() = _WrongCredentials;
   const factory Failure.groupNotExists() = _GroupNotExists;
   const factory Failure.dontBelongToGroup() = _DontBelongToGroup;
+  const factory Failure.userAlreadyExists() = _UserAlreadyExists;
   const factory Failure.unexpected([@Default('unexpected') String? message]) =
       _Unexpected;
 }
