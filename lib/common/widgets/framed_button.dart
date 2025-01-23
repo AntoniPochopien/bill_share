@@ -8,6 +8,7 @@ class FramedButton extends StatelessWidget {
   final bool maxWidth;
   final String? iconUrl;
   final IconData? iconData;
+  final bool isLoading;
 
   const FramedButton({
     super.key,
@@ -16,14 +17,22 @@ class FramedButton extends StatelessWidget {
     this.maxWidth = true,
     this.iconUrl,
     this.iconData,
+    this.isLoading = false,
   }) : assert(iconUrl == null || iconData == null,
             'Only one of iconUrl or iconData can be passed at a time');
 
   Widget _buildChild() {
-    final child = Text(
-      text,
-      style: Font.h4DarkMedium,
-    );
+    final progressIndicator = const SizedBox(
+        height: 20,
+        width: 20,
+        child: CircularProgressIndicator(color: AppColors.black));
+
+    final child = isLoading
+        ? progressIndicator
+        : Text(
+            text,
+            style: Font.h4DarkMedium,
+          );
 
     if (iconUrl != null || iconData != null) {
       return Row(children: [

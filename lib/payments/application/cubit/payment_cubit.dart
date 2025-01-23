@@ -75,6 +75,7 @@ class PaymentCubit extends Cubit<PaymentState> {
   }
 
   void buyProduct(ProductDetails product) async {
+    emit(state.copyWith(pending: true));
     final result = await iPaymentsRepository.buyProduct(product);
     result.fold((l) => emit(state.copyWith(error: l)), (_) {});
   }

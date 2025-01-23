@@ -23,8 +23,8 @@ class Button extends StatelessWidget {
       style: Font.h4Bright,
     );
     final progressIndicator = const SizedBox(
-        height: 22,
-        width: 22,
+        height: 20,
+        width: 20,
         child: CircularProgressIndicator(color: AppColors.white));
     final child = isLoading ? progressIndicator : t;
     return Padding(

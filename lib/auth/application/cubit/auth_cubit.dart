@@ -51,7 +51,9 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void googleSignIn() async {
-    await iAuthRepository.googleSignIn();
+    emit(AuthState.loading());
+    final result = await iAuthRepository.googleSignIn();
+    result.fold((l) => emit(AuthState.error(l)), (r) {});
   }
 
   void signUpWithEmail({
