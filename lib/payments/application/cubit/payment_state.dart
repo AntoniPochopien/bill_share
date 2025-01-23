@@ -11,6 +11,6 @@ class PaymentState with _$PaymentState {
     Failure? error,
   }) = _PaymentState;
 
-  get isPremium => purchases.any((element) => element.productID == 'pl.byteitright.premium');
-
+  get isPremium => purchases
+      .any((element) => element.productID == StoreProducts.premiumProductId);
 }

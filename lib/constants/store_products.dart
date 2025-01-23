@@ -1,3 +1,4 @@
 class StoreProducts {
-  static const storeProductsIds = {'pl.byteitright.premium'};
+  static const premiumProductId = 'pl.byteitright.premium';
+  static const storeProductsIds = {premiumProductId};
 }
