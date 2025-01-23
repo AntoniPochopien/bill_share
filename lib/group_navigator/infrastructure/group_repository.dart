@@ -71,7 +71,7 @@ class GroupRepository implements IGroupRepository {
       final requestes = await Future.wait([
         _supabase
             .from('groups_profiles')
-            .select('profiles(id, username), is_admin')
+            .select('profiles(id, username, image_url), is_admin')
             .eq('group_id', groupId),
         _supabase
             .from('expense_beneficiaries')
@@ -94,7 +94,7 @@ class GroupRepository implements IGroupRepository {
         };
         return GroupMember.fromJson(flattenJson);
       }).toList();
-
+      
       if (groupExpensesResponse.isEmpty) {
         return right(DashboardData(
             toPay: 0,

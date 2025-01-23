@@ -44,6 +44,8 @@ class ProfileImage extends StatelessWidget {
         child: Image.file(
           File(imageFile!.path),
           fit: BoxFit.cover,
+          width: size,
+          height: size,
         ),
       );
     } else if (imageUrl != null) {
@@ -52,6 +54,8 @@ class ProfileImage extends StatelessWidget {
         child: Image.network(
           imageUrl!,
           fit: BoxFit.cover,
+          width: size,
+          height: size,
           loadingBuilder: (context, child, loadingProgress) {
             if (loadingProgress == null) {
               return child;
@@ -73,12 +77,16 @@ class ProfileImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
+      if (imageUrl != null || imageFile != null)
+        Positioned.fill(child: _buildShimmerEffect()),
       Container(
         width: size,
         height: size,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: backgroundColor ?? AppColors.lightBlue,
+          color: (imageUrl == null && imageFile == null)
+              ? (backgroundColor ?? AppColors.lightBlue)
+              : Colors.transparent,
         ),
         child: _buildImage(),
       ),
