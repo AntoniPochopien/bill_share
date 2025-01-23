@@ -12,7 +12,14 @@ class DividerWithText extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 19.5),
       child: Row(children: [
         Expanded(flex: 2, child: Divider(color: AppColors.grey)),
-        Expanded(flex: 3, child: Center(child: Text(text, style: Font.h4Grey))),
+        Expanded(
+            flex: 3,
+            child: Center(
+                child: Text(
+              text,
+              style: Font.h4Grey,
+              textAlign: TextAlign.center,
+            ))),
         Expanded(flex: 2, child: Divider(color: AppColors.grey)),
       ]),
     );

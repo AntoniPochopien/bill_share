@@ -35,7 +35,10 @@ class BillShare extends StatelessWidget {
             create: (context) => LanguageCubit(
                 localStorageRepository: getIt<ILocalStorageRepository>())
               ..init()),
-        BlocProvider(create: (context) => PaymentCubit(iPaymentsRepository: getIt<IPaymentsRepository>()))
+        BlocProvider(
+            create: (context) =>
+                PaymentCubit(iPaymentsRepository: getIt<IPaymentsRepository>())
+                  ..init()),
       ],
       child: BlocBuilder<LanguageCubit, LanguageState>(
         builder: (context, languageState) => MaterialApp.router(

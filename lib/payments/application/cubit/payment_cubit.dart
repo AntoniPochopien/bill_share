@@ -29,6 +29,7 @@ class PaymentCubit extends Cubit<PaymentState> {
       ]);
       final productsResult =
           results[0] as Either<Failure, List<ProductDetails>>;
+
       final streamResult =
           results[1] as Either<Failure, Stream<List<PurchaseDetails>>>;
 
@@ -37,6 +38,7 @@ class PaymentCubit extends Cubit<PaymentState> {
           (products) => streamResult.fold(
                 (streamFalure) => emit(state.copyWith(error: streamFalure)),
                 (stream) {
+                  emit(state.copyWith(products: products));
                   _listenForPurchases(stream);
                 },
               ));

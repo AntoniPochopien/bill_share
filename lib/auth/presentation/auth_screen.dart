@@ -9,6 +9,7 @@ import 'package:bill_share/common/utils/error_handler.dart';
 import 'package:bill_share/common/utils/validators.dart';
 import 'package:bill_share/constants/assets.dart';
 import 'package:bill_share/di.dart';
+import 'package:bill_share/l10n/l10n.dart';
 import 'package:bill_share/local_storage/domain/i_local_storage_repository.dart';
 import 'package:bill_share/navigation/app_router.dart';
 import 'package:flutter/material.dart';
@@ -80,11 +81,11 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AuthCubit(
-        iUserRepository: getIt<IUserRepository>(),
-        iAuthRepository: getIt<IAuthRepository>(),
-        injectableUser: getIt<InjectableUser>(),
-        iLocalStorageRepository: getIt<ILocalStorageRepository>()
-      )..init(),
+          iUserRepository: getIt<IUserRepository>(),
+          iAuthRepository: getIt<IAuthRepository>(),
+          injectableUser: getIt<InjectableUser>(),
+          iLocalStorageRepository: getIt<ILocalStorageRepository>())
+        ..init(),
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           state.whenOrNull(
@@ -108,18 +109,18 @@ class _AuthScreenState extends State<AuthScreen> {
                           ),
                           Column(children: [
                             Text(
-                              'Sign In',
+                              T(context).sign_in,
                               style: Font.h2DarkSemiBold,
                             ),
                             Text(
-                              'Access to your account',
+                              T(context).access_to_your_account,
                               style: Font.h4Grey,
                             ),
                           ]),
                           Column(children: [
                             BillshareTextField(
                               controller: emailController,
-                              label: 'Email',
+                              label: T(context).email,
                               validator: (v) =>
                                   Validators.emailValidator(context, v),
                             ),
@@ -127,7 +128,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                 controller: _inputsExpandAndFadeControllers[0],
                                 child: BillshareTextField(
                                     controller: usernameController,
-                                    label: 'Username',
+                                    label: T(context).username,
                                     validator: (v) {
                                       if (_signUpWithEmail) {
                                         return Validators.usernameValidator(
@@ -138,7 +139,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                     })),
                             BillshareTextField(
                               controller: pwdController,
-                              label: 'Password',
+                              label: T(context).password,
                               obscure: true,
                               validator: (v) =>
                                   Validators.passwordValidator(context, v),
@@ -147,7 +148,7 @@ class _AuthScreenState extends State<AuthScreen> {
                               controller: _inputsExpandAndFadeControllers[1],
                               child: BillshareTextField(
                                 controller: repeatPwdController,
-                                label: 'Repeat password',
+                                label: T(context).repeat_password,
                                 obscure: true,
                                 validator: (v) {
                                   if (_signUpWithEmail) {
@@ -162,14 +163,16 @@ class _AuthScreenState extends State<AuthScreen> {
                             Button(
                                 isLoading: state.maybeWhen(
                                     orElse: () => false, loading: () => true),
-                                text: _signUpWithEmail ? 'Sign Up' : 'Sign in',
+                                text: _signUpWithEmail
+                                    ? T(context).sign_up
+                                    : T(context).sign_in,
                                 onPressed: () => _onSignIn(context)),
-                            DividerWithText(text: 'Or Sign In With'),
+                            DividerWithText(text: T(context).or_sign_in_with),
                             ExpandAndFadeWidget(
                               controller: _buttonsExpandAndFadeController[0],
                               initialExpanded: true,
                               child: FramedButton(
-                                text: 'Sign in with google',
+                                text: T(context).sign_in_with_google,
                                 onPressed: () =>
                                     context.read<AuthCubit>().googleSignIn(),
                                 iconUrl: Assets.googleG,
@@ -179,7 +182,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                 controller: _buttonsExpandAndFadeController[1],
                                 initialExpanded: true,
                                 child: FramedButton(
-                                  text: 'Sign in with Apple',
+                                  text: T(context).sign_in_with_apple,
                                   onPressed: () {},
                                   iconUrl: Assets.apple,
                                 )),
@@ -187,13 +190,15 @@ class _AuthScreenState extends State<AuthScreen> {
                               duration: Duration(milliseconds: 300),
                               child: _signUpWithEmail
                                   ? FramedButton(
-                                      key: ValueKey('Already have an account'),
-                                      text: 'Already have an account',
+                                      key: ValueKey(
+                                          T(context).already_have_account),
+                                      text: T(context).already_have_account,
                                       onPressed: () => _loginRegisterSwitcher(),
                                     )
                                   : FramedButton(
-                                      key: ValueKey('Sign up with Email'),
-                                      text: 'Sign up with Email',
+                                      key: ValueKey(
+                                          T(context).sign_up_with_email),
+                                      text: T(context).sign_up_with_email,
                                       iconData: Icons.email,
                                       onPressed: () =>
                                           _loginRegisterSwitcher()),

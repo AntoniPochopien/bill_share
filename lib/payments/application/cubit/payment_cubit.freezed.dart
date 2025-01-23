@@ -170,7 +170,7 @@ class __$$PaymentStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PaymentStateImpl implements _PaymentState {
+class _$PaymentStateImpl extends _PaymentState {
   const _$PaymentStateImpl(
       {this.pending = false,
       this.avaliable = false,
@@ -178,7 +178,8 @@ class _$PaymentStateImpl implements _PaymentState {
       final List<PurchaseDetails> purchases = const [],
       this.error})
       : _products = products,
-        _purchases = purchases;
+        _purchases = purchases,
+        super._();
 
   @override
   @JsonKey()
@@ -244,13 +245,14 @@ class _$PaymentStateImpl implements _PaymentState {
       __$$PaymentStateImplCopyWithImpl<_$PaymentStateImpl>(this, _$identity);
 }
 
-abstract class _PaymentState implements PaymentState {
+abstract class _PaymentState extends PaymentState {
   const factory _PaymentState(
       {final bool pending,
       final bool avaliable,
       final List<ProductDetails> products,
       final List<PurchaseDetails> purchases,
       final Failure? error}) = _$PaymentStateImpl;
+  const _PaymentState._() : super._();
 
   @override
   bool get pending;
