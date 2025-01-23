@@ -44,60 +44,62 @@ class _UpdateProfileDialogState extends State<UpdateProfileDialog> {
         padding: const EdgeInsets.all(16),
         child: Form(
           key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TitleWithUnderscore(
-                title: T(context).your_profile,
-                description: T(context).update_profile_description,
-              ),
-              Column(
-                children: [
-                  ProfileImage(
-                    size: 96,
-                    onTap: () async {
-                      final picker = ImagePicker();
-                      final newImage =
-                          await picker.pickImage(source: ImageSource.gallery);
-                      if (newImage != null) {
-                        setState(() {
-                          _image = newImage;
-                        });
-                      }
-                    },
-                    imageUrl: ImageUrlGenerator.generatePublicImageUrl(
-                        widget.user.imageUrl),
-                    imageFile: _image,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 32),
-                    child: BillshareTextField(
-                      controller: _controller,
-                      label: T(context).username,
-                      validator: (v) =>
-                          Validators.usernameValidator(context, v),
-                    ),
-                  ),
-                  Button(
-                    text: T(context).update,
-                    isLoading: _isLoading,
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        setState(() => _isLoading = true);
-                        await widget.onUpdate(_controller.text, _image);
-                        if (context.mounted) {
-                          context.maybePop();
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TitleWithUnderscore(
+                  title: T(context).your_profile,
+                  description: T(context).update_profile_description,
+                ),
+                Column(
+                  children: [
+                    ProfileImage(
+                      size: 96,
+                      onTap: () async {
+                        final picker = ImagePicker();
+                        final newImage =
+                            await picker.pickImage(source: ImageSource.gallery);
+                        if (newImage != null) {
+                          setState(() {
+                            _image = newImage;
+                          });
                         }
-                      }
-                    },
-                  ),
-                  FramedButton(
-                      text: T(context).cancel,
-                      onPressed: () => context.maybePop()),
-                ],
-              ),
-            ],
+                      },
+                      imageUrl: ImageUrlGenerator.generatePublicImageUrl(
+                          widget.user.imageUrl),
+                      imageFile: _image,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 32),
+                      child: BillshareTextField(
+                        controller: _controller,
+                        label: T(context).username,
+                        validator: (v) =>
+                            Validators.usernameValidator(context, v),
+                      ),
+                    ),
+                    Button(
+                      text: T(context).update,
+                      isLoading: _isLoading,
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          setState(() => _isLoading = true);
+                          await widget.onUpdate(_controller.text, _image);
+                          if (context.mounted) {
+                            context.maybePop();
+                          }
+                        }
+                      },
+                    ),
+                    FramedButton(
+                        text: T(context).cancel,
+                        onPressed: () => context.maybePop()),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
