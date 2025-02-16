@@ -15,6 +15,7 @@ class SettingsScreen extends StatelessWidget {
     return BlocBuilder<LanguageCubit, LanguageState>(
       builder: (context, languageState) => BillshareScaffold(
         appBar: AppBar(
+          centerTitle: false,
           title: Text(T(context).settings),
         ),
         body: SingleChildScrollView(

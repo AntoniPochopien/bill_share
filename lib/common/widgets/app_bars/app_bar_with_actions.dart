@@ -7,6 +7,7 @@ class AppBarWithActions extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+        centerTitle: false,
         notificationPredicate: (_) => false,
         title: Logo(),
         actions: []);
