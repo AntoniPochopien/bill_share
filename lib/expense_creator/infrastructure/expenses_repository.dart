@@ -48,15 +48,18 @@ class ExpensesRepository implements IExpensesRepository {
               event: PostgresChangeEvent.all,
               schema: 'public',
               table: 'expenses',
+              filter: PostgresChangeFilter(
+                type: PostgresChangeFilterType.eq,
+                column: 'group_id',
+                value: groupId,
+              ),
               callback: (payload) async {
                 if (payload.eventType == PostgresChangeEvent.insert) {
                   final newRecord = payload.newRecord;
-                  if (newRecord['group_id'] == groupId) {
-                    log('expenses observer event: INSERT');
-                    final event =
-                        await _onInsertOrUpdate(newRecord, update: false);
-                    streamController.add(event);
-                  }
+                  log('expenses observer event: INSERT');
+                  final event =
+                      await _onInsertOrUpdate(newRecord, update: false);
+                  streamController.add(event);
                 } else if (payload.eventType == PostgresChangeEvent.delete) {
                   log('expenses observer event: DELETE');
                   final oldRecord = payload.oldRecord;
@@ -64,12 +67,10 @@ class ExpensesRepository implements IExpensesRepository {
                   streamController.add(event);
                 } else if (payload.eventType == PostgresChangeEvent.update) {
                   final newRecord = payload.newRecord;
-                  if (newRecord['group_id'] == groupId) {
-                    log('expenses observer event: UPDATE');
-                    final event =
-                        await _onInsertOrUpdate(newRecord, update: true);
-                    streamController.add(event);
-                  }
+                  log('expenses observer event: UPDATE');
+                  final event =
+                      await _onInsertOrUpdate(newRecord, update: true);
+                  streamController.add(event);
                 }
               })
           .subscribe();

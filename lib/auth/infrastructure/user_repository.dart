@@ -19,8 +19,8 @@ class UserRepository implements IUserRepository {
   }) async {
     try {
       final newImageUrl = newProfileImage != null
-          ? await _supabase.storage.from('users_avatars').upload(
-              id, File(newProfileImage.path),
+          ? await _supabase.storage.from('images').upload(
+              'users_avatars/$id', File(newProfileImage.path),
               fileOptions: sb.FileOptions(upsert: true))
           : null;
 

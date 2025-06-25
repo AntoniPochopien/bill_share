@@ -17,8 +17,9 @@ class GroupsRepository implements IGroupsRepository {
       final result = await _supabase.rpc('create_group', params: {
         'name': groupName,
         'access_code': accessCode,
-      }) as List;
-      final newGroupId = result[0]['id'];
+      });
+
+      final newGroupId = result[0]['group_id'];
       final newGroupResult = await _supabase
           .from('groups_profiles')
           .select(

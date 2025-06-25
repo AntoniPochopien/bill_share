@@ -86,9 +86,12 @@ class AuthRepository implements IAuthRepository {
       if (e.code == 'invalid_credentials') {
         log('logIn emailNotConfirmed error: $e');
         return left(const Failure.wrongCredentials());
+      } else if (e.code == 'email_not_confirmed') {
+        log('logIn User email is not confirmed: $e');
+        return Left(Failure.emailNotConfirmed());
       } else {
         log('logIn AuthException unexpected error: $e');
-        return Left(Failure.unexpected(e.toString()));
+        return Left(Failure.unexpected());
       }
     } catch (e) {
       log('signInWithEmail unexpected error: $e');

@@ -210,8 +210,8 @@ class GroupRepository implements IGroupRepository {
       final image =
           await picker.pickImage(source: ImageSource.gallery, imageQuality: 30);
       if (image != null) {
-        final url = await _supabase.storage.from('groups_avatars').upload(
-            '$groupId', File(image.path),
+        final url = await _supabase.storage.from('images').upload(
+            'groups_images/$groupId', File(image.path),
             fileOptions: FileOptions(upsert: true));
         await _supabase.from('groups').update({
           'image_url': url,
@@ -234,7 +234,7 @@ class GroupRepository implements IGroupRepository {
           .update({'name': newGroupName}).eq('id', id);
       return right(unit);
     } catch (e) {
-      log('updateGroupImage unexpected error: $e');
+      log('updateGroupName unexpected error: $e');
       return left(Failure.unexpected());
     }
   }

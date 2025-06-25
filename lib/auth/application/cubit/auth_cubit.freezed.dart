@@ -21,6 +21,7 @@ mixin _$AuthState {
     required TResult Function() unauthenticated,
     required TResult Function() loading,
     required TResult Function(User user) authenticated,
+    required TResult Function() confirmEmail,
     required TResult Function(Failure failure) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -29,6 +30,7 @@ mixin _$AuthState {
     TResult? Function()? unauthenticated,
     TResult? Function()? loading,
     TResult? Function(User user)? authenticated,
+    TResult? Function()? confirmEmail,
     TResult? Function(Failure failure)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -37,6 +39,7 @@ mixin _$AuthState {
     TResult Function()? unauthenticated,
     TResult Function()? loading,
     TResult Function(User user)? authenticated,
+    TResult Function()? confirmEmail,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) =>
@@ -46,6 +49,7 @@ mixin _$AuthState {
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_ConfirmEmail value) confirmEmail,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,6 +58,7 @@ mixin _$AuthState {
     TResult? Function(_Unauthenticated value)? unauthenticated,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_ConfirmEmail value)? confirmEmail,
     TResult? Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -62,6 +67,7 @@ mixin _$AuthState {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Loading value)? loading,
     TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_ConfirmEmail value)? confirmEmail,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -132,6 +138,7 @@ class _$UnauthenticatedImpl implements _Unauthenticated {
     required TResult Function() unauthenticated,
     required TResult Function() loading,
     required TResult Function(User user) authenticated,
+    required TResult Function() confirmEmail,
     required TResult Function(Failure failure) error,
   }) {
     return unauthenticated();
@@ -143,6 +150,7 @@ class _$UnauthenticatedImpl implements _Unauthenticated {
     TResult? Function()? unauthenticated,
     TResult? Function()? loading,
     TResult? Function(User user)? authenticated,
+    TResult? Function()? confirmEmail,
     TResult? Function(Failure failure)? error,
   }) {
     return unauthenticated?.call();
@@ -154,6 +162,7 @@ class _$UnauthenticatedImpl implements _Unauthenticated {
     TResult Function()? unauthenticated,
     TResult Function()? loading,
     TResult Function(User user)? authenticated,
+    TResult Function()? confirmEmail,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
@@ -169,6 +178,7 @@ class _$UnauthenticatedImpl implements _Unauthenticated {
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_ConfirmEmail value) confirmEmail,
     required TResult Function(_Error value) error,
   }) {
     return unauthenticated(this);
@@ -180,6 +190,7 @@ class _$UnauthenticatedImpl implements _Unauthenticated {
     TResult? Function(_Unauthenticated value)? unauthenticated,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_ConfirmEmail value)? confirmEmail,
     TResult? Function(_Error value)? error,
   }) {
     return unauthenticated?.call(this);
@@ -191,6 +202,7 @@ class _$UnauthenticatedImpl implements _Unauthenticated {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Loading value)? loading,
     TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_ConfirmEmail value)? confirmEmail,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -249,6 +261,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() unauthenticated,
     required TResult Function() loading,
     required TResult Function(User user) authenticated,
+    required TResult Function() confirmEmail,
     required TResult Function(Failure failure) error,
   }) {
     return loading();
@@ -260,6 +273,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? unauthenticated,
     TResult? Function()? loading,
     TResult? Function(User user)? authenticated,
+    TResult? Function()? confirmEmail,
     TResult? Function(Failure failure)? error,
   }) {
     return loading?.call();
@@ -271,6 +285,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? unauthenticated,
     TResult Function()? loading,
     TResult Function(User user)? authenticated,
+    TResult Function()? confirmEmail,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
@@ -286,6 +301,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_ConfirmEmail value) confirmEmail,
     required TResult Function(_Error value) error,
   }) {
     return loading(this);
@@ -297,6 +313,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Unauthenticated value)? unauthenticated,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_ConfirmEmail value)? confirmEmail,
     TResult? Function(_Error value)? error,
   }) {
     return loading?.call(this);
@@ -308,6 +325,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Loading value)? loading,
     TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_ConfirmEmail value)? confirmEmail,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -405,6 +423,7 @@ class _$AuthenticatedImpl implements _Authenticated {
     required TResult Function() unauthenticated,
     required TResult Function() loading,
     required TResult Function(User user) authenticated,
+    required TResult Function() confirmEmail,
     required TResult Function(Failure failure) error,
   }) {
     return authenticated(user);
@@ -416,6 +435,7 @@ class _$AuthenticatedImpl implements _Authenticated {
     TResult? Function()? unauthenticated,
     TResult? Function()? loading,
     TResult? Function(User user)? authenticated,
+    TResult? Function()? confirmEmail,
     TResult? Function(Failure failure)? error,
   }) {
     return authenticated?.call(user);
@@ -427,6 +447,7 @@ class _$AuthenticatedImpl implements _Authenticated {
     TResult Function()? unauthenticated,
     TResult Function()? loading,
     TResult Function(User user)? authenticated,
+    TResult Function()? confirmEmail,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
@@ -442,6 +463,7 @@ class _$AuthenticatedImpl implements _Authenticated {
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_ConfirmEmail value) confirmEmail,
     required TResult Function(_Error value) error,
   }) {
     return authenticated(this);
@@ -453,6 +475,7 @@ class _$AuthenticatedImpl implements _Authenticated {
     TResult? Function(_Unauthenticated value)? unauthenticated,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_ConfirmEmail value)? confirmEmail,
     TResult? Function(_Error value)? error,
   }) {
     return authenticated?.call(this);
@@ -464,6 +487,7 @@ class _$AuthenticatedImpl implements _Authenticated {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Loading value)? loading,
     TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_ConfirmEmail value)? confirmEmail,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -484,6 +508,129 @@ abstract class _Authenticated implements AuthState {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AuthenticatedImplCopyWith<_$AuthenticatedImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ConfirmEmailImplCopyWith<$Res> {
+  factory _$$ConfirmEmailImplCopyWith(
+          _$ConfirmEmailImpl value, $Res Function(_$ConfirmEmailImpl) then) =
+      __$$ConfirmEmailImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ConfirmEmailImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$ConfirmEmailImpl>
+    implements _$$ConfirmEmailImplCopyWith<$Res> {
+  __$$ConfirmEmailImplCopyWithImpl(
+      _$ConfirmEmailImpl _value, $Res Function(_$ConfirmEmailImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ConfirmEmailImpl implements _ConfirmEmail {
+  const _$ConfirmEmailImpl();
+
+  @override
+  String toString() {
+    return 'AuthState.confirmEmail()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ConfirmEmailImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() unauthenticated,
+    required TResult Function() loading,
+    required TResult Function(User user) authenticated,
+    required TResult Function() confirmEmail,
+    required TResult Function(Failure failure) error,
+  }) {
+    return confirmEmail();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? unauthenticated,
+    TResult? Function()? loading,
+    TResult? Function(User user)? authenticated,
+    TResult? Function()? confirmEmail,
+    TResult? Function(Failure failure)? error,
+  }) {
+    return confirmEmail?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? unauthenticated,
+    TResult Function()? loading,
+    TResult Function(User user)? authenticated,
+    TResult Function()? confirmEmail,
+    TResult Function(Failure failure)? error,
+    required TResult orElse(),
+  }) {
+    if (confirmEmail != null) {
+      return confirmEmail();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_ConfirmEmail value) confirmEmail,
+    required TResult Function(_Error value) error,
+  }) {
+    return confirmEmail(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Unauthenticated value)? unauthenticated,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_ConfirmEmail value)? confirmEmail,
+    TResult? Function(_Error value)? error,
+  }) {
+    return confirmEmail?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_ConfirmEmail value)? confirmEmail,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (confirmEmail != null) {
+      return confirmEmail(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ConfirmEmail implements AuthState {
+  const factory _ConfirmEmail() = _$ConfirmEmailImpl;
 }
 
 /// @nodoc
@@ -569,6 +716,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function() unauthenticated,
     required TResult Function() loading,
     required TResult Function(User user) authenticated,
+    required TResult Function() confirmEmail,
     required TResult Function(Failure failure) error,
   }) {
     return error(failure);
@@ -580,6 +728,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? unauthenticated,
     TResult? Function()? loading,
     TResult? Function(User user)? authenticated,
+    TResult? Function()? confirmEmail,
     TResult? Function(Failure failure)? error,
   }) {
     return error?.call(failure);
@@ -591,6 +740,7 @@ class _$ErrorImpl implements _Error {
     TResult Function()? unauthenticated,
     TResult Function()? loading,
     TResult Function(User user)? authenticated,
+    TResult Function()? confirmEmail,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
@@ -606,6 +756,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_ConfirmEmail value) confirmEmail,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -617,6 +768,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Unauthenticated value)? unauthenticated,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_ConfirmEmail value)? confirmEmail,
     TResult? Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -628,6 +780,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Loading value)? loading,
     TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_ConfirmEmail value)? confirmEmail,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {

@@ -10,6 +10,7 @@ class Failure with _$Failure {
   const factory Failure.groupNotExists() = _GroupNotExists;
   const factory Failure.dontBelongToGroup() = _DontBelongToGroup;
   const factory Failure.userAlreadyExists() = _UserAlreadyExists;
+  const factory Failure.emailNotConfirmed() = _EmailNotConfirmed;
   const factory Failure.unexpected([@Default('unexpected') String? message]) =
       _Unexpected;
 }

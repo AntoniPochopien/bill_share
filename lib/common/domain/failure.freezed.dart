@@ -24,6 +24,7 @@ mixin _$Failure {
     required TResult Function() groupNotExists,
     required TResult Function() dontBelongToGroup,
     required TResult Function() userAlreadyExists,
+    required TResult Function() emailNotConfirmed,
     required TResult Function(String? message) unexpected,
   }) =>
       throw _privateConstructorUsedError;
@@ -35,6 +36,7 @@ mixin _$Failure {
     TResult? Function()? groupNotExists,
     TResult? Function()? dontBelongToGroup,
     TResult? Function()? userAlreadyExists,
+    TResult? Function()? emailNotConfirmed,
     TResult? Function(String? message)? unexpected,
   }) =>
       throw _privateConstructorUsedError;
@@ -46,6 +48,7 @@ mixin _$Failure {
     TResult Function()? groupNotExists,
     TResult Function()? dontBelongToGroup,
     TResult Function()? userAlreadyExists,
+    TResult Function()? emailNotConfirmed,
     TResult Function(String? message)? unexpected,
     required TResult orElse(),
   }) =>
@@ -58,6 +61,7 @@ mixin _$Failure {
     required TResult Function(_GroupNotExists value) groupNotExists,
     required TResult Function(_DontBelongToGroup value) dontBelongToGroup,
     required TResult Function(_UserAlreadyExists value) userAlreadyExists,
+    required TResult Function(_EmailNotConfirmed value) emailNotConfirmed,
     required TResult Function(_Unexpected value) unexpected,
   }) =>
       throw _privateConstructorUsedError;
@@ -69,6 +73,7 @@ mixin _$Failure {
     TResult? Function(_GroupNotExists value)? groupNotExists,
     TResult? Function(_DontBelongToGroup value)? dontBelongToGroup,
     TResult? Function(_UserAlreadyExists value)? userAlreadyExists,
+    TResult? Function(_EmailNotConfirmed value)? emailNotConfirmed,
     TResult? Function(_Unexpected value)? unexpected,
   }) =>
       throw _privateConstructorUsedError;
@@ -80,6 +85,7 @@ mixin _$Failure {
     TResult Function(_GroupNotExists value)? groupNotExists,
     TResult Function(_DontBelongToGroup value)? dontBelongToGroup,
     TResult Function(_UserAlreadyExists value)? userAlreadyExists,
+    TResult Function(_EmailNotConfirmed value)? emailNotConfirmed,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) =>
@@ -153,6 +159,7 @@ class _$CannotReachImpl implements _CannotReach {
     required TResult Function() groupNotExists,
     required TResult Function() dontBelongToGroup,
     required TResult Function() userAlreadyExists,
+    required TResult Function() emailNotConfirmed,
     required TResult Function(String? message) unexpected,
   }) {
     return cannotReach();
@@ -167,6 +174,7 @@ class _$CannotReachImpl implements _CannotReach {
     TResult? Function()? groupNotExists,
     TResult? Function()? dontBelongToGroup,
     TResult? Function()? userAlreadyExists,
+    TResult? Function()? emailNotConfirmed,
     TResult? Function(String? message)? unexpected,
   }) {
     return cannotReach?.call();
@@ -181,6 +189,7 @@ class _$CannotReachImpl implements _CannotReach {
     TResult Function()? groupNotExists,
     TResult Function()? dontBelongToGroup,
     TResult Function()? userAlreadyExists,
+    TResult Function()? emailNotConfirmed,
     TResult Function(String? message)? unexpected,
     required TResult orElse(),
   }) {
@@ -199,6 +208,7 @@ class _$CannotReachImpl implements _CannotReach {
     required TResult Function(_GroupNotExists value) groupNotExists,
     required TResult Function(_DontBelongToGroup value) dontBelongToGroup,
     required TResult Function(_UserAlreadyExists value) userAlreadyExists,
+    required TResult Function(_EmailNotConfirmed value) emailNotConfirmed,
     required TResult Function(_Unexpected value) unexpected,
   }) {
     return cannotReach(this);
@@ -213,6 +223,7 @@ class _$CannotReachImpl implements _CannotReach {
     TResult? Function(_GroupNotExists value)? groupNotExists,
     TResult? Function(_DontBelongToGroup value)? dontBelongToGroup,
     TResult? Function(_UserAlreadyExists value)? userAlreadyExists,
+    TResult? Function(_EmailNotConfirmed value)? emailNotConfirmed,
     TResult? Function(_Unexpected value)? unexpected,
   }) {
     return cannotReach?.call(this);
@@ -227,6 +238,7 @@ class _$CannotReachImpl implements _CannotReach {
     TResult Function(_GroupNotExists value)? groupNotExists,
     TResult Function(_DontBelongToGroup value)? dontBelongToGroup,
     TResult Function(_UserAlreadyExists value)? userAlreadyExists,
+    TResult Function(_EmailNotConfirmed value)? emailNotConfirmed,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) {
@@ -288,6 +300,7 @@ class _$UnauthorizedImpl implements _Unauthorized {
     required TResult Function() groupNotExists,
     required TResult Function() dontBelongToGroup,
     required TResult Function() userAlreadyExists,
+    required TResult Function() emailNotConfirmed,
     required TResult Function(String? message) unexpected,
   }) {
     return unauthorized();
@@ -302,6 +315,7 @@ class _$UnauthorizedImpl implements _Unauthorized {
     TResult? Function()? groupNotExists,
     TResult? Function()? dontBelongToGroup,
     TResult? Function()? userAlreadyExists,
+    TResult? Function()? emailNotConfirmed,
     TResult? Function(String? message)? unexpected,
   }) {
     return unauthorized?.call();
@@ -316,6 +330,7 @@ class _$UnauthorizedImpl implements _Unauthorized {
     TResult Function()? groupNotExists,
     TResult Function()? dontBelongToGroup,
     TResult Function()? userAlreadyExists,
+    TResult Function()? emailNotConfirmed,
     TResult Function(String? message)? unexpected,
     required TResult orElse(),
   }) {
@@ -334,6 +349,7 @@ class _$UnauthorizedImpl implements _Unauthorized {
     required TResult Function(_GroupNotExists value) groupNotExists,
     required TResult Function(_DontBelongToGroup value) dontBelongToGroup,
     required TResult Function(_UserAlreadyExists value) userAlreadyExists,
+    required TResult Function(_EmailNotConfirmed value) emailNotConfirmed,
     required TResult Function(_Unexpected value) unexpected,
   }) {
     return unauthorized(this);
@@ -348,6 +364,7 @@ class _$UnauthorizedImpl implements _Unauthorized {
     TResult? Function(_GroupNotExists value)? groupNotExists,
     TResult? Function(_DontBelongToGroup value)? dontBelongToGroup,
     TResult? Function(_UserAlreadyExists value)? userAlreadyExists,
+    TResult? Function(_EmailNotConfirmed value)? emailNotConfirmed,
     TResult? Function(_Unexpected value)? unexpected,
   }) {
     return unauthorized?.call(this);
@@ -362,6 +379,7 @@ class _$UnauthorizedImpl implements _Unauthorized {
     TResult Function(_GroupNotExists value)? groupNotExists,
     TResult Function(_DontBelongToGroup value)? dontBelongToGroup,
     TResult Function(_UserAlreadyExists value)? userAlreadyExists,
+    TResult Function(_EmailNotConfirmed value)? emailNotConfirmed,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) {
@@ -423,6 +441,7 @@ class _$WrongCredentialsImpl implements _WrongCredentials {
     required TResult Function() groupNotExists,
     required TResult Function() dontBelongToGroup,
     required TResult Function() userAlreadyExists,
+    required TResult Function() emailNotConfirmed,
     required TResult Function(String? message) unexpected,
   }) {
     return wrongCredentials();
@@ -437,6 +456,7 @@ class _$WrongCredentialsImpl implements _WrongCredentials {
     TResult? Function()? groupNotExists,
     TResult? Function()? dontBelongToGroup,
     TResult? Function()? userAlreadyExists,
+    TResult? Function()? emailNotConfirmed,
     TResult? Function(String? message)? unexpected,
   }) {
     return wrongCredentials?.call();
@@ -451,6 +471,7 @@ class _$WrongCredentialsImpl implements _WrongCredentials {
     TResult Function()? groupNotExists,
     TResult Function()? dontBelongToGroup,
     TResult Function()? userAlreadyExists,
+    TResult Function()? emailNotConfirmed,
     TResult Function(String? message)? unexpected,
     required TResult orElse(),
   }) {
@@ -469,6 +490,7 @@ class _$WrongCredentialsImpl implements _WrongCredentials {
     required TResult Function(_GroupNotExists value) groupNotExists,
     required TResult Function(_DontBelongToGroup value) dontBelongToGroup,
     required TResult Function(_UserAlreadyExists value) userAlreadyExists,
+    required TResult Function(_EmailNotConfirmed value) emailNotConfirmed,
     required TResult Function(_Unexpected value) unexpected,
   }) {
     return wrongCredentials(this);
@@ -483,6 +505,7 @@ class _$WrongCredentialsImpl implements _WrongCredentials {
     TResult? Function(_GroupNotExists value)? groupNotExists,
     TResult? Function(_DontBelongToGroup value)? dontBelongToGroup,
     TResult? Function(_UserAlreadyExists value)? userAlreadyExists,
+    TResult? Function(_EmailNotConfirmed value)? emailNotConfirmed,
     TResult? Function(_Unexpected value)? unexpected,
   }) {
     return wrongCredentials?.call(this);
@@ -497,6 +520,7 @@ class _$WrongCredentialsImpl implements _WrongCredentials {
     TResult Function(_GroupNotExists value)? groupNotExists,
     TResult Function(_DontBelongToGroup value)? dontBelongToGroup,
     TResult Function(_UserAlreadyExists value)? userAlreadyExists,
+    TResult Function(_EmailNotConfirmed value)? emailNotConfirmed,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) {
@@ -558,6 +582,7 @@ class _$GroupNotExistsImpl implements _GroupNotExists {
     required TResult Function() groupNotExists,
     required TResult Function() dontBelongToGroup,
     required TResult Function() userAlreadyExists,
+    required TResult Function() emailNotConfirmed,
     required TResult Function(String? message) unexpected,
   }) {
     return groupNotExists();
@@ -572,6 +597,7 @@ class _$GroupNotExistsImpl implements _GroupNotExists {
     TResult? Function()? groupNotExists,
     TResult? Function()? dontBelongToGroup,
     TResult? Function()? userAlreadyExists,
+    TResult? Function()? emailNotConfirmed,
     TResult? Function(String? message)? unexpected,
   }) {
     return groupNotExists?.call();
@@ -586,6 +612,7 @@ class _$GroupNotExistsImpl implements _GroupNotExists {
     TResult Function()? groupNotExists,
     TResult Function()? dontBelongToGroup,
     TResult Function()? userAlreadyExists,
+    TResult Function()? emailNotConfirmed,
     TResult Function(String? message)? unexpected,
     required TResult orElse(),
   }) {
@@ -604,6 +631,7 @@ class _$GroupNotExistsImpl implements _GroupNotExists {
     required TResult Function(_GroupNotExists value) groupNotExists,
     required TResult Function(_DontBelongToGroup value) dontBelongToGroup,
     required TResult Function(_UserAlreadyExists value) userAlreadyExists,
+    required TResult Function(_EmailNotConfirmed value) emailNotConfirmed,
     required TResult Function(_Unexpected value) unexpected,
   }) {
     return groupNotExists(this);
@@ -618,6 +646,7 @@ class _$GroupNotExistsImpl implements _GroupNotExists {
     TResult? Function(_GroupNotExists value)? groupNotExists,
     TResult? Function(_DontBelongToGroup value)? dontBelongToGroup,
     TResult? Function(_UserAlreadyExists value)? userAlreadyExists,
+    TResult? Function(_EmailNotConfirmed value)? emailNotConfirmed,
     TResult? Function(_Unexpected value)? unexpected,
   }) {
     return groupNotExists?.call(this);
@@ -632,6 +661,7 @@ class _$GroupNotExistsImpl implements _GroupNotExists {
     TResult Function(_GroupNotExists value)? groupNotExists,
     TResult Function(_DontBelongToGroup value)? dontBelongToGroup,
     TResult Function(_UserAlreadyExists value)? userAlreadyExists,
+    TResult Function(_EmailNotConfirmed value)? emailNotConfirmed,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) {
@@ -693,6 +723,7 @@ class _$DontBelongToGroupImpl implements _DontBelongToGroup {
     required TResult Function() groupNotExists,
     required TResult Function() dontBelongToGroup,
     required TResult Function() userAlreadyExists,
+    required TResult Function() emailNotConfirmed,
     required TResult Function(String? message) unexpected,
   }) {
     return dontBelongToGroup();
@@ -707,6 +738,7 @@ class _$DontBelongToGroupImpl implements _DontBelongToGroup {
     TResult? Function()? groupNotExists,
     TResult? Function()? dontBelongToGroup,
     TResult? Function()? userAlreadyExists,
+    TResult? Function()? emailNotConfirmed,
     TResult? Function(String? message)? unexpected,
   }) {
     return dontBelongToGroup?.call();
@@ -721,6 +753,7 @@ class _$DontBelongToGroupImpl implements _DontBelongToGroup {
     TResult Function()? groupNotExists,
     TResult Function()? dontBelongToGroup,
     TResult Function()? userAlreadyExists,
+    TResult Function()? emailNotConfirmed,
     TResult Function(String? message)? unexpected,
     required TResult orElse(),
   }) {
@@ -739,6 +772,7 @@ class _$DontBelongToGroupImpl implements _DontBelongToGroup {
     required TResult Function(_GroupNotExists value) groupNotExists,
     required TResult Function(_DontBelongToGroup value) dontBelongToGroup,
     required TResult Function(_UserAlreadyExists value) userAlreadyExists,
+    required TResult Function(_EmailNotConfirmed value) emailNotConfirmed,
     required TResult Function(_Unexpected value) unexpected,
   }) {
     return dontBelongToGroup(this);
@@ -753,6 +787,7 @@ class _$DontBelongToGroupImpl implements _DontBelongToGroup {
     TResult? Function(_GroupNotExists value)? groupNotExists,
     TResult? Function(_DontBelongToGroup value)? dontBelongToGroup,
     TResult? Function(_UserAlreadyExists value)? userAlreadyExists,
+    TResult? Function(_EmailNotConfirmed value)? emailNotConfirmed,
     TResult? Function(_Unexpected value)? unexpected,
   }) {
     return dontBelongToGroup?.call(this);
@@ -767,6 +802,7 @@ class _$DontBelongToGroupImpl implements _DontBelongToGroup {
     TResult Function(_GroupNotExists value)? groupNotExists,
     TResult Function(_DontBelongToGroup value)? dontBelongToGroup,
     TResult Function(_UserAlreadyExists value)? userAlreadyExists,
+    TResult Function(_EmailNotConfirmed value)? emailNotConfirmed,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) {
@@ -828,6 +864,7 @@ class _$UserAlreadyExistsImpl implements _UserAlreadyExists {
     required TResult Function() groupNotExists,
     required TResult Function() dontBelongToGroup,
     required TResult Function() userAlreadyExists,
+    required TResult Function() emailNotConfirmed,
     required TResult Function(String? message) unexpected,
   }) {
     return userAlreadyExists();
@@ -842,6 +879,7 @@ class _$UserAlreadyExistsImpl implements _UserAlreadyExists {
     TResult? Function()? groupNotExists,
     TResult? Function()? dontBelongToGroup,
     TResult? Function()? userAlreadyExists,
+    TResult? Function()? emailNotConfirmed,
     TResult? Function(String? message)? unexpected,
   }) {
     return userAlreadyExists?.call();
@@ -856,6 +894,7 @@ class _$UserAlreadyExistsImpl implements _UserAlreadyExists {
     TResult Function()? groupNotExists,
     TResult Function()? dontBelongToGroup,
     TResult Function()? userAlreadyExists,
+    TResult Function()? emailNotConfirmed,
     TResult Function(String? message)? unexpected,
     required TResult orElse(),
   }) {
@@ -874,6 +913,7 @@ class _$UserAlreadyExistsImpl implements _UserAlreadyExists {
     required TResult Function(_GroupNotExists value) groupNotExists,
     required TResult Function(_DontBelongToGroup value) dontBelongToGroup,
     required TResult Function(_UserAlreadyExists value) userAlreadyExists,
+    required TResult Function(_EmailNotConfirmed value) emailNotConfirmed,
     required TResult Function(_Unexpected value) unexpected,
   }) {
     return userAlreadyExists(this);
@@ -888,6 +928,7 @@ class _$UserAlreadyExistsImpl implements _UserAlreadyExists {
     TResult? Function(_GroupNotExists value)? groupNotExists,
     TResult? Function(_DontBelongToGroup value)? dontBelongToGroup,
     TResult? Function(_UserAlreadyExists value)? userAlreadyExists,
+    TResult? Function(_EmailNotConfirmed value)? emailNotConfirmed,
     TResult? Function(_Unexpected value)? unexpected,
   }) {
     return userAlreadyExists?.call(this);
@@ -902,6 +943,7 @@ class _$UserAlreadyExistsImpl implements _UserAlreadyExists {
     TResult Function(_GroupNotExists value)? groupNotExists,
     TResult Function(_DontBelongToGroup value)? dontBelongToGroup,
     TResult Function(_UserAlreadyExists value)? userAlreadyExists,
+    TResult Function(_EmailNotConfirmed value)? emailNotConfirmed,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) {
@@ -914,6 +956,147 @@ class _$UserAlreadyExistsImpl implements _UserAlreadyExists {
 
 abstract class _UserAlreadyExists implements Failure {
   const factory _UserAlreadyExists() = _$UserAlreadyExistsImpl;
+}
+
+/// @nodoc
+abstract class _$$EmailNotConfirmedImplCopyWith<$Res> {
+  factory _$$EmailNotConfirmedImplCopyWith(_$EmailNotConfirmedImpl value,
+          $Res Function(_$EmailNotConfirmedImpl) then) =
+      __$$EmailNotConfirmedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$EmailNotConfirmedImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$EmailNotConfirmedImpl>
+    implements _$$EmailNotConfirmedImplCopyWith<$Res> {
+  __$$EmailNotConfirmedImplCopyWithImpl(_$EmailNotConfirmedImpl _value,
+      $Res Function(_$EmailNotConfirmedImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$EmailNotConfirmedImpl implements _EmailNotConfirmed {
+  const _$EmailNotConfirmedImpl();
+
+  @override
+  String toString() {
+    return 'Failure.emailNotConfirmed()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$EmailNotConfirmedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() cannotReach,
+    required TResult Function() unauthorized,
+    required TResult Function() wrongCredentials,
+    required TResult Function() groupNotExists,
+    required TResult Function() dontBelongToGroup,
+    required TResult Function() userAlreadyExists,
+    required TResult Function() emailNotConfirmed,
+    required TResult Function(String? message) unexpected,
+  }) {
+    return emailNotConfirmed();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? cannotReach,
+    TResult? Function()? unauthorized,
+    TResult? Function()? wrongCredentials,
+    TResult? Function()? groupNotExists,
+    TResult? Function()? dontBelongToGroup,
+    TResult? Function()? userAlreadyExists,
+    TResult? Function()? emailNotConfirmed,
+    TResult? Function(String? message)? unexpected,
+  }) {
+    return emailNotConfirmed?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? cannotReach,
+    TResult Function()? unauthorized,
+    TResult Function()? wrongCredentials,
+    TResult Function()? groupNotExists,
+    TResult Function()? dontBelongToGroup,
+    TResult Function()? userAlreadyExists,
+    TResult Function()? emailNotConfirmed,
+    TResult Function(String? message)? unexpected,
+    required TResult orElse(),
+  }) {
+    if (emailNotConfirmed != null) {
+      return emailNotConfirmed();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CannotReach value) cannotReach,
+    required TResult Function(_Unauthorized value) unauthorized,
+    required TResult Function(_WrongCredentials value) wrongCredentials,
+    required TResult Function(_GroupNotExists value) groupNotExists,
+    required TResult Function(_DontBelongToGroup value) dontBelongToGroup,
+    required TResult Function(_UserAlreadyExists value) userAlreadyExists,
+    required TResult Function(_EmailNotConfirmed value) emailNotConfirmed,
+    required TResult Function(_Unexpected value) unexpected,
+  }) {
+    return emailNotConfirmed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_CannotReach value)? cannotReach,
+    TResult? Function(_Unauthorized value)? unauthorized,
+    TResult? Function(_WrongCredentials value)? wrongCredentials,
+    TResult? Function(_GroupNotExists value)? groupNotExists,
+    TResult? Function(_DontBelongToGroup value)? dontBelongToGroup,
+    TResult? Function(_UserAlreadyExists value)? userAlreadyExists,
+    TResult? Function(_EmailNotConfirmed value)? emailNotConfirmed,
+    TResult? Function(_Unexpected value)? unexpected,
+  }) {
+    return emailNotConfirmed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CannotReach value)? cannotReach,
+    TResult Function(_Unauthorized value)? unauthorized,
+    TResult Function(_WrongCredentials value)? wrongCredentials,
+    TResult Function(_GroupNotExists value)? groupNotExists,
+    TResult Function(_DontBelongToGroup value)? dontBelongToGroup,
+    TResult Function(_UserAlreadyExists value)? userAlreadyExists,
+    TResult Function(_EmailNotConfirmed value)? emailNotConfirmed,
+    TResult Function(_Unexpected value)? unexpected,
+    required TResult orElse(),
+  }) {
+    if (emailNotConfirmed != null) {
+      return emailNotConfirmed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _EmailNotConfirmed implements Failure {
+  const factory _EmailNotConfirmed() = _$EmailNotConfirmedImpl;
 }
 
 /// @nodoc
@@ -991,6 +1174,7 @@ class _$UnexpectedImpl implements _Unexpected {
     required TResult Function() groupNotExists,
     required TResult Function() dontBelongToGroup,
     required TResult Function() userAlreadyExists,
+    required TResult Function() emailNotConfirmed,
     required TResult Function(String? message) unexpected,
   }) {
     return unexpected(message);
@@ -1005,6 +1189,7 @@ class _$UnexpectedImpl implements _Unexpected {
     TResult? Function()? groupNotExists,
     TResult? Function()? dontBelongToGroup,
     TResult? Function()? userAlreadyExists,
+    TResult? Function()? emailNotConfirmed,
     TResult? Function(String? message)? unexpected,
   }) {
     return unexpected?.call(message);
@@ -1019,6 +1204,7 @@ class _$UnexpectedImpl implements _Unexpected {
     TResult Function()? groupNotExists,
     TResult Function()? dontBelongToGroup,
     TResult Function()? userAlreadyExists,
+    TResult Function()? emailNotConfirmed,
     TResult Function(String? message)? unexpected,
     required TResult orElse(),
   }) {
@@ -1037,6 +1223,7 @@ class _$UnexpectedImpl implements _Unexpected {
     required TResult Function(_GroupNotExists value) groupNotExists,
     required TResult Function(_DontBelongToGroup value) dontBelongToGroup,
     required TResult Function(_UserAlreadyExists value) userAlreadyExists,
+    required TResult Function(_EmailNotConfirmed value) emailNotConfirmed,
     required TResult Function(_Unexpected value) unexpected,
   }) {
     return unexpected(this);
@@ -1051,6 +1238,7 @@ class _$UnexpectedImpl implements _Unexpected {
     TResult? Function(_GroupNotExists value)? groupNotExists,
     TResult? Function(_DontBelongToGroup value)? dontBelongToGroup,
     TResult? Function(_UserAlreadyExists value)? userAlreadyExists,
+    TResult? Function(_EmailNotConfirmed value)? emailNotConfirmed,
     TResult? Function(_Unexpected value)? unexpected,
   }) {
     return unexpected?.call(this);
@@ -1065,6 +1253,7 @@ class _$UnexpectedImpl implements _Unexpected {
     TResult Function(_GroupNotExists value)? groupNotExists,
     TResult Function(_DontBelongToGroup value)? dontBelongToGroup,
     TResult Function(_UserAlreadyExists value)? userAlreadyExists,
+    TResult Function(_EmailNotConfirmed value)? emailNotConfirmed,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) {

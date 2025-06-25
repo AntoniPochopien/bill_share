@@ -67,7 +67,8 @@ class AuthCubit extends Cubit<AuthState> {
       username: username.trim(),
       password: password.trim(),
     );
-    result.fold((l) => emit(AuthState.error(l)), (r) {});
+    result.fold(
+        (l) => emit(AuthState.error(l)), (r) => emit(AuthState.confirmEmail()));
   }
 
   void signInWithEmail({

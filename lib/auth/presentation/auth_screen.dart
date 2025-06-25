@@ -5,6 +5,7 @@ import 'package:bill_share/auth/domain/i_user_repository.dart';
 import 'package:bill_share/auth/domain/injectable_user.dart';
 import 'package:bill_share/auth/presentation/widgets/expand_and_fade/expand_and_fade_controller.dart';
 import 'package:bill_share/auth/presentation/widgets/expand_and_fade/expand_and_fade_widget.dart';
+import 'package:bill_share/common/domain/failure.dart';
 import 'package:bill_share/common/utils/error_handler.dart';
 import 'package:bill_share/common/utils/validators.dart';
 import 'package:bill_share/constants/assets.dart';
@@ -90,8 +91,14 @@ class _AuthScreenState extends State<AuthScreen> {
         listener: (context, state) {
           state.whenOrNull(
               authenticated: (user) => context.replaceRoute(HomeRoute()),
-              error: (failure) =>
-                  ErrorHandler.showErrorDialog(context, failure: failure));
+              confirmEmail: () => context.replaceRoute(ConfirmEmailRoute()),
+              error: (failure) {
+                if (failure == Failure.emailNotConfirmed()) {
+                  context.replaceRoute(ConfirmEmailRoute());
+                } else {
+                  ErrorHandler.showErrorDialog(context, failure: failure);
+                }
+              });
         },
         builder: (context, state) => BillshareScaffold(
           body: CustomScrollView(

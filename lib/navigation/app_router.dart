@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bill_share/app_startup/presentation/app_startup_screen.dart';
 import 'package:bill_share/auth/presentation/auth_screen.dart';
+import 'package:bill_share/auth/presentation/confirm_email_screen.dart';
 import 'package:bill_share/expense_creator/presentation/expense_creator_screen.dart';
 import 'package:bill_share/group_chat/presentation/group_chat_screen.dart';
 import 'package:bill_share/group_dashboard/presentation/group_dashboard_screen.dart';
@@ -19,6 +20,7 @@ class AppRouter extends RootStackRouter {
   List<AutoRoute> get routes => [
         AutoRoute(page: AppStartupRoute.page, initial: true),
         AutoRoute(page: AuthRoute.page),
+        AutoRoute(page: ConfirmEmailRoute.page),
         AutoRoute(page: HomeRoute.page),
         AutoRoute(page: ExpenseCreatorRoute.page),
         AutoRoute(page: SettingsRoute.page),
