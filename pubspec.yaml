@@ -1,9 +1,9 @@
 name: bill_share
-description: A new Flutter project.
+description: Spliting bills for groups.
 
 publish_to: 'none'
 
-version: 1.0.0+4
+version: 1.0.0+5
 
 environment:
   sdk: ^3.5.4
